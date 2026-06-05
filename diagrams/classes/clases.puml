@@ -1,0 +1,64 @@
+@startuml
+
+class ContextoNocturno{
+    -unaVotacion : VotacionNocturna
+    -unProtegido : Jugador
+
+    +definirProtegido()
+    +obtenerBando()
+    +getVotacion()
+    +getProtegido()
+}
+
+class VotacionNocturna{
+    -eliminado : Jugador
+    -recuentoVotos : Map <Jugador,Int>
+
+    +registrarVoto()
+    +obtenerEliminado()
+
+
+}
+
+
+class Jugador{
+    'elige cualquier rol
+    -unRol :Rol
+
+    'la accion depende del rol elegido
+    +eleccionNocturna(contexto : ContextoNocturno)
+    +elegirObjetivo()
+    +eliminar()
+}
+
+interface Rol {
+    +eleccionNocturna(contexto : ContextoNocturno)
+}
+
+
+
+class Medico{
+    'elige a quien salvar
+    +eleccionNocturna(contexto : ContextoNocturno)
+}
+class Detective{
+    'elige a quien investigar
+    +eleccionNocturna(unJugador: Jugadorador,contexto : ContextoNocturno)
+}
+class Mafioso{
+    'elige a quien eliminar
+    +eleccionNocturna(unJugador: Jugador,contexto : ContextoNocturno)
+}
+
+
+Jugador --> Rol
+
+Mafioso ..|> Rol
+Detective ..|> Rol
+Medico ..|> Rol
+
+
+
+
+
+@enduml
