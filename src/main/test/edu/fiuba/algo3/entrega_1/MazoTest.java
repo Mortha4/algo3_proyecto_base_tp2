@@ -79,12 +79,12 @@ public class MazoTest {
 
         //assert
 
-        assertEquals(7, mazo.size(), "Tamaño de mazo invalido");
+        assertEquals(10, mazo.size(), "Tamaño de mazo invalido");
         assertEquals(3,cantMafiosos,"cantidad de mafiosos invalido");
         assertEquals(1,cantMedico,"solamente existe un unico medico");
         assertEquals(1,cantPadrino,"error solo debe existir un padrino");
         assertEquals(1,cantDetective,"error solo debe existir un detective");
-        assertEquals(7, cantMafiosos + cantMedico + cantDetective + cantCiudadanos +cantSheriff +cantPadrino,"Composicion de roles invalido");
+        assertEquals(10, cantMafiosos + cantMedico + cantDetective + cantCiudadanos +cantSheriff +cantPadrino,"Composicion de roles invalido");
 
 
     }
