@@ -34,6 +34,39 @@ public class CreadorDeMazo {
                 mazo.add(new Ciudadano());
             }
         }
+
+        if (cantidadJugadores >= 7 && cantidadJugadores <= 9) {
+            int cantidadMafiosos = random.nextBoolean() ? 3 : 2;
+
+            for (int i = 0; i < cantidadMafiosos; i++) {
+                mazo.add(new Mafioso());
+            }
+
+            mazo.add(new Detective());
+            mazo.add(new Medico());
+
+            for (int i = 0; i < cantidadJugadores - cantidadMafiosos - 2; i++) {
+                mazo.add(new Ciudadano());
+            }
+        }
+
+        if (cantidadJugadores >= 10 && cantidadJugadores <= 12) {
+            int cantidadMafiosos = 3 ;
+
+            for (int i = 0; i < cantidadMafiosos; i++) {
+                mazo.add(new Mafioso());
+            }
+
+            mazo.add(new Detective());
+            mazo.add(new Medico());
+            mazo.add(new Padrino());
+            mazo.add(new Sheriff());
+
+
+            for (int i = 0; i < cantidadJugadores - cantidadMafiosos - 4; i++) {
+                mazo.add(new Ciudadano());
+            }
+        }
         return mazo;
     }
 
