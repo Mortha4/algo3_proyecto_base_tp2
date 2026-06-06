@@ -1,5 +1,18 @@
 @startuml
 
+class CreadorDeMazo{
+
+    +crearMazo() : List<Rol>
+}
+
+class Partida{
+    -jugadores :List<Jugador>
+    +iniciar()
+
+
+}
+
+
 class ContextoNocturno{
     -unaVotacion : VotacionNocturna
     -unProtegido : Jugador
@@ -29,13 +42,17 @@ class Jugador{
     +eleccionNocturna(contexto : ContextoNocturno)
     +elegirObjetivo()
     +eliminar()
+    +asignarRol()
+    +getRol()
 }
 
 interface Rol {
     +eleccionNocturna(contexto : ContextoNocturno)
 }
 
-
+class Padrino{}
+class Sheriff{}
+class Ciudadano{}
 
 class Medico{
     'elige a quien salvar
@@ -56,8 +73,10 @@ Jugador --> Rol
 Mafioso ..|> Rol
 Detective ..|> Rol
 Medico ..|> Rol
-
-
+Padrino ..|> Rol
+Sheriff ..|> Rol
+Ciudadano ..|> Rol
+Partida --> Jugador
 
 
 

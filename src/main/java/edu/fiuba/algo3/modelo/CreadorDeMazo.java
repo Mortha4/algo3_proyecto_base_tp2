@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class CreadorDeMazo {
@@ -51,7 +49,7 @@ public class CreadorDeMazo {
         }
 
         if (cantidadJugadores >= 10 && cantidadJugadores <= 12) {
-            int cantidadMafiosos = 3 ;
+            int cantidadMafiosos = 2 ;
 
             for (int i = 0; i < cantidadMafiosos; i++) {
                 mazo.add(new Mafioso());
@@ -67,6 +65,7 @@ public class CreadorDeMazo {
                 mazo.add(new Ciudadano());
             }
         }
+        Collections.shuffle(mazo);
         return mazo;
     }
 
