@@ -15,10 +15,10 @@ public class MafiosoTest {
         Mafioso mafiosoObservado = new Mafioso();
 
         // Act
-        RolVisitable result = mafioso.verRol(mafiosoObservado);
+        RolVisitable result = mafioso.verBando(mafiosoObservado);
 
         // Assert
-        assertEquals(result, mafiosoObservado, "El mafioso no pudo observar a otro mafioso.");
+        assertEquals(result, mafiosoObservado, "El mafioso no pudo ver el bando de otro mafioso");
     }
 
     @Test
@@ -28,7 +28,8 @@ public class MafiosoTest {
         Ciudadano ciudadanoObservado = new Ciudadano();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verRol(ciudadanoObservado));
+        assertThrows(NoVisible.class, () -> mafioso.verBando(ciudadanoObservado),
+                "El mafioso no pudo ver el bando de un ciudadano");
     }
 
     @Test
@@ -38,7 +39,8 @@ public class MafiosoTest {
         Sheriff sheriffObservado = new Sheriff();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verRol(sheriffObservado));
+        assertThrows(NoVisible.class, () -> mafioso.verBando(sheriffObservado),
+                "El mafioso no pudo ver el bando de un sheriff");
     }
     @Test
     public void test04MafiosoNoPuedeVerUnDetective(){
@@ -47,7 +49,8 @@ public class MafiosoTest {
         Detective detectiveObservado = new Detective();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verRol(detectiveObservado));
+        assertThrows(NoVisible.class, () -> mafioso.verBando(detectiveObservado),
+                "El mafioso no pudo ver el bando de un detective");
     }
     @Test
     public void test05MafiosoNoPuedeVerUnMedico(){
@@ -56,7 +59,8 @@ public class MafiosoTest {
         Medico medicoObservado = new Medico();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verRol(medicoObservado));
+        assertThrows(NoVisible.class, () -> mafioso.verBando(medicoObservado),
+                "El mafioso no pudo ver el bando de un medico");
     }
     @Test
     public void test06MafiosoPuedeVerUnPadrino(){
@@ -65,10 +69,10 @@ public class MafiosoTest {
         Padrino padrinoObservado = new Padrino();
 
         // Act
-        RolVisitable result = mafioso.verRol(padrinoObservado);
+        RolVisitable result = mafioso.verBando(padrinoObservado);
 
         // Assert
-        assertEquals(result, padrinoObservado, "El mafioso no pudo observar a otro mafioso.");
+        assertEquals(result, padrinoObservado, "El mafioso no pudo observar un padrino.");
     }
 
 

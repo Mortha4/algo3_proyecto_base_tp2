@@ -1,11 +1,14 @@
 package edu.fiuba.algo3.modelo.roles;
-
 import edu.fiuba.algo3.modelo.visitors.Visitante;
+import edu.fiuba.algo3.modelo.visitors.VisitanteCiudadano;
 
-public class Ciudadano implements Rol, RolVisitable {
+public class Ciudadano extends Rol implements RolVisitable {
 
+    public Ciudadano(){
+        this.visitante = new VisitanteCiudadano();
+    }
     @Override
     public RolVisitable aceptar(Visitante visitante) {
-       return visitante.visitar(this);
+        return visitante.visitar(this);
     }
 }
