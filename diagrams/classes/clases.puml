@@ -1,5 +1,40 @@
 @startuml
 
+
+interface ConfiguracionDeMazo{
+    +aplicarPara(cantidadJugadores: int) :boolean
+    +obtenerCantidadMafiosos() : int
+    +agregarRolesEspeciales()
+
+}
+
+class ConfiguracionPequenia{
+    -random : Random
+
+    +aplicarPara(cantidadJugadores: int) :boolean
+    +obtenerCantidadMafiosos() : int
+    +agregarRolesEspeciales()
+
+}
+
+class ConfiguracionMediana{
+        -random : Random
+
+        +aplicarPara(cantidadJugadores: int) :boolean
+        +obtenerCantidadMafiosos() : int
+        +agregarRolesEspeciales()
+
+}
+
+class ConfiguracionGrande{
+
+        +aplicarPara(cantidadJugadores: int) :boolean
+        +obtenerCantidadMafiosos() : int
+        +agregarRolesEspeciales()
+
+}
+
+
 class CreadorDeMazo{
 
     +crearMazo() : List<Rol>
@@ -92,6 +127,12 @@ Padrino ..|> Rol
 Sheriff ..|> Rol
 Ciudadano ..|> Rol
 Partida --> Jugador
+
+ConfiguracionPequenia ..|> ConfiguracionDeMazo
+ConfiguracionMediana ..|> ConfiguracionDeMazo
+ConfiguracionGrande ..|> ConfiguracionDeMazo
+
+ConfiguracionDeMazo --> CreadorDeMazo
 
 
 

@@ -4,68 +4,40 @@ import java.util.*;
 
 
 public class CreadorDeMazo {
-    private final Random random = new Random();
+    private List<ConfiguracionDeMazo> configuraciones;
 
 
+    //constructor
+
+    public CreadorDeMazo(){
+        this.configuraciones = List.of(new ConfiguracionPequenia(),new ConfiguracionMediana(),new ConfiguracionGrande());
+
+    }
 
 
     //metodo
     public List<Rol> crearMazo(int cantidadJugadores) {
         List<Rol> mazo = new ArrayList<>();
+        ConfiguracionDeMazo configMazo = this.configuraciones.stream().filter(c -> c.aplicaPara(cantidadJugadores)).findFirst().orElseThrow(() -> new IllegalArgumentException("No existe una configuración"));
+        int cantidadMafiosos = configMazo.obtenerCantidadMafiosos(), cantidadCiudadanos;
 
-        if (cantidadJugadores >= 5 && cantidadJugadores <= 6) {
-            int cantidadMafiosos = random.nextBoolean() ? 2 : 1;
+        configMazo.agregarRolesEspeciales(mazo);
 
-            for (int i = 0; i < cantidadMafiosos; i++) {
-                mazo.add(new Mafioso());
-            }
-
-            if(random.nextBoolean()){
-                mazo.add(new Detective());
-            }else{
-                mazo.add(new Medico());
-            }
-
-
-            for (int i = 0; i < cantidadJugadores - cantidadMafiosos - 1; i++) {
-                mazo.add(new Ciudadano());
-            }
+        for(int i=0 ; i < cantidadMafiosos; i ++){
+            mazo.add(new Mafioso());
         }
 
-        if (cantidadJugadores >= 7 && cantidadJugadores <= 9) {
-            int cantidadMafiosos = random.nextBoolean() ? 3 : 2;
-
-            for (int i = 0; i < cantidadMafiosos; i++) {
-                mazo.add(new Mafioso());
-            }
-
-            mazo.add(new Detective());
-            mazo.add(new Medico());
-
-            for (int i = 0; i < cantidadJugadores - cantidadMafiosos - 2; i++) {
-                mazo.add(new Ciudadano());
-            }
+        cantidadCiudadanos = cantidadJugadores - mazo.size();
+        for(int i=0 ; i < cantidadCiudadanos ; i++){
+            mazo.add(new Ciudadano());
         }
 
-        if (cantidadJugadores >= 10 && cantidadJugadores <= 12) {
-            int cantidadMafiosos = 2 ;
-
-            for (int i = 0; i < cantidadMafiosos; i++) {
-                mazo.add(new Mafioso());
-            }
-
-            mazo.add(new Detective());
-            mazo.add(new Medico());
-            mazo.add(new Padrino());
-            mazo.add(new Sheriff());
-
-
-            for (int i = 0; i < cantidadJugadores - cantidadMafiosos - 4; i++) {
-                mazo.add(new Ciudadano());
-            }
-        }
         return mazo;
+
     }
+
+
+
 
 
 }

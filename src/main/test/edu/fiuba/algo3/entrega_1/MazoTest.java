@@ -32,7 +32,7 @@ public class MazoTest {
         assertEquals(5, mazo.size(), "Tamaño de mazo invalido");
         assertTrue(cantMafiosos >= 1 && cantMafiosos <= 2, "Cantidad de mafiosos invalida");
         assertEquals(1, cantMedico + cantDetective,  "Solamente se permite un rol especial");
-        assertEquals(5, cantMafiosos + cantMedico + cantDetective + cantCiudadanos);
+        assertTrue(cantCiudadanos >= 2 && cantCiudadanos <= 3,"Cantidad de ciudadano invalida");
 
 
     }
@@ -56,7 +56,8 @@ public class MazoTest {
         assertEquals(7, mazo.size(), "Tamaño de mazo invalido");
         assertTrue(cantMafiosos >= 2 && cantMafiosos <= 3, "Cantidad de mafiosos invalida");
         assertEquals(2, cantMedico + cantDetective,  "Solamente se permiten 2 roles especiales");
-        assertEquals(7, cantMafiosos + cantMedico + cantDetective + cantCiudadanos);
+        assertTrue(cantCiudadanos >= 2 && cantCiudadanos <= 3,"Cantidad de ciudadano invalida");
+
 
 
     }
@@ -84,7 +85,8 @@ public class MazoTest {
         assertEquals(1,cantMedico,"solamente existe un unico medico");
         assertEquals(1,cantPadrino,"error solo debe existir un padrino");
         assertEquals(1,cantDetective,"error solo debe existir un detective");
-        assertEquals(10, cantMafiosos + cantMedico + cantDetective + cantCiudadanos +cantSheriff +cantPadrino,"Composicion de roles invalido");
+        assertEquals(1,cantSheriff,"error solo debe existir un sheriff");
+        assertEquals(4,cantCiudadanos,"Cantidad de ciudadano invalida");
 
 
     }
