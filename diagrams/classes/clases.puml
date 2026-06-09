@@ -5,6 +5,10 @@ class CreadorDeMazo{
     +crearMazo() : List<Rol>
 }
 
+class MezcladorDeMazo{
+    +mezclar(List<Rol> : mazo)
+}
+
 class Partida{
     -jugadores :List<Jugador>
     +iniciar()
@@ -48,23 +52,34 @@ class Jugador{
 
 interface Rol {
     +eleccionNocturna(contexto : ContextoNocturno)
+    +getTipo() : String
 }
 
-class Padrino{}
-class Sheriff{}
-class Ciudadano{}
+class Padrino{
+    +getTipo() : String
+}
+class Sheriff{
+    +getTipo() : String
+}
+class Ciudadano{
+
+    +getTipo() : String
+}
 
 class Medico{
     'elige a quien salvar
     +eleccionNocturna(contexto : ContextoNocturno)
+    +getTipo() : String
 }
 class Detective{
     'elige a quien investigar
     +eleccionNocturna(unJugador: Jugadorador,contexto : ContextoNocturno)
+    +getTipo() : String
 }
 class Mafioso{
     'elige a quien eliminar
     +eleccionNocturna(unJugador: Jugador,contexto : ContextoNocturno)
+    +getTipo() : String
 }
 
 

@@ -6,7 +6,6 @@ import java.util.*;
 public class CreadorDeMazo {
     private final Random random = new Random();
 
-    //constructor
 
 
 
@@ -65,7 +64,6 @@ public class CreadorDeMazo {
                 mazo.add(new Ciudadano());
             }
         }
-        Collections.shuffle(mazo);
         return mazo;
     }
 

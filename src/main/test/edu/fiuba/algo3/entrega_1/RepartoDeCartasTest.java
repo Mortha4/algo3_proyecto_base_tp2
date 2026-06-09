@@ -12,7 +12,7 @@ public class RepartoDeCartasTest {
 
 
     @Test
-    public void Test01PartidaCon5JugadoresRecibenRolesAleatoriamente(){
+    public void Test01EnUnaPatidaCon5JugadoresTodosRecibenUnRol(){
         //arrange
         List<Jugador> jugadores = List.of(new Jugador(),new Jugador(),new Jugador(),new Jugador(),new Jugador() );
         Partida partida = new Partida(jugadores);

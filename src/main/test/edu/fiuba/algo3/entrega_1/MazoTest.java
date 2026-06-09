@@ -4,17 +4,17 @@ package edu.fiuba.algo3.entrega_1;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MazoTest {
 
 
     @Test
-    public void test03MazoPara5JugadoresTieneLaCantidadCorrectaDeRoles(){
+    public void test01MazoPara5JugadoresTieneLaCantidadCorrectaDeRoles(){
         //arrange
         int cantidadJugadores = 5;
         long cantMafiosos , cantCiudadanos , cantDetective ,cantMedico ;
@@ -90,112 +90,55 @@ public class MazoTest {
     }
 
     @Test
-    public void test04ElMazoCon5JugadoresSeGeneraAleatoriamenteConPrimeraCarta(){
+    public void test04UnMazoConDetective_Medico_Ciudadano_Y_2MafiososSeMezclaAleatoriamente(){
         //arrange
-        int cantidadJugadores = 5,cantidadMafiososInicio=0 ,cantidadCiudadanosInicio=0,cantidadDetectiveInicio=0,cantidadMedicoInicio=0;
-        CreadorDeMazo creador = new CreadorDeMazo();
-        List<Rol> mazo;
-        Rol primerRol;
+        MezcladorDeMazo mezclador = new MezcladorDeMazo();
+        Medico unMedico = new Medico();
+        Detective unDetective = new Detective();
+        Ciudadano unCiudadano = new Ciudadano();
+        Mafioso unMafioso0 = new Mafioso();
+        Mafioso unMafioso1 = new Mafioso();
+        List<Rol> mazoOriginal = new ArrayList<>(List.of(unDetective,unMedico,unCiudadano,unMafioso0,unMafioso1));
+        List<Rol> mazoMezclado = new ArrayList<>((mazoOriginal));
 
         //act
 
-        for (int i=0 ; i <= 500 ; i++){
-            mazo = creador.crearMazo(cantidadJugadores);
-            primerRol = mazo.get(0);
-
-            if(Objects.equals(primerRol.getTipo(), "Mafioso")){
-                cantidadMafiososInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Ciudadano")){
-                cantidadCiudadanosInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Medico")){
-                cantidadMedicoInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Detective")){
-                cantidadDetectiveInicio++;
-            }
-
-        }
+        mezclador.mezclar(mazoMezclado);
 
         //assert
-        assertTrue(cantidadMafiososInicio >0 ,"el mafioso nunca salio primero");
-        assertTrue(cantidadCiudadanosInicio >0 ,"el ciudadano nunca salio primero");
-        assertTrue(cantidadMedicoInicio >0 ,"el medico nunca salio primero");
-        assertTrue(cantidadDetectiveInicio >0 ,"el detective nunca salio primero");
+
+        assertEquals(mazoOriginal.size(),mazoMezclado.size(),"El mazo mezclado debe tener la misma cantidad de cartas que el mazo sin mezclar");
+        assertTrue(mazoMezclado.containsAll(mazoOriginal), "El mazo mezclado debe contener exactamente las mismas cartas");
+        assertNotEquals(mazoOriginal, mazoMezclado, "El mezclador debería haber cambiado el orden de los elementos");
+        
 
     }
 
     @Test
-    public void test05ElMazoCon7JugadoresSeGeneraAleatoriamenteConPrimeraCarta(){
+    public void test05UnMazoConDetective_Medico_Ciudadano_2Mafiosos_Padrino_y_SheriffSeMezclaAleatoriamente(){
         //arrange
-        int cantidadJugadores = 7,cantidadMafiososInicio=0 ,cantidadCiudadanosInicio=0,cantidadDetectiveInicio=0,cantidadMedicoInicio=0;
-        CreadorDeMazo creador = new CreadorDeMazo();
-        List<Rol> mazo;
-        Rol primerRol;
+        MezcladorDeMazo mezclador = new MezcladorDeMazo();
+        Medico unMedico = new Medico();
+        Detective unDetective = new Detective();
+        Ciudadano unCiudadano = new Ciudadano();
+        Mafioso unMafioso0 = new Mafioso();
+        Mafioso unMafioso1 = new Mafioso();
+        Padrino unPadrino = new Padrino();
+        Sheriff unSheriff = new Sheriff();
+        List<Rol> mazoOriginal = new ArrayList<>(List.of(unDetective,unMedico,unCiudadano,unMafioso0,unMafioso1,unPadrino,unSheriff));
+        List<Rol> mazoMezclado = new ArrayList<>((mazoOriginal));
 
         //act
 
-        for (int i=0 ; i <= 500 ; i++){
-            mazo = creador.crearMazo(cantidadJugadores);
-            primerRol = mazo.get(0);
-
-            if(Objects.equals(primerRol.getTipo(), "Mafioso")){
-                cantidadMafiososInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Ciudadano")){
-                cantidadCiudadanosInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Medico")){
-                cantidadMedicoInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Detective")){
-                cantidadDetectiveInicio++;
-            }
-
-        }
+        mezclador.mezclar(mazoMezclado);
 
         //assert
-        assertTrue(cantidadMafiososInicio >0 ,"el mafioso nunca salio primero");
-        assertTrue(cantidadCiudadanosInicio >0 ,"el ciudadano nunca salio primero");
-        assertTrue(cantidadMedicoInicio >0 ,"el medico nunca salio primero");
-        assertTrue(cantidadDetectiveInicio >0 ,"el detective nunca salio primero");
+
+        assertEquals(mazoOriginal.size(),mazoMezclado.size(),"El mazo mezclado debe tener la misma cantidad de cartas que el mazo sin mezclar");
+        assertTrue(mazoMezclado.containsAll(mazoOriginal), "El mazo mezclado debe contener exactamente las mismas cartas");
+        assertNotEquals(mazoOriginal, mazoMezclado, "El mezclador debería haber cambiado el orden de los elementos");
+
 
     }
-
-    @Test
-    public void test06ElMazoCon5JugadoresSeGeneraAleatoriamenteConPrimeraCarta(){
-        //arrange
-        int cantidadJugadores = 10,cantidadMafiososInicio=0 ,cantidadCiudadanosInicio=0,cantidadDetectiveInicio=0,cantidadMedicoInicio=0,cantPadrinoInicio=0,cantSheriffInicio=0;
-        CreadorDeMazo creador = new CreadorDeMazo();
-        List<Rol> mazo;
-        Rol primerRol;
-
-        //act
-
-        for (int i=0 ; i <= 500 ; i++){
-            mazo = creador.crearMazo(cantidadJugadores);
-            primerRol = mazo.get(0);
-
-            if(Objects.equals(primerRol.getTipo(), "Mafioso")){
-                cantidadMafiososInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Ciudadano")){
-                cantidadCiudadanosInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Medico")){
-                cantidadMedicoInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Detective")){
-                cantidadDetectiveInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Sheriff")){
-                cantSheriffInicio++;
-            }else if(Objects.equals(primerRol.getTipo(), "Padrino")){
-                cantPadrinoInicio++;
-            }
-
-        }
-
-        //assert
-        assertTrue(cantidadMafiososInicio >0 ,"el mafioso nunca salio primero");
-        assertTrue(cantidadCiudadanosInicio >0 ,"el ciudadano nunca salio primero");
-        assertTrue(cantidadMedicoInicio >0 ,"el medico nunca salio primero");
-        assertTrue(cantidadDetectiveInicio >0 ,"el detective nunca salio primero");
-        assertTrue(cantPadrinoInicio >0 ,"el padrino nunca salio primero");
-        assertTrue(cantSheriffInicio >0,"el sheriff nunca salio primero");
-
-    }
-    
 
 }
