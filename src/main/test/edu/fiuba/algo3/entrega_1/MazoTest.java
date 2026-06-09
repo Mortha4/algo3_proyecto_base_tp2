@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.*;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,10 +22,10 @@ public class MazoTest {
         List<Rol> mazo = creador.crearMazo(cantidadJugadores);
 
         //act
-        cantMafiosos = mazo.stream().filter(rol -> rol instanceof Mafioso).count();
-        cantMedico = mazo.stream().filter(rol -> rol instanceof Medico).count();
-        cantDetective = mazo.stream().filter(rol -> rol instanceof Detective).count();
-        cantCiudadanos = mazo.stream().filter(rol -> rol instanceof Ciudadano).count();
+        cantMafiosos = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(), "Mafioso")).count();
+        cantMedico = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(), "Medico")).count();
+        cantDetective = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(), "Detective")).count();
+        cantCiudadanos = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(), "Ciudadano")).count();
 
         //assert
 
@@ -45,10 +46,10 @@ public class MazoTest {
         List<Rol> mazo = creador.crearMazo(cantidadJugadores);
 
         //act
-        cantMafiosos = mazo.stream().filter(rol -> rol instanceof Mafioso).count();
-        cantMedico = mazo.stream().filter(rol -> rol instanceof Medico).count();
-        cantDetective = mazo.stream().filter(rol -> rol instanceof Detective).count();
-        cantCiudadanos = mazo.stream().filter(rol -> rol instanceof Ciudadano).count();
+        cantMafiosos = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Mafioso")).count();
+        cantMedico = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Medico")).count();
+        cantDetective = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Detective")).count();
+        cantCiudadanos = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Ciudadano")).count();
 
         //assert
 
@@ -69,12 +70,12 @@ public class MazoTest {
         List<Rol> mazo = creador.crearMazo(cantidadJugadores);
 
         //act
-        cantMafiosos = mazo.stream().filter(rol -> rol instanceof Mafioso).count();
-        cantPadrino = mazo.stream().filter(rol -> rol instanceof Padrino).count();
-        cantSheriff = mazo.stream().filter(rol -> rol instanceof Sheriff).count();
-        cantMedico = mazo.stream().filter(rol -> rol instanceof Medico).count();
-        cantDetective = mazo.stream().filter(rol -> rol instanceof Detective).count();
-        cantCiudadanos = mazo.stream().filter(rol -> rol instanceof Ciudadano).count();
+        cantMafiosos = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Mafioso")).count();
+        cantMedico = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Medico")).count();
+        cantDetective = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Detective")).count();
+        cantCiudadanos = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Ciudadano")).count();
+        cantPadrino = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Padrino")).count();
+        cantSheriff = mazo.stream().filter(rol -> Objects.equals(rol.getTipo(),"Sheriff")).count();
 
         //assert
 
@@ -101,13 +102,14 @@ public class MazoTest {
         for (int i=0 ; i <= 500 ; i++){
             mazo = creador.crearMazo(cantidadJugadores);
             primerRol = mazo.get(0);
-            if(primerRol instanceof Mafioso){
+
+            if(Objects.equals(primerRol.getTipo(), "Mafioso")){
                 cantidadMafiososInicio++;
-            }else if(primerRol instanceof Ciudadano){
+            }else if(Objects.equals(primerRol.getTipo(), "Ciudadano")){
                 cantidadCiudadanosInicio++;
-            }else if(primerRol instanceof Medico){
+            }else if(Objects.equals(primerRol.getTipo(), "Medico")){
                 cantidadMedicoInicio++;
-            }else if(primerRol instanceof Detective){
+            }else if(Objects.equals(primerRol.getTipo(), "Detective")){
                 cantidadDetectiveInicio++;
             }
 
@@ -134,13 +136,14 @@ public class MazoTest {
         for (int i=0 ; i <= 500 ; i++){
             mazo = creador.crearMazo(cantidadJugadores);
             primerRol = mazo.get(0);
-            if(primerRol instanceof Mafioso){
+
+            if(Objects.equals(primerRol.getTipo(), "Mafioso")){
                 cantidadMafiososInicio++;
-            }else if(primerRol instanceof Ciudadano){
+            }else if(Objects.equals(primerRol.getTipo(), "Ciudadano")){
                 cantidadCiudadanosInicio++;
-            }else if(primerRol instanceof Medico){
+            }else if(Objects.equals(primerRol.getTipo(), "Medico")){
                 cantidadMedicoInicio++;
-            }else if(primerRol instanceof Detective){
+            }else if(Objects.equals(primerRol.getTipo(), "Detective")){
                 cantidadDetectiveInicio++;
             }
 
@@ -167,17 +170,18 @@ public class MazoTest {
         for (int i=0 ; i <= 500 ; i++){
             mazo = creador.crearMazo(cantidadJugadores);
             primerRol = mazo.get(0);
-            if(primerRol instanceof Mafioso){
+
+            if(Objects.equals(primerRol.getTipo(), "Mafioso")){
                 cantidadMafiososInicio++;
-            }else if(primerRol instanceof Ciudadano){
+            }else if(Objects.equals(primerRol.getTipo(), "Ciudadano")){
                 cantidadCiudadanosInicio++;
-            }else if(primerRol instanceof Medico){
+            }else if(Objects.equals(primerRol.getTipo(), "Medico")){
                 cantidadMedicoInicio++;
-            }else if(primerRol instanceof Detective){
+            }else if(Objects.equals(primerRol.getTipo(), "Detective")){
                 cantidadDetectiveInicio++;
-            }else if(primerRol instanceof Sheriff){
+            }else if(Objects.equals(primerRol.getTipo(), "Sheriff")){
                 cantSheriffInicio++;
-            }else if(primerRol instanceof Padrino){
+            }else if(Objects.equals(primerRol.getTipo(), "Padrino")){
                 cantPadrinoInicio++;
             }
 

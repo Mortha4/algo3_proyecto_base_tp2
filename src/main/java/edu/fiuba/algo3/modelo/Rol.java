@@ -2,5 +2,5 @@ package edu.fiuba.algo3.modelo;
 
 public interface Rol {
 
-
+    public String getTipo();
 }
