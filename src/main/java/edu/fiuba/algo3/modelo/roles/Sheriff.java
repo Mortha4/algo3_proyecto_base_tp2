@@ -10,7 +10,7 @@ public class Sheriff extends Rol implements RolVisitable{
     }
 
     public String getTipo() {
-        return "Padrino";
+        return "Sheriff";
     }
     @Override
     public RolVisitable aceptar(Visitante visitante) {

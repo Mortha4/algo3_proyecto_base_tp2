@@ -9,4 +9,8 @@ public class Rol {
     public RolVisitable verBando(RolVisitable visitable){
         return visitante.visitar(visitable);
     }
+
+    public String getTipo() {
+        return null;
+    }
 }
