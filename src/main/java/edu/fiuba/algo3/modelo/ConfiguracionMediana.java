@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.List;
 import java.util.Random;
+import edu.fiuba.algo3.modelo.roles.*;
 
 public class ConfiguracionMediana implements ConfiguracionDeMazo{
     private Random random = new Random();
