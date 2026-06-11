@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class FaseNocturnaTest {
     @Test
@@ -68,7 +69,7 @@ public class FaseNocturnaTest {
         faseNocturna.finalizar();
 
         // Assert
-        assertTrue(!(victima.estaVivo()),"El objetivo fue eliminado");
+        assertFalse(victima.estaVivo(),"El objetivo fue eliminado");
     }
 
 }
