@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class FaseNocturnaTest {
     @Test
     public void test01LaMafiaPuedeSeleccionarVictimaValida() {
+        // Arrange
         Jugador ciudadano = new Jugador(new Ciudadano());
         Jugador mafioso = new Jugador(new Mafioso());
 
@@ -24,6 +25,13 @@ public class FaseNocturnaTest {
         jugadores.add(mafioso);
 
         FaseNocturna faseNocturna = new FaseNocturna(jugadores);
+
+        // Act
+        faseNocturna.laMafiaElije(ciudadano);
+        faseNocturna.finalizar();
+
+        // Assert
+        assertFalse(ciudadano.estaVivo(),"La mafia seleccionó una víctima valida");
     }
     @Test
     public void test07ElMedicoProtegeAlMismoJugadorQueEligioLaMafia(){
