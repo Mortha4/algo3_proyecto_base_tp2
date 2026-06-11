@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,5 +17,12 @@ public class Votacion {
         }
 
         this.votos.put(objetivo, this.votos.get(objetivo) + 1);
+    }
+
+    public Jugador obtenerMasVotado() {
+        if (this.votos.isEmpty()) {
+            return null;
+        }
+        return Collections.max(this.votos.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 }
