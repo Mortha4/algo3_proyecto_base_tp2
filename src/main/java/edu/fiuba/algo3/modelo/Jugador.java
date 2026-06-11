@@ -6,6 +6,13 @@ import edu.fiuba.algo3.modelo.roles.RolVisitable;
 
 public class Jugador {
     private Rol rol;
+    private boolean vivo = true;
+
+    public Jugador() {}
+
+    public Jugador(Rol rol) {
+        this.asignarRol(rol);
+    }
 
     public void asignarRol (Rol rol){
         this.rol = rol;
@@ -22,6 +29,11 @@ public class Jugador {
         throw new NoVisible();
     }
 
+    public void eliminar() {
+        this.vivo = false;
+    }
 
-
+    public boolean estaVivo() {
+        return this.vivo;
+    }
 }

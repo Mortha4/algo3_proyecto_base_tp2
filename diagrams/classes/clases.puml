@@ -50,7 +50,12 @@ class Partida{
 
 
 }
-
+class Votacion{
+    -votos : Map <Jugador,Int>
+    +Votacion()
+    +votar()
+    +obtenerMasVotado()
+}
 
 class ContextoNocturno{
     -unaVotacion : VotacionNocturna
@@ -64,11 +69,14 @@ class ContextoNocturno{
 
 class VotacionNocturna{
     -eliminado : Jugador
-    -recuentoVotos : Map <Jugador,Int>
+    -protegido : Jugador
+    -votacionMafia : Votacion
 
     +registrarVoto()
     +obtenerEliminado()
-
+    +laMafiaElije()
+    +elMedicoProteje()
+    +finalizar()
 
 }
 
@@ -76,11 +84,13 @@ class VotacionNocturna{
 class Jugador{
     'elige cualquier rol
     -unRol :Rol
+    -vivo : boolean
 
     'la accion depende del rol elegido
     +eleccionNocturna(contexto : ContextoNocturno)
     +elegirObjetivo()
     +eliminar()
+    +estaVivo()
     +asignarRol()
     +getRol()
 }
