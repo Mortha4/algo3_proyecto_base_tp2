@@ -2,6 +2,7 @@ package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.FaseNocturna;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalida;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Medico;
@@ -10,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FaseNocturnaTest {
     @Test
@@ -33,6 +33,27 @@ public class FaseNocturnaTest {
         // Assert
         assertFalse(ciudadano.estaVivo(),"La mafia seleccionó una víctima valida");
     }
+
+    @Test
+    public void test02LaMafiaNoPuedeSeleccionarVictimaInvalida() {
+        // Arrange
+        Jugador ciudadano = new Jugador(new Ciudadano());
+        Jugador mafioso1 = new Jugador(new Mafioso());
+        Jugador mafioso2 = new Jugador(new Mafioso());
+
+        ciudadano.eliminar();
+
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(ciudadano);
+        jugadores.add(mafioso1);
+        jugadores.add(mafioso2);
+
+        FaseNocturna faseNocturna = new FaseNocturna(jugadores);
+
+        // Act y Assert
+        assertThrows(SeleccionInvalida.class, () -> faseNocturna.laMafiaElije(ciudadano),"La mafia seleccionó una víctima invalida");
+    }
+
     @Test
     public void test07ElMedicoProtegeAlMismoJugadorQueEligioLaMafia(){
         // Arrange

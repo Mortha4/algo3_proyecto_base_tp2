@@ -1,4 +1,6 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalida;
+
 import java.util.List;
 
 public class FaseNocturna {
@@ -12,6 +14,10 @@ public class FaseNocturna {
     }
 
     public void laMafiaElije(Jugador objetivo) {
+        if (!objetivo.estaVivo()) {
+            throw new SeleccionInvalida("La mafia seleccionó una víctima invalida");
+        }
+
         this.votacionMafia.votar(objetivo);
     }
 
