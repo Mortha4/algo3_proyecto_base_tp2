@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.fiuba.algo3.modelo.roles.*;
 
-public class ConfiguracionGrande implements ConfiguracionDeMazo {
+public class ConfiguracionDeMazoGrande implements ConfiguracionDeMazo {
     @Override
     public boolean aplicaPara(int cantidadJugadores) {
         return cantidadJugadores>=10 && cantidadJugadores<= 12;

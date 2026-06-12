@@ -5,7 +5,7 @@ import java.util.Random;
 
 import edu.fiuba.algo3.modelo.roles.*;
 
-public class ConfiguracionPequenia implements ConfiguracionDeMazo {
+public class ConfiguracionDeMazoPequenia implements ConfiguracionDeMazo {
     private Random random = new Random();
 
     @Override
