@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.configuraciones.ConfiguracionDeMazo;
+import edu.fiuba.algo3.modelo.configuraciones.ConfiguracionGrande;
+import edu.fiuba.algo3.modelo.configuraciones.ConfiguracionMediana;
+import edu.fiuba.algo3.modelo.configuraciones.ConfiguracionPequenia;
 import edu.fiuba.algo3.modelo.roles.*;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.configuraciones;
 
 import java.util.List;
 import edu.fiuba.algo3.modelo.roles.*;
