@@ -1,38 +1,32 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.excepciones.NoVisible;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
 public class Jugador {
-    private Rol rol;
-    private boolean vivo = true;
+    private final Rol rol;
+    private final String nombre;
+    private Estado estado;
 
-    public Jugador() {}
-
-    public Jugador(Rol rol) {
-        this.asignarRol(rol);
-    }
-
-    public void asignarRol (Rol rol){
+    public Jugador(Rol rol, String nombre) {
         this.rol = rol;
-    }
-
-    public boolean tieneRolAsignado() {
-        return this.rol != null;
+        this.nombre = nombre;
+        this.estado = new Vivo();
     }
 
     public Rol verRol(Jugador otroJugador){
         if(otroJugador.equals(this)){
             return rol;
         }
-        throw new NoVisible();
+
+        throw new NoVisibleException();
     }
 
-    public void eliminar() {
-        this.vivo = false;
+    public void morir() {
+        this.estado = new Muerto();
     }
 
     public boolean estaVivo() {
-        return this.vivo;
+        return this.estado.estaVivo();
     }
 }

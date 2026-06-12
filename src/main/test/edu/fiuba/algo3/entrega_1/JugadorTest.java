@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.excepciones.NoVisible;
-import edu.fiuba.algo3.modelo.roles.Mafioso;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
+import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Medico;
-import edu.fiuba.algo3.modelo.roles.Rol;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,24 +11,19 @@ public class JugadorTest {
     @Test
     public void test01JugadorNoPuedeVerElRolDeOtroJugador(){
         // Arrange
-        Jugador jugador = new Jugador();
-        Jugador otroJugador = new Jugador();
+        Jugador jugador = new Jugador(new Ciudadano(), "jugador1");
+        Jugador otroJugador = new Jugador(new Ciudadano(), "jugador2");
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> jugador.verRol(otroJugador), "Un jugador puede ver el rol de otro");
+        assertThrows(NoVisibleException.class, () -> jugador.verRol(otroJugador), "Un jugador puede ver el rol de otro");
     }
     @Test
     public void test02JugadorPuedeVerSuRol(){
         // Arrange
-        Jugador jugador = new Jugador();
         Medico medico = new Medico();
-        jugador.asignarRol(medico);
+        Jugador jugador = new Jugador(medico, "medico");
 
-        // Act
-
-        Rol result = jugador.verRol(jugador);
-
-        // Assert
-        assertEquals(medico, result, "Un jugador no puede ver su propio rol");
+        // Act y Assert
+        assertEquals(medico, jugador.verRol(jugador));
     }
 }
