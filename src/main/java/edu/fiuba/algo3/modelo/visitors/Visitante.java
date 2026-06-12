@@ -3,12 +3,12 @@ package edu.fiuba.algo3.modelo.visitors;
 import edu.fiuba.algo3.modelo.roles.*;
 
 public interface Visitante {
-    RolVisitable visitar(RolVisitable rol);
-    RolVisitable visitar(Mafioso mafioso);
-    RolVisitable visitar(Padrino padrino);
-    RolVisitable visitar(Ciudadano ciudadano);
-    RolVisitable visitar(Medico medico);
-    RolVisitable visitar(Detective detective);
-    RolVisitable visitar(Sheriff sheriff);
+    Rol visitar(Rol rol);
+    Rol visitar(Mafioso mafioso);
+    Rol visitar(Padrino padrino);
+    Rol visitar(Ciudadano ciudadano);
+    Rol visitar(Medico medico);
+    Rol visitar(Detective detective);
+    Rol visitar(Sheriff sheriff);
 
 }

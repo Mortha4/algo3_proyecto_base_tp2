@@ -13,7 +13,7 @@ public class DetectiveTest {
         Detective otroDetective = new Detective();
 
         // Act
-        RolVisitable result = detective.verBando(otroDetective);
+        Rol result = detective.verBando(otroDetective);
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
@@ -26,7 +26,7 @@ public class DetectiveTest {
         Medico medico = new Medico();
 
         // Act
-        RolVisitable result = detective.verBando(medico);
+        Rol result = detective.verBando(medico);
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
@@ -40,7 +40,7 @@ public class DetectiveTest {
         Ciudadano ciudadano = new Ciudadano();
 
         // Act
-        RolVisitable result = detective.verBando(ciudadano);
+        Rol result = detective.verBando(ciudadano);
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
@@ -54,7 +54,7 @@ public class DetectiveTest {
         Sheriff sheriff = new Sheriff();
 
         // Act
-        RolVisitable result = detective.verBando(sheriff);
+        Rol result = detective.verBando(sheriff);
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
@@ -68,7 +68,7 @@ public class DetectiveTest {
         Mafioso mafioso = new Mafioso();
 
         // Act
-        RolVisitable result = detective.verBando(mafioso);
+        Rol result = detective.verBando(mafioso);
 
         // Assert
         assertEquals(Mafioso.class, result.getClass(),
@@ -82,7 +82,7 @@ public class DetectiveTest {
         Padrino padrino = new Padrino();
 
         // Act
-        RolVisitable result = detective.verBando(padrino);
+        Rol result = detective.verBando(padrino);
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),

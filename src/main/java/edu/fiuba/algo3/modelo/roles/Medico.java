@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.roles;
 import edu.fiuba.algo3.modelo.visitors.Visitante;
 import edu.fiuba.algo3.modelo.visitors.VisitanteCiudadano;
 
-public class Medico extends Rol implements RolVisitable{
+public class Medico extends Rol {
     public Medico(){
         visitante = new VisitanteCiudadano();
     }
@@ -11,7 +11,7 @@ public class Medico extends Rol implements RolVisitable{
         return "Medico";
     }
     @Override
-    public RolVisitable aceptar(Visitante visitante) {
+    public Rol aceptar(Visitante visitante) {
         return visitante.visitar(this);
     }
 }

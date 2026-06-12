@@ -2,14 +2,14 @@ package edu.fiuba.algo3.modelo.roles;
 
 import edu.fiuba.algo3.modelo.visitors.Visitante;
 
-public class Rol {
+public abstract class Rol {
     protected Visitante visitante;
 
 
-    public RolVisitable verBando(RolVisitable visitable){
+    public Rol verBando(Rol visitable){
         return visitante.visitar(visitable);
     }
-
+    public abstract Rol aceptar(Visitante visitante);
     public String getTipo() {
         return null;
     }

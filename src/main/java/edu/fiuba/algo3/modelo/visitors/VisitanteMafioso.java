@@ -6,31 +6,31 @@ import edu.fiuba.algo3.modelo.roles.*;
 public class VisitanteMafioso implements Visitante{
 
     @Override
-    public RolVisitable visitar(RolVisitable rol) {
+    public Rol visitar(Rol rol) {
         return rol.aceptar(this);
     }
     @Override
-    public RolVisitable visitar(Mafioso mafioso){
+    public Rol visitar(Mafioso mafioso){
         return mafioso;
     }
     @Override
-    public RolVisitable visitar(Padrino padrino){
+    public Rol visitar(Padrino padrino){
         return padrino;
     }
     @Override
-    public RolVisitable visitar(Ciudadano ciudadano){
+    public Rol visitar(Ciudadano ciudadano){
         throw new NoVisible();
     }
     @Override
-    public RolVisitable visitar(Medico medico){
+    public Rol visitar(Medico medico){
         throw new NoVisible();
     }
     @Override
-    public RolVisitable visitar(Detective detective){
+    public Rol visitar(Detective detective){
         throw new NoVisible();
     }
     @Override
-    public RolVisitable visitar(Sheriff sheriff){
+    public Rol visitar(Sheriff sheriff){
         throw new NoVisible();
     }
 }
