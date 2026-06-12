@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.modelo.configuraciones;
 
-import java.util.List;
-import edu.fiuba.algo3.modelo.roles.*;
+import edu.fiuba.algo3.modelo.roles.Rol;
+
+import java.util.Map;
 
 public interface ConfiguracionDeMazo {
-
-    boolean aplicaPara(int cantidadJugadores);
-    void agregarRolesEspeciales(List<Rol> mazo);
-    int obtenerCantidadMafiosos();
+    public void obtenerConfig(Map<String, Integer> configuracion);
 }

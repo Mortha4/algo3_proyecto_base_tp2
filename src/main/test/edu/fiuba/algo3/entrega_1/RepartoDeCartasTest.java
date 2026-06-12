@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.Partida;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.roles.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RepartoDeCartasTest {
@@ -15,20 +16,53 @@ public class RepartoDeCartasTest {
     @Test
     public void Test01EnUnaPatidaCon5JugadoresTodosRecibenUnRol(){
         //arrange
-        List<Jugador> jugadores = List.of(new Jugador(),new Jugador(),new Jugador(),new Jugador(),new Jugador() );
-        Partida partida = new Partida(jugadores);
+        List<String> nombresDeJugadores = new ArrayList<>();
+        nombresDeJugadores.addAll(List.of("jugador1", "jugador2", "jugador3", "jugador4", "jugador5"));
+
+        Partida partida = new Partida(nombresDeJugadores);
 
         //act
-        partida.iniciar();
-
-
+        partida.repartirCartas();
+        List<Jugador> jugadores = partida.getJugadores();
 
         //assert
         for (Jugador jugador : jugadores) {
-            assertTrue(jugador.tieneRolAsignado(), "Un jugador o varios no tienen rol");
+            assertNotNull(jugador.verRol(jugador), "Algun jugador no tiene rol");
         }
+    }
+    @Test
+    public void Test02EnUnaPatidaCon7JugadoresTodosRecibenUnRol(){
+        //arrange
+        List<String> nombresDeJugadores = new ArrayList<>();
+        nombresDeJugadores.addAll(List.of("1", "2", "3", "4", "5", "6", "7"));
 
+        Partida partida = new Partida(nombresDeJugadores);
 
+        //act
+        partida.repartirCartas();
+        List<Jugador> jugadores = partida.getJugadores();
+
+        //assert
+        for (Jugador jugador : jugadores) {
+            assertNotNull(jugador.verRol(jugador), "Algun jugador no tiene rol");
+        }
+    }
+    @Test
+    public void Test03EnUnaPatidaCon10JugadoresTodosRecibenUnRol(){
+        //arrange
+        List<String> nombresDeJugadores = new ArrayList<>();
+        nombresDeJugadores.addAll(List.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+
+        Partida partida = new Partida(nombresDeJugadores);
+
+        //act
+        partida.repartirCartas();
+        List<Jugador> jugadores = partida.getJugadores();
+
+        //assert
+        for (Jugador jugador : jugadores) {
+            assertNotNull(jugador.verRol(jugador), "Algun jugador no tiene rol");
+        }
     }
 
 

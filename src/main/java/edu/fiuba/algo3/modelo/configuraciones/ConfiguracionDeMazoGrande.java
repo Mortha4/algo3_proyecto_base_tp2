@@ -1,27 +1,18 @@
 package edu.fiuba.algo3.modelo.configuraciones;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 import edu.fiuba.algo3.modelo.roles.*;
 
-public class ConfiguracionDeMazoGrande implements ConfiguracionDeMazo {
+public class ConfiguracionDeMazoGrande implements ConfiguracionDeMazo{
     @Override
-    public boolean aplicaPara(int cantidadJugadores) {
-        return cantidadJugadores>=10 && cantidadJugadores<= 12;
-    }
-
-    @Override
-    public void agregarRolesEspeciales(List<Rol> mazo) {
-        mazo.add(new Detective());
-        mazo.add(new Medico());
-        mazo.add(new Padrino());
-        mazo.add(new Sheriff());
-
-    }
-
-
-    @Override
-    public int obtenerCantidadMafiosos() {
-        return 2;
+    public void obtenerConfig(Map<String, Integer> config) {
+        config.put("Sheriff", 1);
+        config.put("Detective", 1);
+        config.put("Padrino", 1);
+        config.put("Medico", 1);
+        config.put("Mafioso", 3);
     }
 }

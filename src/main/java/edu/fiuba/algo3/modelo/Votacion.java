@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.jugador.Jugador;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

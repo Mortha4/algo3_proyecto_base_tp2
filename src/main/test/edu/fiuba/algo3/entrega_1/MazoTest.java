@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,6 @@ import edu.fiuba.algo3.modelo.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,112 +17,209 @@ public class MazoTest {
     @Test
     public void test01MazoPara5JugadoresTieneLaCantidadCorrectaDeRoles(){
         //arrange
-        int cantidadJugadores = 5;
-        long cantMafiosos , cantCiudadanos , cantDetective ,cantMedico ;
-        CreadorDeMazo creador = new CreadorDeMazo();
-        List<Rol> mazo = creador.crearMazo(cantidadJugadores);
+        int cantidadJugadores = 5, cantMafiosos = 0, cantCiudadanos = 0, cantDetective = 0, cantMedico = 0;
+        Mazo mazo = new Mazo(cantidadJugadores);
 
         //act
-        cantMafiosos = mazo.stream().filter(rol -> rol instanceof Mafioso).count();
-        cantMedico = mazo.stream().filter(rol -> rol instanceof Medico).count();
-        cantDetective = mazo.stream().filter(rol -> rol instanceof Detective).count();
-        cantCiudadanos = mazo.stream().filter(rol -> rol instanceof Ciudadano).count();
+        for(int i=0; i < cantidadJugadores; i++){
+            Rol rol = mazo.agarrarCarta();
+            if(rol instanceof Ciudadano) cantCiudadanos++;
+            if(rol instanceof Mafioso) cantMafiosos++;
+            if(rol instanceof Detective) cantDetective++;
+            if(rol instanceof Medico) cantMedico++;
+        }
 
         //assert
-        assertEquals(5, mazo.size(), "Tamaño de mazo invalido");
-        assertTrue(cantMafiosos >= 1 && cantMafiosos <= 2, "Cantidad de mafiosos invalida");
+        assertTrue(cantMafiosos == 1 || cantMafiosos == 2, "Cantidad de mafiosos invalida");
         assertEquals(1, cantMedico + cantDetective,  "Solamente se permite un rol especial");
-        assertTrue(cantCiudadanos >= 2 && cantCiudadanos <= 3,"Cantidad de ciudadano invalida");
+        assertTrue(cantCiudadanos == 2 || cantCiudadanos == 3,"Cantidad de ciudadano invalida");
     }
 
     @Test
     public void test02MazoPara7JugadoresTieneLaCantidadCorrectaDeRoles(){
         //arrange
-        int cantidadJugadores = 7;
-        long cantMafiosos , cantCiudadanos , cantDetective ,cantMedico ;
-        CreadorDeMazo creador = new CreadorDeMazo();
-        List<Rol> mazo = creador.crearMazo(cantidadJugadores);
+        int cantidadJugadores = 7, cantMafiosos = 0, cantCiudadanos = 0, cantDetective = 0, cantMedico = 0;
+        Mazo mazo = new Mazo(cantidadJugadores);
 
         //act
-        cantMafiosos = mazo.stream().filter(rol -> rol instanceof Mafioso).count();
-        cantMedico = mazo.stream().filter(rol -> rol instanceof Medico).count();
-        cantDetective = mazo.stream().filter(rol -> rol instanceof Detective).count();
-        cantCiudadanos = mazo.stream().filter(rol -> rol instanceof Ciudadano).count();
-
+        for(int i=0; i < cantidadJugadores; i++){
+            Rol rol = mazo.agarrarCarta();
+            if(rol instanceof Ciudadano) cantCiudadanos++;
+            if(rol instanceof Mafioso) cantMafiosos++;
+            if(rol instanceof Detective) cantDetective++;
+            if(rol instanceof Medico) cantMedico++;
+        }
         //assert
-        assertEquals(7, mazo.size(), "Tamaño de mazo invalido");
         assertTrue(cantMafiosos >= 2 && cantMafiosos <= 3, "Cantidad de mafiosos invalida");
         assertEquals(2, cantMedico + cantDetective,  "Solamente se permiten 2 roles especiales");
-        assertTrue(cantCiudadanos >= 2 && cantCiudadanos <= 3,"Cantidad de ciudadano invalida");
+        assertTrue(cantCiudadanos == 2 || cantCiudadanos == 3,"Cantidad de ciudadano invalida");
     }
 
     @Test
     public void test03MazoPara10JugadoresTieneLaCantidadCorrectaDeRoles(){
         //arrange
-        int cantidadJugadores = 10;
-        long cantMafiosos , cantCiudadanos , cantDetective ,cantMedico ,cantPadrino ,cantSheriff ;
-        CreadorDeMazo creador = new CreadorDeMazo();
-        List<Rol> mazo = creador.crearMazo(cantidadJugadores);
+        int cantidadJugadores = 10, cantMafiosos = 0, cantCiudadanos = 0,
+                cantDetective = 0, cantMedico = 0, cantPadrinos = 0, cantSheriff = 0;
+        Mazo mazo = new Mazo(cantidadJugadores);
 
         //act
-        cantMafiosos = mazo.stream().filter(rol -> rol instanceof Mafioso).count();
-        cantMedico = mazo.stream().filter(rol -> rol instanceof Medico).count();
-        cantDetective = mazo.stream().filter(rol -> rol instanceof Detective).count();
-        cantCiudadanos = mazo.stream().filter(rol -> rol instanceof Ciudadano).count();
-        cantPadrino = mazo.stream().filter(rol -> rol instanceof Padrino).count();
-        cantSheriff = mazo.stream().filter(rol -> rol instanceof Sheriff).count();
-
+        for(int i=0; i < cantidadJugadores; i++){
+            Rol rol = mazo.agarrarCarta();
+            if(rol instanceof Ciudadano) cantCiudadanos++;
+            if(rol instanceof Mafioso) cantMafiosos++;
+            if(rol instanceof Detective) cantDetective++;
+            if(rol instanceof Medico) cantMedico++;
+            if(rol instanceof Padrino) cantPadrinos++;
+            if(rol instanceof Sheriff) cantSheriff++;
+        }
         //assert
-        assertEquals(10, mazo.size(), "Tamaño de mazo invalido");
-        assertEquals(2,cantMafiosos,"cantidad de mafiosos invalido");
-        assertEquals(1,cantMedico,"solamente existe un unico medico");
-        assertEquals(1,cantPadrino,"error solo debe existir un padrino");
-        assertEquals(1,cantDetective,"error solo debe existir un detective");
-        assertEquals(1,cantSheriff,"error solo debe existir un sheriff");
-        assertEquals(4,cantCiudadanos,"Cantidad de ciudadano invalida");
+        assertTrue(cantMafiosos == 3,"Cantidad de mafiosos invalido");
+        assertEquals(1,cantMedico,"solo debe existir un medico");
+        assertEquals(1,cantPadrinos,"solo debe existir un padrino");
+        assertEquals(1,cantDetective,"solo debe existir un detective");
+        assertEquals(1,cantSheriff,"solo debe existir un sheriff");
+        assertEquals(3, cantCiudadanos, "Cantidad de ciudadano invalida");
+    }
+    @Test
+    public void test04UnMazoDe4RolesLanzaExcepcion(){
+        // Arrange
+        int cantidadDeRoles = 4;
+
+        // Act y Assert
+        assertThrows(CantidadDeJugadoresException.class, ()-> new Mazo(cantidadDeRoles),
+                "No se puede crear un mazo con menos de 5 roles.");
+    }
+    @Test
+    public void test05UnMazoDe13RolesLanzaExcepcion(){
+        // Arrange
+        int cantidadDeRoles = 13;
+
+        // Act y Assert
+        assertThrows(CantidadDeJugadoresException.class, ()-> new Mazo(cantidadDeRoles),
+                "No se puede crear un mazo con mas de 12 roles.");
     }
 
     @Test
-    public void test04UnMazoConDetectiveMedicoCiudadanoY2MafiososSeMezclaAleatoriamente(){
+    public void test06UnMazoDe5RolesSeMezcla(){
         //arrange
-        MezcladorDeMazo mezclador = new MezcladorDeMazo();
-        Medico unMedico = new Medico();
-        Detective unDetective = new Detective();
-        Ciudadano unCiudadano = new Ciudadano();
-        Mafioso unMafioso0 = new Mafioso();
-        Mafioso unMafioso1 = new Mafioso();
-        List<Rol> mazoOriginal = new ArrayList<>(List.of(unDetective,unMedico,unCiudadano,unMafioso0,unMafioso1));
-        List<Rol> mazoMezclado = new ArrayList<>((mazoOriginal));
+        Mazo mazo = new Mazo(5);
+        List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
 
         //act
-        mezclador.mezclar(mazoMezclado);
+        mazo.mezclar();
 
         //assert
-        assertEquals(mazoOriginal.size(),mazoMezclado.size(),"El mazo mezclado debe tener la misma cantidad de cartas que el mazo sin mezclar");
-        assertTrue(mazoMezclado.containsAll(mazoOriginal), "El mazo mezclado debe contener exactamente las mismas cartas");
-        assertNotEquals(mazoOriginal, mazoMezclado, "El mezclador debería haber cambiado el orden de los elementos");
+        assertNotEquals(mazoOriginal, mazo.getRoles(),
+                "El mezclador debería haber cambiado el orden de los elementos");
     }
 
     @Test
-    public void test05UnMazoConDetectiveMedicoCiudadano2MafiososPadrinoySheriffSeMezclaAleatoriamente(){
+    public void test07UnMazoDe5RolesMantieneSuTamanioAlMezclar(){
+        // arrange
+        Mazo mazo = new Mazo(5);
+        int tamanioOriginal = mazo.getCantidadDeRoles();
+
+        // act
+        mazo.mezclar();
+
+        // assert
+        assertEquals(tamanioOriginal, mazo.getCantidadDeRoles(),
+                "El tamanio del mazo cambio al mezclarlo");
+    }
+
+    @Test
+    public void test08UnMazoCon5RolesMantieneSusRolesAlMezclar(){
+        // arrange
+        Mazo mazo = new Mazo(5);
+        List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
+
+        // act
+        mazo.mezclar();
+
+        // assert
+        assertTrue(mazoOriginal.containsAll(mazo.getRoles()),
+                "El mazo mezclado no contiene las mismas cartas");
+    }
+
+    @Test
+    public void test09UnMazoCon7RolesMantieneSuTamanioAlMezclar(){
+        // arrange
+        Mazo mazo = new Mazo(7);
+        int tamanioOriginal = mazo.getCantidadDeRoles();
+
+        // act
+        mazo.mezclar();
+
+        // assert
+        assertEquals(tamanioOriginal, mazo.getCantidadDeRoles(),
+                "El tamanio del mazo cambio al mezclarlo");
+    }
+
+    @Test
+    public void test10UnMazoCon7RolesMantieneSusRolesAlMezclar(){
+        Mazo mazo = new Mazo(7);
+        List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
+
+        // act
+        mazo.mezclar();
+
+        // assert
+        assertTrue(mazoOriginal.containsAll(mazo.getRoles()),
+                "El mazo mezclado no contiene las mismas cartas");
+    }
+
+    @Test
+    public void test11UnMazoCon7RolesSeMezcla(){
         //arrange
-        MezcladorDeMazo mezclador = new MezcladorDeMazo();
-        Medico unMedico = new Medico();
-        Detective unDetective = new Detective();
-        Ciudadano unCiudadano = new Ciudadano();
-        Mafioso unMafioso0 = new Mafioso();
-        Mafioso unMafioso1 = new Mafioso();
-        Padrino unPadrino = new Padrino();
-        Sheriff unSheriff = new Sheriff();
-        List<Rol> mazoOriginal = new ArrayList<>(List.of(unDetective,unMedico,unCiudadano,unMafioso0,unMafioso1,unPadrino,unSheriff));
-        List<Rol> mazoMezclado = new ArrayList<>((mazoOriginal));
+        Mazo mazo = new Mazo(7);
+        List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
 
         //act
-        mezclador.mezclar(mazoMezclado);
+        mazo.mezclar();
 
         //assert
-        assertEquals(mazoOriginal.size(),mazoMezclado.size(),"El mazo mezclado debe tener la misma cantidad de cartas que el mazo sin mezclar");
-        assertTrue(mazoMezclado.containsAll(mazoOriginal), "El mazo mezclado debe contener exactamente las mismas cartas");
-        assertNotEquals(mazoOriginal, mazoMezclado, "El mezclador debería haber cambiado el orden de los elementos");
+        assertNotEquals(mazoOriginal, mazo.getRoles(),
+                "El mezclador debería haber cambiado el orden de los elementos");
+    }
+
+    @Test
+    public void test12UnMazoCon10RolesSeMezcla(){
+        //arrange
+        Mazo mazo = new Mazo(10);
+        List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
+
+        //act
+        mazo.mezclar();
+
+        //assert
+        assertNotEquals(mazoOriginal, mazo.getRoles(),
+                "El mezclador debería haber cambiado el orden de los elementos");
+    }
+
+    @Test
+    public void test13UnMazoCon10RolesMantieneSusRolesAlMezclar(){
+        Mazo mazo = new Mazo(10);
+        List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
+
+        // act
+        mazo.mezclar();
+
+        // assert
+        assertTrue(mazoOriginal.containsAll(mazo.getRoles()),
+                "El mazo mezclado no contiene las mismas cartas");
+    }
+
+    @Test
+    public void test14UnMazoCon10RolesMantieneSuTamanioAlMezclar(){
+        // arrange
+        Mazo mazo = new Mazo(10);
+        int tamanioOriginal = mazo.getCantidadDeRoles();
+
+        // act
+        mazo.mezclar();
+
+        // assert
+        assertEquals(tamanioOriginal, mazo.getCantidadDeRoles(),
+                "El tamanio del mazo cambio al mezclarlo");
     }
 }

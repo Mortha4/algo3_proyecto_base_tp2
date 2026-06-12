@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.FaseNocturna;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalida;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Medico;
@@ -17,8 +17,8 @@ public class FaseNocturnaTest {
     @Test
     public void test01LaMafiaPuedeSeleccionarVictimaValida() {
         // Arrange
-        Jugador ciudadano = new Jugador(new Ciudadano());
-        Jugador mafioso = new Jugador(new Mafioso());
+        Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
 
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(ciudadano);
@@ -37,11 +37,11 @@ public class FaseNocturnaTest {
     @Test
     public void test02LaMafiaNoPuedeSeleccionarVictimaInvalida() {
         // Arrange
-        Jugador ciudadano = new Jugador(new Ciudadano());
-        Jugador mafioso1 = new Jugador(new Mafioso());
-        Jugador mafioso2 = new Jugador(new Mafioso());
+        Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso");
+        Jugador mafioso2 = new Jugador(new Mafioso(), "mafioso");
 
-        ciudadano.eliminar();
+        ciudadano.morir();
 
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(ciudadano);
@@ -51,15 +51,15 @@ public class FaseNocturnaTest {
         FaseNocturna faseNocturna = new FaseNocturna(jugadores);
 
         // Act y Assert
-        assertThrows(SeleccionInvalida.class, () -> faseNocturna.laMafiaElije(ciudadano),"La mafia seleccionó una víctima invalida");
+        assertThrows(SeleccionInvalidaException.class, () -> faseNocturna.laMafiaElije(ciudadano),"La mafia seleccionó una víctima invalida");
     }
 
     @Test
-    public void test07ElMedicoProtegeAlMismoJugadorQueEligioLaMafia(){
+    public void test03ElMedicoProtegeAlMismoJugadorQueEligioLaMafia(){
         // Arrange
-        Jugador victima = new Jugador(new Ciudadano());
-        Jugador medico = new Jugador(new Medico());
-        Jugador mafioso = new Jugador(new Mafioso());
+        Jugador victima = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador medico = new Jugador(new Medico(), "medico");
+        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
 
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(victima);
@@ -77,12 +77,12 @@ public class FaseNocturnaTest {
         assertTrue(victima.estaVivo(),"El medico protegió al objetivo de la mafia");
     }
     @Test
-    public void test08LaMafiaEligeAUnJugadorNoProgido(){
+    public void test04LaMafiaEligeAUnJugadorNoProgido(){
         // Arrange
-        Jugador victima = new Jugador(new Ciudadano());
-        Jugador protegido = new Jugador(new Ciudadano());
-        Jugador medico = new Jugador(new Medico());
-        Jugador mafioso = new Jugador(new Mafioso());
+        Jugador victima = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador protegido = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador medico = new Jugador(new Medico(), "medico");
+        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
 
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(victima);

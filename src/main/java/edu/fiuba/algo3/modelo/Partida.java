@@ -1,30 +1,30 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.roles.Rol;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Partida {
-    private List<Jugador> jugadores;
-    private CreadorDeMazo creador;
+    private final List<String> nombres;
+    private final List<Jugador> jugadores = new ArrayList<>();
+    private final Mazo mazo;
 
-    public Partida(List<Jugador> jugadores)
+    public Partida(List<String> nombres)
     {
-        this.jugadores = jugadores;
-        creador = new CreadorDeMazo();
+        this.nombres = nombres;
+        mazo = new Mazo(nombres.size());
     }
 
-    public void iniciar(){
-        int cantidadJugadores = jugadores.size();
-        List<Rol> mazo ;
-        mazo = creador.crearMazo(cantidadJugadores);
-
-        //asignar roles a todos los jugadores
-
-        for(int i=0 ; i < cantidadJugadores ;i++){
-            jugadores.get(i).asignarRol(mazo.get(i));
+    public void repartirCartas(){
+        mazo.mezclar();
+        for (String nombre : nombres) {
+            jugadores.add(new Jugador(mazo.agarrarCarta(), nombre));
         }
+    }
 
+    public List<Jugador> getJugadores(){
+        return jugadores;
     }
 
 

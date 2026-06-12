@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Medico;
@@ -26,4 +26,26 @@ public class JugadorTest {
         // Act y Assert
         assertEquals(medico, jugador.verRol(jugador));
     }
+    @Test
+    public void test03UnJugadorSeCreaVivo(){
+        // Arrange
+        Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
+
+        // Act y Assert
+        assertTrue(jugador.estaVivo(),
+                "El jugador se creo muerto.");
+    }
+    @Test
+    public void test04AlMatarUnJugadorNoEstaVivo(){
+        // Arrange
+        Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
+
+        // Act
+        jugador.morir();
+
+        // Assert
+        assertFalse(jugador.estaVivo(),
+                "El jugador sigue vivo luego de morir()");
+    }
+
 }
