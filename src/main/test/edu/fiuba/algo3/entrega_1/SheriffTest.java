@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.excepciones.NoVisible;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class SheriffTest {
         Sheriff otroSheriff = new Sheriff();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> sheriff.verBando(otroSheriff),
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(otroSheriff),
                 "El sheriff pudo ver el bando de un ciudadano");
     }
     @Test
@@ -24,7 +24,7 @@ public class SheriffTest {
         Ciudadano ciudadano = new Ciudadano();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> sheriff.verBando(ciudadano),
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(ciudadano),
                 "El sheriff pudo ver el bando de un ciudadano");
     }
     @Test
@@ -34,7 +34,7 @@ public class SheriffTest {
         Detective detective = new Detective();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> sheriff.verBando(detective),
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(detective),
                 "El sheriff pudo ver el bando de un ciudadano");
     }
     @Test
@@ -44,7 +44,7 @@ public class SheriffTest {
         Medico medico = new Medico();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> sheriff.verBando(medico),
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(medico),
                 "El sheriff pudo ver el bando de un ciudadano");
     }
     @Test
@@ -54,7 +54,7 @@ public class SheriffTest {
         Mafioso mafioso = new Mafioso();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> sheriff.verBando(mafioso),
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(mafioso),
                 "El sheriff pudo ver el bando de un mafioso");
     }
     @Test
@@ -64,7 +64,7 @@ public class SheriffTest {
         Padrino padrino = new Padrino();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> sheriff.verBando(padrino),
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(padrino),
                 "El sheriff pudo ver el bando de un mafioso");
     }
 }

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.excepciones.NoVisible;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class MedicoTest {
         Medico otroMedico = new Medico();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> medico.verBando(otroMedico),
+        assertThrows(NoVisibleException.class, () -> medico.verBando(otroMedico),
                 "El medico pudo ver el bando de un ciudadano");
     }
     @Test
@@ -24,7 +24,7 @@ public class MedicoTest {
         Ciudadano ciudadano = new Ciudadano();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> medico.verBando(ciudadano),
+        assertThrows(NoVisibleException.class, () -> medico.verBando(ciudadano),
                 "El medico pudo ver el bando de un ciudadano");
     }
     @Test
@@ -34,7 +34,7 @@ public class MedicoTest {
         Detective detective = new Detective();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> medico.verBando(detective),
+        assertThrows(NoVisibleException.class, () -> medico.verBando(detective),
                 "El medico pudo ver el bando de un ciudadano");
     }
     @Test
@@ -44,7 +44,7 @@ public class MedicoTest {
         Sheriff sheriff = new Sheriff();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> medico.verBando(sheriff),
+        assertThrows(NoVisibleException.class, () -> medico.verBando(sheriff),
                 "El medico pudo ver el bando de un ciudadano");
     }
     @Test
@@ -54,7 +54,7 @@ public class MedicoTest {
         Mafioso mafioso = new Mafioso();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> medico.verBando(mafioso),
+        assertThrows(NoVisibleException.class, () -> medico.verBando(mafioso),
                 "El medico pudo ver el bando de un ciudadano");
     }
     @Test
@@ -64,7 +64,7 @@ public class MedicoTest {
         Padrino padrino = new Padrino();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> medico.verBando(padrino),
+        assertThrows(NoVisibleException.class, () -> medico.verBando(padrino),
                 "El medico pudo ver el bando de un ciudadano");
     }
 }

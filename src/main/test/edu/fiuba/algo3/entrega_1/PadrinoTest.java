@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.excepciones.NoVisible;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ public class PadrinoTest {
         Ciudadano ciudadanoObservado = new Ciudadano();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> padrino.verBando(ciudadanoObservado),
+        assertThrows(NoVisibleException.class, () -> padrino.verBando(ciudadanoObservado),
                 "El padrino pudo ver el bando de un ciudadano");
     }
 
@@ -39,7 +39,7 @@ public class PadrinoTest {
         Sheriff sheriffObservado = new Sheriff();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> padrino.verBando(sheriffObservado),
+        assertThrows(NoVisibleException.class, () -> padrino.verBando(sheriffObservado),
                 "El padrino pudo ver el bando de un ciudadano");
     }
     @Test
@@ -49,7 +49,7 @@ public class PadrinoTest {
         Detective detectiveObservado = new Detective();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> padrino.verBando(detectiveObservado),
+        assertThrows(NoVisibleException.class, () -> padrino.verBando(detectiveObservado),
                 "El padrino pudo ver el bando de un ciudadano");
     }
     @Test
@@ -59,7 +59,7 @@ public class PadrinoTest {
         Medico medicoObservado = new Medico();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> padrino.verBando(medicoObservado),
+        assertThrows(NoVisibleException.class, () -> padrino.verBando(medicoObservado),
                 "El padrino pudo ver el bando de un ciudadano");
     }
     @Test

@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.excepciones.NoVisible;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class CiudadanoTest {
         Ciudadano otroCiudadano = new Ciudadano();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> ciudadano.verBando(otroCiudadano),
+        assertThrows(NoVisibleException.class, () -> ciudadano.verBando(otroCiudadano),
                 "Un ciudadano puede ver el bando de otro ciudadano");
     }
     @Test
@@ -24,7 +24,7 @@ public class CiudadanoTest {
         Medico medico = new Medico();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> ciudadano.verBando(medico),
+        assertThrows(NoVisibleException.class, () -> ciudadano.verBando(medico),
                 "Un ciudadano puede ver el bando de otro ciudadano");
     }
     @Test
@@ -34,7 +34,7 @@ public class CiudadanoTest {
         Detective detective = new Detective();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> ciudadano.verBando(detective),
+        assertThrows(NoVisibleException.class, () -> ciudadano.verBando(detective),
                 "Un ciudadano puede ver el bando de otro ciudadano");
     }
     @Test
@@ -44,7 +44,7 @@ public class CiudadanoTest {
         Sheriff sheriff = new Sheriff();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> ciudadano.verBando(sheriff),
+        assertThrows(NoVisibleException.class, () -> ciudadano.verBando(sheriff),
                 "Un ciudadano puede ver el bando de otro ciudadano");
     }
     @Test
@@ -54,7 +54,7 @@ public class CiudadanoTest {
         Mafioso mafioso = new Mafioso();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> ciudadano.verBando(mafioso),
+        assertThrows(NoVisibleException.class, () -> ciudadano.verBando(mafioso),
                 "Un ciudadano puede ver el bando de otro ciudadano");
     }
     @Test
@@ -64,7 +64,7 @@ public class CiudadanoTest {
         Padrino padrino = new Padrino();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> ciudadano.verBando(padrino),
+        assertThrows(NoVisibleException.class, () -> ciudadano.verBando(padrino),
                 "Un ciudadano puede ver el bando de otro ciudadano");
     }
 

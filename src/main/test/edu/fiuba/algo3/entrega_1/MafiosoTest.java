@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.entrega_1;
-import edu.fiuba.algo3.modelo.excepciones.NoVisible;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.*;
@@ -28,7 +28,7 @@ public class MafiosoTest {
         Ciudadano ciudadanoObservado = new Ciudadano();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verBando(ciudadanoObservado),
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(ciudadanoObservado),
                 "El mafioso no pudo ver el bando de un ciudadano");
     }
 
@@ -39,7 +39,7 @@ public class MafiosoTest {
         Sheriff sheriffObservado = new Sheriff();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verBando(sheriffObservado),
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(sheriffObservado),
                 "El mafioso no pudo ver el bando de un sheriff");
     }
     @Test
@@ -49,7 +49,7 @@ public class MafiosoTest {
         Detective detectiveObservado = new Detective();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verBando(detectiveObservado),
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(detectiveObservado),
                 "El mafioso no pudo ver el bando de un detective");
     }
     @Test
@@ -59,7 +59,7 @@ public class MafiosoTest {
         Medico medicoObservado = new Medico();
 
         // Act y Assert
-        assertThrows(NoVisible.class, () -> mafioso.verBando(medicoObservado),
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(medicoObservado),
                 "El mafioso no pudo ver el bando de un medico");
     }
     @Test
