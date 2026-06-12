@@ -3,12 +3,8 @@ import edu.fiuba.algo3.modelo.visitors.Visitante;
 import edu.fiuba.algo3.modelo.visitors.VisitanteMafioso;
 
 public class Mafioso extends Rol {
-    public Mafioso(){
+    public Mafioso() {
         visitante = new VisitanteMafioso();
-    }
-
-    public String getTipo() {
-        return "Mafioso";
     }
 
     @Override
