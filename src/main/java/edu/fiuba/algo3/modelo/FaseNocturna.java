@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo;
+import edu.fiuba.algo3.modelo.comandos.Command;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.votacion.Votacion;
 
 import java.util.List;
 
@@ -17,38 +17,33 @@ public class FaseNocturna {
         this.votacionMafia = new Votacion();
     }
 
-    // comando votar ()
-    /*
-    * void registrarVoto(Jugador objetivo) {
-    *   this.votacionMafia.registrarVoto(objetivo);
-    * }
-    * */
-    /*
-     * void registrarVotoPrioritario(Jugador objetivo) {
-     *   this.votacionMafia.registrarVotoPrioritario(objetivo);
-     * }
-     * */
+    public void ejecutar(Command comando) {
+        comando.execute(this);
+    }
 
-    public void laMafiaElige(Jugador objetivo) {
-        if (!objetivo.estaVivo()) {
-            throw new SeleccionInvalidaException();
-        }
-
+    public void registrarVoto(Jugador objetivo) {
         this.votacionMafia.registrarVoto(objetivo);
     }
 
-    public void elMedicoProtege(Jugador objetivo){
+    public void registrarVotoPrioritario(Jugador objetivo) {
+        this.votacionMafia.registrarVotoPrioritario(objetivo);
+    }
+
+    public void proteger(Jugador objetivo){
         this.protegido = objetivo;
     }
 
     public void finalizar() {
         Jugador objetivo = this.votacionMafia.obtenerMasVotado();
+
         if(objetivo == null){
             throw new NoHuboDecisionException();
         } else if (objetivo.equals(this.protegido)){
             throw new ObjetivoProtegidoException();
+        } else if (!objetivo.estaVivo()) {
+            throw new SeleccionInvalidaException();
         }
+
         objetivo.morir();
     }
-
 }

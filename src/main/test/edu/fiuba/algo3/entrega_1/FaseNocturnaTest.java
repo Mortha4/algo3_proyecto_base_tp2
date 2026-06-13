@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.FaseNocturna;
+import edu.fiuba.algo3.modelo.comandos.Votar;
+import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
@@ -27,7 +29,7 @@ public class FaseNocturnaTest {
         FaseNocturna faseNocturna = new FaseNocturna(jugadores);
 
         // Act
-        faseNocturna.laMafiaElige(ciudadano);
+        faseNocturna.ejecutar(new Votar(mafioso, ciudadano));
         faseNocturna.finalizar();
 
         // Assert
@@ -51,7 +53,7 @@ public class FaseNocturnaTest {
         FaseNocturna faseNocturna = new FaseNocturna(jugadores);
 
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class, () -> faseNocturna.laMafiaElige(ciudadano),"La mafia seleccionó una víctima invalida");
+        assertThrows(SeleccionInvalidaException.class, () -> faseNocturna.ejecutar(new Votar(mafioso1, ciudadano)),"La mafia seleccionó una víctima invalida");
     }
 
     @Test
@@ -69,12 +71,11 @@ public class FaseNocturnaTest {
         FaseNocturna faseNocturna = new FaseNocturna(jugadores);
 
         // Act
-        faseNocturna.laMafiaElige(victima);
-        faseNocturna.elMedicoProtege(victima);
-        faseNocturna.finalizar();
+        faseNocturna.ejecutar(new Votar(mafioso, victima));
+        faseNocturna.proteger(victima);
 
         // Assert
-        assertTrue(victima.estaVivo(),"El medico protegió al objetivo de la mafia");
+        assertThrows(ObjetivoProtegidoException.class, faseNocturna::finalizar,"El medico protegió al objetivo de la mafia");
     }
     @Test
     public void test04LaMafiaEligeAUnJugadorNoProgido(){
@@ -93,8 +94,8 @@ public class FaseNocturnaTest {
         FaseNocturna faseNocturna = new FaseNocturna(jugadores);
 
         // Act
-        faseNocturna.laMafiaElige(victima);
-        faseNocturna.elMedicoProtege(protegido);
+        faseNocturna.ejecutar(new Votar(mafioso, victima));
+        faseNocturna.proteger(protegido);
         faseNocturna.finalizar();
 
         // Assert
