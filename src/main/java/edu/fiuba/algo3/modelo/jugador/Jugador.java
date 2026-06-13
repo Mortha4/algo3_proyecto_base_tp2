@@ -26,6 +26,10 @@ public class Jugador {
         this.estado = new Muerto();
     }
 
+    public void votar(Jugador objetivo){
+        this.estado.votar(objetivo);
+    }
+
     public boolean estaVivo() {
         return this.estado.estaVivo();
     }
