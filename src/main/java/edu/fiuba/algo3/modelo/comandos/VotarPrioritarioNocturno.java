@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.comandos;
 
-import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
+import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public class VotarPrioritarioNocturno implements Command{
