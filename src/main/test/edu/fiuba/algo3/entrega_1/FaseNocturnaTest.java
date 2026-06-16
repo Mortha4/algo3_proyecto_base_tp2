@@ -26,7 +26,7 @@ public class FaseNocturnaTest {
         jugadores.add(ciudadano);
         jugadores.add(mafioso);
 
-        FaseNocturna faseNocturna = new FaseNocturna(jugadores);
+        FaseNocturna faseNocturna = new FaseNocturna();
 
         // Act
         faseNocturna.ejecutar(new Votar(mafioso, ciudadano));
@@ -50,7 +50,7 @@ public class FaseNocturnaTest {
         jugadores.add(mafioso1);
         jugadores.add(mafioso2);
 
-        FaseNocturna faseNocturna = new FaseNocturna(jugadores);
+        FaseNocturna faseNocturna = new FaseNocturna();
 
         // Act y Assert
         assertThrows(SeleccionInvalidaException.class, () -> faseNocturna.ejecutar(new Votar(mafioso1, ciudadano)),"La mafia seleccionó una víctima invalida");
@@ -68,7 +68,7 @@ public class FaseNocturnaTest {
         jugadores.add(medico);
         jugadores.add(mafioso);
 
-        FaseNocturna faseNocturna = new FaseNocturna(jugadores);
+        FaseNocturna faseNocturna = new FaseNocturna();
 
         // Act
         faseNocturna.ejecutar(new Votar(mafioso, victima));
@@ -91,7 +91,7 @@ public class FaseNocturnaTest {
         jugadores.add(medico);
         jugadores.add(mafioso);
 
-        FaseNocturna faseNocturna = new FaseNocturna(jugadores);
+        FaseNocturna faseNocturna = new FaseNocturna();
 
         // Act
         faseNocturna.ejecutar(new Votar(mafioso, victima));

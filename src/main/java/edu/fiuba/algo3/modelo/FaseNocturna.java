@@ -8,12 +8,10 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.List;
 
 public class FaseNocturna {
-    private List<Jugador> jugadores;
     private final Votacion votacionMafia;
-    private Jugador protegido;
+    private Candidato protegido;
 
-    public FaseNocturna(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public FaseNocturna() {
         this.votacionMafia = new Votacion();
     }
 
@@ -30,11 +28,11 @@ public class FaseNocturna {
     }
 
     public void proteger(Jugador objetivo){
-        this.protegido = objetivo;
+        this.protegido = new Candidato(objetivo);
     }
 
     public void finalizar() {
-        Jugador objetivo = this.votacionMafia.obtenerMasVotado();
+        Candidato objetivo = this.votacionMafia.obtenerMasVotado();
 
         if(objetivo == null){
             throw new NoHuboDecisionException();

@@ -3,38 +3,44 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
 public class Votacion {
-    private List<Jugador> votos;
-    private Jugador prioritario = null;
+    private Candidato prioritario = null;
+    private Set<Candidato> candidatos;
 
     public Votacion() {
-        this.votos = new ArrayList<>();
+        this.candidatos = new HashSet<>();
     }
 
     public void registrarVoto(Jugador objetivo) {
-        votos.add(objetivo);
+        Candidato candidato = new Candidato(objetivo);
+        candidatos.add(candidato);
+        candidato.sumarVoto();
     }
 
     public void registrarVotoPrioritario(Jugador objetivo) {
         registrarVoto(objetivo);
-        this.prioritario = objetivo;
+        this.prioritario = new Candidato(objetivo);
     }
 
-    public Jugador obtenerMasVotado() {
-        if (this.votos.isEmpty()) {
+    public Candidato obtenerMasVotado() {
+        Candidato masVotado = candidatos.iterator().next();
+        List<Candidato> empatados = new ArrayList<>();
+        empatados.add(masVotado);
+
+        for (Candidato candidato : candidatos) {
+            if(candidato.esMasVotadoQue(masVotado)) {
+                masVotado = candidato;
+                empatados = new ArrayList<>(List.of(masVotado));
+            } else if (candidato.empataCon(masVotado)) {
+                empatados.add(candidato);
+            }
+        }
+
+        if (empatados.size() > 1) {
+            if(empatados.contains(prioritario)) {
+                return prioritario;
+            }
             return null;
         }
-
-        Map<Jugador, Integer> cantidadesDeVotos = new HashMap<>();
-
-        for (Jugador jugador: this.votos) {
-            if (!cantidadesDeVotos.containsKey(jugador)) {
-                cantidadesDeVotos.put(jugador, 0);
-            }
-
-            cantidadesDeVotos.put(jugador, cantidadesDeVotos.get(jugador) + 1);
-        }
-
-        return Collections.max(cantidadesDeVotos.entrySet(), Map.Entry.comparingByValue()).getKey();
-        // TODO: si hay empate desempata this.prioritario
+        return masVotado;
     }
 }
