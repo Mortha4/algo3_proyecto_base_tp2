@@ -1,30 +1,46 @@
 package edu.fiuba.algo3.modelo;
-
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Votacion {
-    private Map<Jugador, Integer> votos;
+    private Candidato prioritario = null;
+    private Set<Candidato> candidatos;
 
     public Votacion() {
-        this.votos = new HashMap<>();
+        this.candidatos = new HashSet<>();
     }
 
-    public void votar(Jugador objetivo) {
-        if (!this.votos.containsKey(objetivo)) {
-            this.votos.put(objetivo, 0);
+    public void registrarVoto(Jugador objetivo) {
+        Candidato candidato = new Candidato(objetivo);
+        candidatos.add(candidato);
+        candidato.sumarVoto();
+    }
+
+    public void registrarVotoPrioritario(Jugador objetivo) {
+        registrarVoto(objetivo);
+        this.prioritario = new Candidato(objetivo);
+    }
+
+    public Candidato obtenerMasVotado() {
+        Candidato masVotado = candidatos.iterator().next();
+        List<Candidato> empatados = new ArrayList<>();
+        empatados.add(masVotado);
+
+        for (Candidato candidato : candidatos) {
+            if(candidato.esMasVotadoQue(masVotado)) {
+                masVotado = candidato;
+                empatados = new ArrayList<>(List.of(masVotado));
+            } else if (candidato.empataCon(masVotado)) {
+                empatados.add(candidato);
+            }
         }
 
-        this.votos.put(objetivo, this.votos.get(objetivo) + 1);
-    }
-
-    public Jugador obtenerMasVotado() {
-        if (this.votos.isEmpty()) {
+        if (empatados.size() > 1) {
+            if(empatados.contains(prioritario)) {
+                return prioritario;
+            }
             return null;
         }
-        return Collections.max(this.votos.entrySet(), Map.Entry.comparingByValue()).getKey();
+        return masVotado;
     }
 }

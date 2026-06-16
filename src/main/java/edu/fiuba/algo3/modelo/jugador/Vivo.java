@@ -5,4 +5,9 @@ public class Vivo implements Estado {
     public boolean estaVivo() {
         return true;
     }
+
+    @Override
+    public void votar(Jugador objetivo) {
+
+    }
 }
