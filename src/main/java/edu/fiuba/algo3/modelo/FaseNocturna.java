@@ -5,8 +5,6 @@ import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-import java.util.List;
-
 public class FaseNocturna {
     private final Votacion votacionMafia;
     private Candidato protegido;
