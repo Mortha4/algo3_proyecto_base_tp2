@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.FaseNocturna;
+import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.comandos.Votar;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.fase;
 import edu.fiuba.algo3.modelo.comandos.Command;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
