@@ -6,15 +6,17 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public class Votar implements Command {
     private final Jugador objetivo;
+    private final FaseNocturna fase;
 
-    public Votar(Jugador votante, Jugador objetivo) {
+    public Votar(FaseNocturna fase, Jugador votante, Jugador objetivo) {
+        this.fase = fase;
         if(!objetivo.estaVivo()) throw new SeleccionInvalidaException();
 
         this.objetivo = objetivo;
     }
 
     @Override
-    public void execute(FaseNocturna faseNocturna) {
-        faseNocturna.registrarVoto(this.objetivo);
+    public void execute() {
+        fase.registrarVoto(objetivo);
     }
 }

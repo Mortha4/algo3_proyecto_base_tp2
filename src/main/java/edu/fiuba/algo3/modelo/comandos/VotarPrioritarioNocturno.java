@@ -5,13 +5,15 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public class VotarPrioritarioNocturno implements Command{
     private final Jugador objetivo;
+    private final FaseNocturna fase;
 
-    public VotarPrioritarioNocturno(Jugador objetivo) {
+    public VotarPrioritarioNocturno(FaseNocturna fase, Jugador base, Jugador objetivo) {
+        this.fase = fase;
         this.objetivo = objetivo;
     }
 
     @Override
-    public void execute(FaseNocturna faseNocturna) {
-        faseNocturna.registrarVotoPrioritario(this.objetivo);
+    public void execute() {
+        fase.registrarVotoPrioritario(objetivo);
     }
 }
