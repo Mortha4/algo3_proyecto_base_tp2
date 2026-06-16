@@ -1,11 +1,10 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.FaseNocturna;
 import edu.fiuba.algo3.modelo.comandos.Command;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-
-import java.util.List;
+import edu.fiuba.algo3.modelo.roles.Rol;
 
 public class FaseNocturna {
     private final Votacion votacionMafia;
@@ -16,7 +15,7 @@ public class FaseNocturna {
     }
 
     public void ejecutar(Command comando) {
-        comando.execute(this);
+        comando.execute();
     }
 
     public void registrarVoto(Jugador objetivo) {
@@ -29,6 +28,10 @@ public class FaseNocturna {
 
     public void proteger(Jugador objetivo){
         this.protegido = new Candidato(objetivo);
+    }
+
+    public Rol investigar(Jugador base, Jugador objetivo){
+        return base.verRol(objetivo);
     }
 
     public void finalizar() {

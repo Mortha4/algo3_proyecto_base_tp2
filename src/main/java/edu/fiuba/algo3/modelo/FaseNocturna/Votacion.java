@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
@@ -24,14 +24,13 @@ public class Votacion {
     public Candidato obtenerMasVotado() {
         Candidato masVotado = candidatos.iterator().next();
         List<Candidato> empatados = new ArrayList<>();
-        empatados.add(masVotado);
 
         for (Candidato candidato : candidatos) {
-            if(candidato.esMasVotadoQue(masVotado)) {
+            if (candidato.empataCon(masVotado)) {
+                empatados.add(candidato);
+            } else if (candidato.esMasVotadoQue(masVotado)){
                 masVotado = candidato;
                 empatados = new ArrayList<>(List.of(masVotado));
-            } else if (candidato.empataCon(masVotado)) {
-                empatados.add(candidato);
             }
         }
 

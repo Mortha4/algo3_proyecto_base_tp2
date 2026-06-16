@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public class Candidato {

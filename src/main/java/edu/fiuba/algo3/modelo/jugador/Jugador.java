@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.jugador;
 
+import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
@@ -28,5 +29,9 @@ public class Jugador {
 
     public boolean estaVivo() {
         return this.estado.estaVivo();
+    }
+
+    public void accionNocturna(FaseNocturna faseNocturna, Jugador objetivo){
+        faseNocturna.ejecutar(rol.accionNocturna(faseNocturna, this, objetivo));
     }
 }
