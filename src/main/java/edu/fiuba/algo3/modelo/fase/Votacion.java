@@ -11,8 +11,11 @@ public class Votacion {
     }
 
     public void registrarVoto(Jugador objetivo) {
-        Candidato candidato = new Candidato(objetivo);
-        candidatos.add(candidato);
+        Candidato candidato = buscarCandidato(objetivo);
+        if(candidato == null){
+            candidato = new Candidato(objetivo);
+            candidatos.add(candidato);
+        }
         candidato.sumarVoto();
     }
 
@@ -24,23 +27,29 @@ public class Votacion {
     public Candidato obtenerMasVotado() {
         Candidato masVotado = candidatos.iterator().next();
         List<Candidato> empatados = new ArrayList<>();
-        empatados.add(masVotado);
 
         for (Candidato candidato : candidatos) {
-            if(candidato.esMasVotadoQue(masVotado)) {
+            if (candidato.empataCon(masVotado)) {
+                empatados.add(candidato);
+            } else if (candidato.esMasVotadoQue(masVotado)) {
                 masVotado = candidato;
                 empatados = new ArrayList<>(List.of(masVotado));
-            } else if (candidato.empataCon(masVotado)) {
-                empatados.add(candidato);
             }
         }
-
         if (empatados.size() > 1) {
-            if(empatados.contains(prioritario)) {
+            if (empatados.contains(prioritario)) {
                 return prioritario;
             }
             return null;
         }
         return masVotado;
+    }
+    public Candidato buscarCandidato(Jugador objetivo){
+        for(Candidato candidato: candidatos){
+            if(candidato.esIgualQue(objetivo)){
+                return candidato;
+            }
+        }
+        return null;
     }
 }

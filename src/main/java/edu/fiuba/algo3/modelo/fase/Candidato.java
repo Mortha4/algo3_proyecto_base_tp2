@@ -43,4 +43,8 @@ public class Candidato {
         Candidato candidato = (Candidato) o;
         return jugador.equals(candidato.jugador);
     }
+
+    public boolean esIgualQue(Jugador objetivo) {
+        return this.jugador.equals(objetivo);
+    }
 }

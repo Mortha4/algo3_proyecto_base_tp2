@@ -1,4 +1,7 @@
-package edu.fiuba.algo3.entrega_1;
+package edu.fiuba.algo3.entrega_2;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidas;
+import edu.fiuba.algo3.modelo.fase.FaseNocturna;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
 
@@ -88,5 +91,22 @@ public class DetectiveTest {
         assertEquals(Ciudadano.class, result.getClass(),
                 "Un detective no puede ver el bando de un padrino");
 
+    }
+
+    @Test
+    public void test07DetectiveNoPuedeInvestigarAlMismoJugadorDosNochesSeguidas(){
+        // Arrange
+        Jugador detective = new Jugador(new Detective(), "detective");
+        Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
+        FaseNocturna primeraNoche = new FaseNocturna();
+
+        // Act
+        detective.accionNocturna(primeraNoche, ciudadano);
+        FaseNocturna segundaNoche = new FaseNocturna(ciudadano, null);
+        //TODO: HACER QUE AL TERMINAR UNA FASE SE GUARDE UN MEMENTO, Y CADA FASENOCTURNA SE CONSTRUYA RECIBIENDO EL ULTIMO INVESTIGADO
+
+        assertThrows(NoSePuedeInvestigarDosVecesSeguidas.class,
+                () -> detective.accionNocturna(segundaNoche, ciudadano),
+                "No se lanza una excepcion al investigar dos veces al mismo jugador");
     }
 }

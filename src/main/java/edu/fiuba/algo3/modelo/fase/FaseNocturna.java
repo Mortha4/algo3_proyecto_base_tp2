@@ -1,45 +1,47 @@
 package edu.fiuba.algo3.modelo.fase;
-import edu.fiuba.algo3.modelo.comandos.Command;
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
-import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-public class FaseNocturna {
-    private final Votacion votacionMafia;
+public class FaseNocturna extends Fase {
+
+    private Jugador ultimoProtegido;
     private Candidato protegido;
+    private Jugador ultimoInvestigado;
 
     public FaseNocturna() {
-        this.votacionMafia = new Votacion();
+        super();
     }
 
-    public void ejecutar(Command comando) {
-        comando.execute(this);
-    }
-
-    public void registrarVoto(Jugador objetivo) {
-        this.votacionMafia.registrarVoto(objetivo);
+    public FaseNocturna(Jugador ultimoInvestigado, Jugador ultimoProtegido) {
+        super();
+        this.ultimoProtegido = ultimoProtegido;
+        this.ultimoInvestigado = ultimoInvestigado;
     }
 
     public void registrarVotoPrioritario(Jugador objetivo) {
-        this.votacionMafia.registrarVotoPrioritario(objetivo);
+        this.votacion.registrarVotoPrioritario(objetivo);
     }
 
-    public void proteger(Jugador objetivo){
-        this.protegido = new Candidato(objetivo);
-    }
-
-    public void finalizar() {
-        Candidato objetivo = this.votacionMafia.obtenerMasVotado();
-
-        if(objetivo == null){
-            throw new NoHuboDecisionException();
-        } else if (objetivo.equals(this.protegido)){
-            throw new ObjetivoProtegidoException();
-        } else if (!objetivo.estaVivo()) {
-            throw new SeleccionInvalidaException();
+    public void proteger(Jugador objetivo) {
+        if (objetivo.equals(ultimoProtegido)) {
+            throw new NoSePuedeProtegerDosVecesSeguidas();
         }
+        this.protegido = new Candidato(objetivo);
+        ultimoProtegido = objetivo;
+    }
 
-        objetivo.morir();
+    public void investigar(Jugador base, Jugador objetivo) {
+        if (objetivo.equals(ultimoInvestigado)) {
+            throw new NoSePuedeInvestigarDosVecesSeguidas();
+        }
+        base.verBando(objetivo);
+        ultimoInvestigado = objetivo;
+    }
+
+    @Override
+    public void otrasExcepciones(Candidato objetivo) {
+        if (objetivo.equals(this.protegido)) {
+            throw new ObjetivoProtegidoException();
+        }
     }
 }

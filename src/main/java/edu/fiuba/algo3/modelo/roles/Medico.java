@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.roles;
-import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
+import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.comandos.Command;
 import edu.fiuba.algo3.modelo.comandos.Proteger;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
