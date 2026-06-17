@@ -1,148 +1,69 @@
 @startuml
 
-
-interface ConfiguracionDeMazo{
-    +aplicarPara(cantidadJugadores: int) :boolean
-    +obtenerCantidadMafiosos() : int
-    +agregarRolesEspeciales()
-
-}
-
-class ConfiguracionPequenia{
-    -random : Random
-
-    +aplicarPara(cantidadJugadores: int) :boolean
-    +obtenerCantidadMafiosos() : int
-    +agregarRolesEspeciales()
-
-}
-
-class ConfiguracionMediana{
-        -random : Random
-
-        +aplicarPara(cantidadJugadores: int) :boolean
-        +obtenerCantidadMafiosos() : int
-        +agregarRolesEspeciales()
-
-}
-
-class ConfiguracionGrande{
-
-        +aplicarPara(cantidadJugadores: int) :boolean
-        +obtenerCantidadMafiosos() : int
-        +agregarRolesEspeciales()
-
-}
-
-
-class CreadorDeMazo{
-
-    +crearMazo() : List<Rol>
-}
-
-class MezcladorDeMazo{
-    +mezclar(List<Rol> : mazo)
-}
-
-class Partida{
-    -jugadores :List<Jugador>
-    +iniciar()
-
-
-}
-class Votacion{
-    -votos : Map <Jugador,Int>
-    +Votacion()
-    +votar()
-    +obtenerMasVotado()
-}
-
-class ContextoNocturno{
-    -unaVotacion : VotacionNocturna
-    -unProtegido : Jugador
-
-    +definirProtegido()
-    +obtenerBando()
-    +getVotacion()
-    +getProtegido()
-}
-
-class VotacionNocturna{
-    -eliminado : Jugador
-    -protegido : Jugador
-    -votacionMafia : Votacion
-
-    +registrarVoto()
-    +obtenerEliminado()
-    +laMafiaElije()
-    +elMedicoProteje()
-    +finalizar()
-
+interface Estado{
+    + accionNocturna(fase: FaseNocturna, objetivo: Jugador): void
+    + accionDiurna(fase: FaseDiurna, objetivo: Jugador): void
+    + estaVivo() : boolean
 }
 
 
 class Jugador{
-    'elige cualquier rol
-    -unRol :Rol
-    -vivo : boolean
+    + Jugador(rol: Rol, nombre: String)
+    + accionNocturna(fase: FaseNocturna, objetivo: Jugador) : void
+    + accionDiurna(fase: FaseDiurna, objetivo: Jugador) : void
+    + estaVivo() : boolean
+    + morir() : void
 
-    'la accion depende del rol elegido
-    +eleccionNocturna(contexto : ContextoNocturno)
-    +elegirObjetivo()
-    +eliminar()
-    +estaVivo()
-    +asignarRol()
-    +getRol()
 }
-
 interface Rol {
-    +eleccionNocturna(contexto : ContextoNocturno)
-    +getTipo() : String
+    - visitante: Visitante
+    +accionNocturna(fase: FaseNocturna, base: Jugador, objetivo: Jugador): Command
 }
-
-class Padrino{
-    +getTipo() : String
+interface Command{
+    + execute()
 }
-class Sheriff{
-    +getTipo() : String
-}
-class Ciudadano{
-
-    +getTipo() : String
-}
-
-class Medico{
-    'elige a quien salvar
-    +eleccionNocturna(contexto : ContextoNocturno)
-    +getTipo() : String
-}
-class Detective{
-    'elige a quien investigar
-    +eleccionNocturna(unJugador: Jugadorador,contexto : ContextoNocturno)
-    +getTipo() : String
-}
-class Mafioso{
-    'elige a quien eliminar
-    +eleccionNocturna(unJugador: Jugador,contexto : ContextoNocturno)
-    +getTipo() : String
-}
-
 
 Jugador --> Rol
+Jugador --> Estado
+Muerto ..|> Estado
+Vivo ..|> Estado
+Rol ..> Command
 
-Mafioso ..|> Rol
-Detective ..|> Rol
-Medico ..|> Rol
-Padrino ..|> Rol
-Sheriff ..|> Rol
 Ciudadano ..|> Rol
-Partida --> Jugador
+Medico ..|>Rol
+Mafioso ..|> Rol
+Padrino ..|> Rol
+Detective ..|> Rol
+Sheriff ..|> Rol
 
-ConfiguracionPequenia ..|> ConfiguracionDeMazo
-ConfiguracionMediana ..|> ConfiguracionDeMazo
-ConfiguracionGrande ..|> ConfiguracionDeMazo
+class Proteger{
+    + Proteger(faseNocturna: FaseNocturna,
+    objetivo: Jugador)
+}
 
-ConfiguracionDeMazo --> CreadorDeMazo
+class Votar{
+    + Votar(faseNocturna: FaseNocturna,
+    votante: Jugador, votado: Jugador)
+}
+class Investigar{
+    + Investigar(faseNocturna: FaseNocturna,
+    base: Jugador, objetivo: Jugador)
+}
+class VotarPrioritario{
+    + Proteger(faseNocturna: FaseNocturna,
+    votante: Jugador, votado: Jugador)
+}
+
+class Nada{
+    + Nada()
+}
+
+
+Proteger .|> Command
+Investigar .|> Command
+Votar .|> Command
+VotarPrioritario .|> Command
+Nada .|> Command
 
 
 
