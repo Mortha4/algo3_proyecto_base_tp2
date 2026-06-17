@@ -1,9 +1,8 @@
-package edu.fiuba.algo3.modelo.configuraciones;
-import edu.fiuba.algo3.modelo.roles.*;
+package edu.fiuba.algo3.modelo.mazo;
 import java.util.Map;
 import java.util.Random;
 
-public class ConfiguracionPequenia implements ConfiguracionDeMazo {
+public class Pequenia implements ConfiguracionDeMazo {
     private final Random random = new Random();
 
     @Override

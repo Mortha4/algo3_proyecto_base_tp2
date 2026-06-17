@@ -14,8 +14,7 @@ public class Vivo implements Estado {
     public void accionNocturna(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol){
         faseNocturna.ejecutar(rol.accionNocturna(faseNocturna, ejecutor, objetivo));
     }
-
-    public void accionDiurna(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo){
+    public void accionDiurna(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol){
         faseDiurna.ejecutar(new Votar(faseDiurna, ejecutor, objetivo));
     }
 }

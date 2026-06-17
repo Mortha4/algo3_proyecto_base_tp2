@@ -1,12 +1,8 @@
-package edu.fiuba.algo3.modelo.configuraciones;
+package edu.fiuba.algo3.modelo.mazo;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
-import edu.fiuba.algo3.modelo.roles.*;
-
-public class ConfiguracionDeMazoGrande implements ConfiguracionDeMazo{
+public class Grande implements ConfiguracionDeMazo{
     @Override
     public void obtenerConfig(Map<String, Integer> config) {
         config.put("Sheriff", 1);

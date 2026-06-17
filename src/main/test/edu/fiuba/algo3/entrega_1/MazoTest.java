@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.entrega_1;
 
 import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
+import edu.fiuba.algo3.modelo.excepciones.NoHayMasCartasException;
+import edu.fiuba.algo3.modelo.mazo.Mazo;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
-
-import edu.fiuba.algo3.modelo.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,13 +117,16 @@ public class MazoTest {
     public void test07UnMazoDe5RolesMantieneSuTamanioAlMezclar(){
         // arrange
         Mazo mazo = new Mazo(5);
-        int tamanioOriginal = mazo.getCantidadDeRoles();
 
         // act
         mazo.mezclar();
+        for(int i = 0; i < 5; i++){
+            mazo.agarrarCarta();
+        }
 
         // assert
-        assertEquals(tamanioOriginal, mazo.getCantidadDeRoles(),
+        assertThrows(NoHayMasCartasException.class,
+                mazo::agarrarCarta,
                 "El tamanio del mazo cambio al mezclarlo");
     }
 
@@ -145,13 +148,15 @@ public class MazoTest {
     public void test09UnMazoCon7RolesMantieneSuTamanioAlMezclar(){
         // arrange
         Mazo mazo = new Mazo(7);
-        int tamanioOriginal = mazo.getCantidadDeRoles();
-
         // act
         mazo.mezclar();
+        for(int i = 0; i < 7; i++){
+            mazo.agarrarCarta();
+        }
 
         // assert
-        assertEquals(tamanioOriginal, mazo.getCantidadDeRoles(),
+        assertThrows(NoHayMasCartasException.class,
+                mazo::agarrarCarta,
                 "El tamanio del mazo cambio al mezclarlo");
     }
 
@@ -213,13 +218,15 @@ public class MazoTest {
     public void test14UnMazoCon10RolesMantieneSuTamanioAlMezclar(){
         // arrange
         Mazo mazo = new Mazo(10);
-        int tamanioOriginal = mazo.getCantidadDeRoles();
-
         // act
         mazo.mezclar();
+        for(int i = 0; i < 10; i++){
+            mazo.agarrarCarta();
+        }
 
         // assert
-        assertEquals(tamanioOriginal, mazo.getCantidadDeRoles(),
+        assertThrows(NoHayMasCartasException.class,
+                mazo::agarrarCarta,
                 "El tamanio del mazo cambio al mezclarlo");
     }
 }
