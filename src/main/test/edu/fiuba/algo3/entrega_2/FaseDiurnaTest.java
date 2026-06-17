@@ -28,7 +28,7 @@ public class FaseDiurnaTest {
     public void test01VotacionSinEmpateSoloUsaJugadoresVivos(){
         // Act y assert
         ciudadano1.morir();
-        assertThrows(SeleccionInvalidaException.class, () -> ciudadano2.accionDiurna(fase, muerto),
+        assertThrows(SeleccionInvalidaException.class, () -> ciudadano2.accionDiurna(fase, ciudadano1),
                 "Se pudo votar a un muerto");
 
     }
@@ -61,5 +61,15 @@ public class FaseDiurnaTest {
         fase.finalizar();
         // Assert
         assertFalse(ciudadano3.estaVivo(), "En una votacion valida, no se elimino el jugador mas votado");
+    }
+
+    @Test
+    public void test05JugadorMuertoNoPuedeSeguirVotando(){
+        // Act
+        ciudadano1.morir();
+        // Assert
+        assertThrows(SeleccionInvalidaException.class,
+                () -> ciudadano1.accionDiurna(fase, ciudadano2),
+                "Un jugador muerto puede seguir votando");
     }
 }
