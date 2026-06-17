@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.mazo;
 import java.util.Map;
 import java.util.Random;
 
-public class ConfiguracionMediana implements ConfiguracionDeMazo {
+public class Mediana implements ConfiguracionDeMazo {
     private final Random random = new Random();
 
     @Override

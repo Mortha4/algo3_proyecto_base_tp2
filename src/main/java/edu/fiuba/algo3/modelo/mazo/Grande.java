@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.mazo;
 
 import java.util.Map;
 
-public class ConfiguracionDeMazoGrande implements ConfiguracionDeMazo{
+public class Grande implements ConfiguracionDeMazo{
     @Override
     public void obtenerConfig(Map<String, Integer> config) {
         config.put("Sheriff", 1);
