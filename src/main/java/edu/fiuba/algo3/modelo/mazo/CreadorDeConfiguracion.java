@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.configuraciones;
+package edu.fiuba.algo3.modelo.mazo;
 import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
 
 public class CreadorDeConfiguracion {

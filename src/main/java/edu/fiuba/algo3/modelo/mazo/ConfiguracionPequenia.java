@@ -1,5 +1,4 @@
-package edu.fiuba.algo3.modelo.configuraciones;
-import edu.fiuba.algo3.modelo.roles.*;
+package edu.fiuba.algo3.modelo.mazo;
 import java.util.Map;
 import java.util.Random;
 

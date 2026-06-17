@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-
+import edu.fiuba.algo3.modelo.mazo.Mazo;
 import java.util.ArrayList;
 import java.util.List;
 
