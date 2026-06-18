@@ -11,11 +11,11 @@ public class VisitanteMafioso implements Visitante{
     }
     @Override
     public Rol visitar(Mafioso mafioso){
-        return mafioso;
+        return new Mafioso();
     }
     @Override
     public Rol visitar(Padrino padrino){
-        return padrino;
+        return new Mafioso();
     }
     @Override
     public Rol visitar(Ciudadano ciudadano){
