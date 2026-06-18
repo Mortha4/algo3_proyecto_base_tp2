@@ -1,0 +1,37 @@
+package edu.fiuba.algo3.modelo.jugador;
+
+import edu.fiuba.algo3.modelo.FaseNocturna.FaseNocturna;
+import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
+import edu.fiuba.algo3.modelo.roles.Rol;
+
+public class Jugador {
+    private final Rol rol;
+    private final String nombre;
+    private Estado estado;
+
+    public Jugador(Rol rol, String nombre) {
+        this.rol = rol;
+        this.nombre = nombre;
+        this.estado = new Vivo();
+    }
+
+    public Rol verRol(Jugador otroJugador){
+        if(otroJugador.equals(this)){
+            return rol;
+        }
+
+        throw new NoVisibleException();
+    }
+
+    public void morir() {
+        this.estado = new Muerto();
+    }
+
+    public boolean estaVivo() {
+        return this.estado.estaVivo();
+    }
+
+    public void accionNocturna(FaseNocturna faseNocturna, Jugador objetivo){
+        faseNocturna.ejecutar(rol.accionNocturna(faseNocturna, this, objetivo));
+    }
+}
