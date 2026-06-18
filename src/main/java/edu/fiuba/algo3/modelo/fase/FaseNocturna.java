@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.fase;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.roles.Rol;
 
 public class FaseNocturna extends Fase {
 
@@ -30,12 +31,12 @@ public class FaseNocturna extends Fase {
         ultimoProtegido = objetivo;
     }
 
-    public void investigar(Jugador base, Jugador objetivo) {
+    public Rol investigar(Jugador base, Jugador objetivo) {
         if (objetivo.equals(ultimoInvestigado)) {
             throw new NoSePuedeInvestigarDosVecesSeguidas();
         }
-        base.verBando(objetivo);
         ultimoInvestigado = objetivo;
+        return base.verBando(objetivo);
     }
 
     @Override

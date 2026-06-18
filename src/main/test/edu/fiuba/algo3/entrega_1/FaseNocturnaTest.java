@@ -97,9 +97,10 @@ public class FaseNocturnaTest {
     @Test
     public void test07NoSePuedeMatarAOtroMafioso(){
         // Act
-        mafioso1.accionNocturna(fase, mafioso2);
+
         // Assert
-        assertThrows(NoHuboDecisionException.class, fase::finalizar,
+        assertThrows(NoVotableException.class,
+                () -> mafioso1.accionNocturna(fase, mafioso2),
                 "Los mafiosos pudieron eliminar a otro mafioso1");
     }
 
