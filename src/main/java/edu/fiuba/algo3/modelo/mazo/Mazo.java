@@ -4,8 +4,8 @@ import edu.fiuba.algo3.modelo.roles.*;
 import java.util.*;
 
 public class Mazo {
-    private ConfiguracionDeMazo configuracion;
-    private List<Rol> cartas = new ArrayList<>();
+    private final ConfiguracionDeMazo configuracion;
+    private final List<Rol> cartas = new ArrayList<>();
 
     public Mazo(int cantidadDeCartas) {
         this.configuracion = CreadorDeConfiguracion.crearConfig(cantidadDeCartas);

@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.fase;
 
-import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public abstract class Fase {

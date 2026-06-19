@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo.jugador;
-import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.roles.Rol;
 

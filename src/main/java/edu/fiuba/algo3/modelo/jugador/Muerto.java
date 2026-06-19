@@ -22,7 +22,7 @@ public class Muerto implements Estado {
     }
 
     @Override
-    public void accionDiurna(FaseDiurna faseDiurna, Jugador ejecuror, Jugador objetivo, Rol rol) {
+    public void accionDiurna(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol) {
         throw new SeleccionInvalidaException();
     }
 

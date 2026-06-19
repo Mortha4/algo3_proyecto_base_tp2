@@ -7,5 +7,5 @@ public interface Estado {
     Candidato crearCandidato(Jugador otroJugador);
     Candidato devolverCandidato(Jugador otroJugador);
     void accionNocturna(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol);
-    void accionDiurna(FaseDiurna faseDiurna, Jugador ejecuror, Jugador objetivo, Rol rol);
+    void accionDiurna(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol);
 }
