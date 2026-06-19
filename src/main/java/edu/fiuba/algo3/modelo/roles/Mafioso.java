@@ -27,9 +27,4 @@ public class Mafioso extends Rol {
     public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
         return new Votar(fase, base, objetivo);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return o != null && this.getClass() == o.getClass();
-    }
 }
