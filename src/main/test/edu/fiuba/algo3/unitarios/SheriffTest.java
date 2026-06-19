@@ -16,62 +16,62 @@ public class SheriffTest {
     }
 
     @Test
-    public void test02SheriffNoPuedeVerUnCiudadano(){
+    public void test01SheriffNoPuedeVerBandoDeUnCiudadano(){
         // Arrange
         Ciudadano ciudadano = new Ciudadano();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> sheriff.verBando(ciudadano),
-                "El sheriff pudo ver el bando de un ciudadano");
+                "Un sheriff no debería poder ver el bando de un ciudadano");
     }
 
     @Test
-    public void test04SheriffNoPuedeVerUnMedico(){
+    public void test02SheriffNoPuedeVerBandoDeUnMedico(){
         // Arrange
         Medico medico = new Medico();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> sheriff.verBando(medico),
-                "El sheriff pudo ver el bando de un ciudadano");
+                "Un sheriff no debería poder ver el bando de un médico");
     }
 
     @Test
-    public void test03SheriffNoPuedeVerUnDetective(){
+    public void test03SheriffNoPuedeVerBandoDeUnDetective(){
         // Arrange
         Detective detective = new Detective();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> sheriff.verBando(detective),
-                "El sheriff pudo ver el bando de un ciudadano");
+                "Un sheriff no debería poder ver el bando de un detective");
     }
 
     @Test
-    public void test01SheriffNoPuedeVerUnSheriff(){
+    public void test04SheriffNoPuedeVerBandoDeOtroSheriff(){
         // Arrange
         Sheriff otroSheriff = new Sheriff();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> sheriff.verBando(otroSheriff),
-                "El sheriff pudo ver el bando de un ciudadano");
+                "Un sheriff no debería poder ver el bando de otro sheriff");
     }
 
     @Test
-    public void test05SheriffNoPuedeVerUnMafioso(){
+    public void test05SheriffNoPuedeVerBandoDeUnMafioso(){
         // Arrange
         Mafioso mafioso = new Mafioso();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> sheriff.verBando(mafioso),
-                "El sheriff pudo ver el bando de un mafioso");
+                "Un sheriff no debería poder ver el bando de un mafioso");
     }
 
     @Test
-    public void test06SheriffNoPuedeVerUnPadrino(){
+    public void test06SheriffNoPuedeVerBandoDeUnPadrino(){
         // Arrange
         Padrino padrino = new Padrino();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> sheriff.verBando(padrino),
-                "El sheriff pudo ver el bando de un mafioso");
+                "Un sheriff no debería poder ver el bando de un padrino");
     }
 }

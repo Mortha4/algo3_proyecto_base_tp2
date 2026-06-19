@@ -10,56 +10,57 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CreadorDeConfiguracionTest {
-
     @Test
-    public void Test01EnUnaPatidaCon5JugadoresTodosRecibenUnRol(){
-        //arrange
-        List<String> nombresDeJugadores = new ArrayList<>();
-        nombresDeJugadores.addAll(List.of("jugador1", "jugador2", "jugador3", "jugador4", "jugador5"));
+    public void test01TodosLosJugadoresRecibenUnRolEnUnaPartidaDe5Jugadores(){
+        // Arrange
+        List<String> nombresDeJugadores = new ArrayList<>(List.of("jugador1", "jugador2", "jugador3", "jugador4", "jugador5"));
 
         Partida partida = new Partida(nombresDeJugadores);
 
-        //act
+        // Act
         partida.repartirCartas();
         List<Jugador> jugadores = partida.getJugadores();
 
-        //assert
+        // Assert
         for (Jugador jugador : jugadores) {
-            assertNotNull(jugador.verRol(jugador), "Algun jugador no tiene rol");
+            assertNotNull(jugador.verRol(jugador),
+                    "Todos los jugadores deberían recibir un rol al repartir las cartas");
         }
     }
+
     @Test
-    public void Test02EnUnaPatidaCon7JugadoresTodosRecibenUnRol(){
-        //arrange
-        List<String> nombresDeJugadores = new ArrayList<>();
-        nombresDeJugadores.addAll(List.of("1", "2", "3", "4", "5", "6", "7"));
+    public void test02TodosLosJugadoresRecibenUnRolEnUnaPartidaDe7Jugadores(){
+        // Arrange
+        List<String> nombresDeJugadores = new ArrayList<>(List.of("1", "2", "3", "4", "5", "6", "7"));
 
         Partida partida = new Partida(nombresDeJugadores);
 
-        //act
+        // Act
         partida.repartirCartas();
         List<Jugador> jugadores = partida.getJugadores();
 
-        //assert
+        // Assert
         for (Jugador jugador : jugadores) {
-            assertNotNull(jugador.verRol(jugador), "Algun jugador no tiene rol");
+            assertNotNull(jugador.verRol(jugador),
+                    "Todos los jugadores deberían recibir un rol al repartir las cartas");
         }
     }
+
     @Test
-    public void Test03EnUnaPatidaCon10JugadoresTodosRecibenUnRol(){
-        //arrange
-        List<String> nombresDeJugadores = new ArrayList<>();
-        nombresDeJugadores.addAll(List.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+    public void test03TodosLosJugadoresRecibenUnRolEnUnaPartidaDe10Jugadores(){
+        // Arrange
+        List<String> nombresDeJugadores = new ArrayList<>(List.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 
         Partida partida = new Partida(nombresDeJugadores);
 
-        //act
+        // Act
         partida.repartirCartas();
         List<Jugador> jugadores = partida.getJugadores();
 
-        //assert
+        // Assert
         for (Jugador jugador : jugadores) {
-            assertNotNull(jugador.verRol(jugador), "Algun jugador no tiene rol");
+            assertNotNull(jugador.verRol(jugador),
+                    "Todos los jugadores deberían recibir un rol al repartir las cartas");
         }
     }
 }

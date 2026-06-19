@@ -17,47 +17,47 @@ public class PadrinoTest {
     }
 
     @Test
-    public void test02PadrinoNoPuedeVerUnCiudadano(){
+    public void test01PadrinoNoPuedeVerBandoDeUnCiudadano(){
         // Arrange
         Ciudadano ciudadanoObservado = new Ciudadano();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> padrino.verBando(ciudadanoObservado),
-                "El padrino pudo ver el bando de un ciudadano");
+                "Un padrino no debería poder ver el bando de un ciudadano");
     }
 
     @Test
-    public void test05PadrinoNoPuedeVerUnMedico(){
+    public void test02PadrinoNoPuedeVerBandoDeUnMedico(){
         // Arrange
         Medico medicoObservado = new Medico();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> padrino.verBando(medicoObservado),
-                "El padrino pudo ver el bando de un ciudadano");
+                "Un padrino no debería poder ver el bando de un médico");
     }
 
     @Test
-    public void test04PadrinoNoPuedeVerUnDetective(){
+    public void test03PadrinoNoPuedeVerBandoDeUnDetective(){
         // Arrange
         Detective detectiveObservado = new Detective();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> padrino.verBando(detectiveObservado),
-                "El padrino pudo ver el bando de un ciudadano");
+                "Un padrino no debería poder ver el bando de un detective");
     }
 
     @Test
-    public void test03PadrinoNoPuedeVerUnSheriff(){
+    public void test04PadrinoNoPuedeVerBandoDeUnSheriff(){
         // Arrange
         Sheriff sheriffObservado = new Sheriff();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> padrino.verBando(sheriffObservado),
-                "El padrino pudo ver el bando de un ciudadano");
+                "Un padrino no debería poder ver el bando de un sheriff");
     }
 
     @Test
-    public void test06PadrinoPuedeVerUnMafioso(){
+    public void test05PadrinoPuedeVerBandoDeUnMafioso(){
         // Arrange
         Mafioso mafioso = new Mafioso();
 
@@ -65,11 +65,12 @@ public class PadrinoTest {
         Rol result = padrino.verBando(mafioso);
 
         // Assert
-        assertEquals(new Mafioso(), result, "el padrino no pudo ver el bando de un mafioso");
+        assertEquals(new Mafioso(), result,
+                "Un padrino debería poder ver el bando de un mafioso");
     }
 
     @Test
-    public void test01PadrinoPuedeVerUnPadrino(){
+    public void test06PadrinoPuedeVerBandoDeOtroPadrino(){
         // Arrange
         Padrino otroPadrino = new Padrino();
 
@@ -77,7 +78,8 @@ public class PadrinoTest {
         Rol result = padrino.verBando(otroPadrino);
 
         // Assert
-        assertEquals(new Mafioso(), result, "El padrino no pudo observar a otro padrino.");
+        assertEquals(new Mafioso(), result,
+                "Un padrino debería poder ver el bando de otro padrino");
     }
 }
 

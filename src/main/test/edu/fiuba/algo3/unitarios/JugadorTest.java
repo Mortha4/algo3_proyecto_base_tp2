@@ -19,28 +19,31 @@ public class JugadorTest {
     }
 
     @Test
-    public void test03UnJugadorSeCreaVivo(){
+    public void test01UnJugadorSeCreaVivo(){
         // Act y Assert
         assertTrue(ciudadano1.estaVivo(),
-                "El jugador se creo muerto.");
+                "Un jugador recién creado debería estar vivo");
     }
+
     @Test
-    public void test04AlMatarUnJugadorNoEstaVivo(){
+    public void test02AlMatarUnJugadorNoEstaVivo(){
         // Act
         ciudadano1.morir();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
-                "El jugador sigue vivo luego de morir()");
+                "Un jugador no debería estar vivo después de morir");
     }
 
     @Test
-    public void test05UnJugadorMuertoNoPuedeRealizarAcciones(){
+    public void test03UnJugadorMuertoNoPuedeRealizarAcciones(){
         // Arrange
         ciudadano1.morir();
+
+        // Act y Assert
         assertThrows(SeleccionInvalidaException.class,
                 () -> ciudadano1.accionDiurna(new FaseDiurna(), ciudadano2),
-                "Un jugador pudo votar muerto");
+                "Un jugador muerto no debería poder realizar acciones");
     }
 
 }
