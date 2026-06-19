@@ -13,15 +13,9 @@ public class Votacion {
     }
 
     public void registrarVoto(Jugador votante, Jugador objetivo) {
-        Candidato candidato;
-        try {
-            candidato = buscarCandidato(objetivo);
-        } catch (NoSeEncontroElCandidatoException exc){
-            candidato = votante.crearCandidato(objetivo);
-            candidatos.add(candidato);
-        }
+        Candidato candidato = buscarCandidato(votante, objetivo);
+        candidatos.add(candidato);
         candidato.sumarVoto();
-
     }
 
     public void registrarVotoPrioritario(Jugador votante, Jugador objetivo) {
@@ -50,12 +44,12 @@ public class Votacion {
         return masVotado;
     }
 
-    public Candidato buscarCandidato(Jugador objetivo){
+    public Candidato buscarCandidato(Jugador votante, Jugador objetivo){
         for(Candidato candidato: candidatos){
             if(candidato.esIgualQue(objetivo)){
                 return candidato;
             }
         }
-        throw new NoSeEncontroElCandidatoException();
+        return votante.crearCandidato(objetivo);
     }
 }
