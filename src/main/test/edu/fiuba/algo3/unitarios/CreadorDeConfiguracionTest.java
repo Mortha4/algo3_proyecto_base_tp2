@@ -8,11 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RepartoDeCartasTest {
-
-    // FIXME: remove and make MazoTest instead
+public class CreadorDeConfiguracionTest {
 
     @Test
     public void Test01EnUnaPatidaCon5JugadoresTodosRecibenUnRol(){
@@ -65,13 +62,4 @@ public class RepartoDeCartasTest {
             assertNotNull(jugador.verRol(jugador), "Algun jugador no tiene rol");
         }
     }
-
-
-
-
-
-
-
-
-
 }
