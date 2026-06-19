@@ -31,7 +31,7 @@ public class FaseNocturna extends Fase {
 
     public void proteger(Jugador objetivo) {
         if (objetivo.equals(ultimoProtegido)) {
-            throw new NoSePuedeProtegerDosVecesSeguidas();
+            throw new NoSePuedeProtegerDosVecesSeguidasException();
         }
         this.protegido = new Candidato(objetivo);
         ultimoProtegido = objetivo;
@@ -39,7 +39,7 @@ public class FaseNocturna extends Fase {
 
     public Rol investigar(Jugador base, Jugador objetivo) {
         if (objetivo.equals(ultimoInvestigado)) {
-            throw new NoSePuedeInvestigarDosVecesSeguidas();
+            throw new NoSePuedeInvestigarDosVecesSeguidasException();
         }
         ultimoInvestigado = objetivo;
         return base.verBando(objetivo);

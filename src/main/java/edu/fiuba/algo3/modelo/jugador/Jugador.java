@@ -25,7 +25,19 @@ public class Jugador {
     }
 
     public Rol verBando(Jugador otroJugador){
-        return rol.verBando(otroJugador.rol);
+        return otroJugador.compararCon(this.rol);
+    }
+
+    public Rol compararCon(Rol rol){
+        return rol.verBando(this.rol);
+    }
+
+    public boolean tieneMismoRol(Jugador otroJugador){
+        return otroJugador.tieneMismoRol(this.rol);
+    }
+
+    public boolean tieneMismoRol(Rol rol){
+        return this.rol.equals(rol);
     }
 
     public void morir() {

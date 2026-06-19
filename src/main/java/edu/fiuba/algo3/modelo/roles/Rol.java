@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.visitors.Visitante;
 
+import java.util.Objects;
+
 public abstract class Rol {
     protected Visitante visitante;
 

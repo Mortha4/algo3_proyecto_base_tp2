@@ -4,9 +4,9 @@ import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public class Votar implements AccionNocturna, AccionDiurna{
-    private final Jugador objetivo;
-    private final Jugador votante;
-    private final Fase fase;
+    protected final Jugador objetivo;
+    protected final Jugador votante;
+    protected final Fase fase;
 
     public Votar(Fase fase, Jugador votante, Jugador objetivo) {
         if(votante.equals(objetivo)) {
