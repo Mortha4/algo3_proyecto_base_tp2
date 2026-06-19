@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidas;
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidas;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidasException;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
@@ -114,7 +114,7 @@ public class Entrega2Test {
         FaseNocturna segundaNoche = new FaseNocturna(ciudadano, null);
         //TODO: HACER QUE AL TERMINAR UNA FASE SE GUARDE UN MEMENTO, Y CADA FASENOCTURNA SE CONSTRUYA RECIBIENDO EL ULTIMO INVESTIGADO
 
-        assertThrows(NoSePuedeInvestigarDosVecesSeguidas.class,
+        assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
                 () -> detective.accionNocturna(segundaNoche, ciudadano),
                 "No se lanza una excepción al investigar dos veces al mismo jugador");
     }
@@ -131,7 +131,7 @@ public class Entrega2Test {
         FaseNocturna noche2 = new FaseNocturna(null, ciudadano);
 
         // Assert
-        assertThrows(NoSePuedeProtegerDosVecesSeguidas.class,
+        assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
                 () -> medico.accionNocturna(noche2, ciudadano),
                 "El medico pudo proteger dos veces seguidas al mismo jugador");
 
