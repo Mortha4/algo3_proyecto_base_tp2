@@ -1,4 +1,6 @@
 package edu.fiuba.algo3.modelo.fase;
+import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
+import edu.fiuba.algo3.modelo.excepciones.NoSeEncontroElCandidatoException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
@@ -11,12 +13,15 @@ public class Votacion {
     }
 
     public void registrarVoto(Jugador objetivo) {
-        Candidato candidato = buscarCandidato(objetivo);
-        if(candidato == null){
+        Candidato candidato;
+        try {
+            candidato = buscarCandidato(objetivo);
+        } catch (NoSeEncontroElCandidatoException exc){
             candidato = new Candidato(objetivo);
             candidatos.add(candidato);
         }
         candidato.sumarVoto();
+
     }
 
     public void registrarVotoPrioritario(Jugador objetivo) {
@@ -40,7 +45,7 @@ public class Votacion {
             if (empatados.contains(prioritario)) {
                 return prioritario;
             }
-            return null;
+            throw new NoHuboDecisionException();
         }
         return masVotado;
     }
@@ -50,6 +55,6 @@ public class Votacion {
                 return candidato;
             }
         }
-        return null;
+        throw new NoSeEncontroElCandidatoException();
     }
 }

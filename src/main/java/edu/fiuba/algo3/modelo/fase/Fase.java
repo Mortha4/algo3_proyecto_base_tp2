@@ -24,9 +24,7 @@ public abstract class Fase {
     public void finalizar() {
         Candidato objetivo = this.votacion.obtenerMasVotado();
 
-        if (objetivo == null) {
-            throw new NoHuboDecisionException();
-        } else if (!objetivo.estaVivo()) {
+        if (!objetivo.estaVivo()) {
             throw new SeleccionInvalidaException();
         }
         otrasExcepciones(objetivo);
