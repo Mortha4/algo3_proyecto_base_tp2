@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.mazo;
 import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
 
 public class CreadorDeConfiguracion {
-    public static CreadorDeMazo crearConfig(int cantidadDeJugadores){
+    public static CreadorDeMazo crearConfigAutomatica(int cantidadDeJugadores){
         if (cantidadDeJugadores < 5 || cantidadDeJugadores > 12) {
             throw new CantidadDeJugadoresException();
         }

@@ -4,11 +4,10 @@ import edu.fiuba.algo3.modelo.roles.*;
 import java.util.*;
 
 public class Mazo {
-    private final CreadorDeMazo configuracion;
     private final List<Rol> cartas;
 
     public Mazo(int cantidadDeCartas) {
-        this.configuracion = CreadorDeConfiguracion.crearConfig(cantidadDeCartas);
+        CreadorDeMazo configuracion = CreadorDeConfiguracion.crearConfigAutomatica(cantidadDeCartas);
         cartas = configuracion.obtenerRoles();
     }
 
