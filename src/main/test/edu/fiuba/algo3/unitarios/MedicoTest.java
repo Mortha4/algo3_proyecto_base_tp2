@@ -79,7 +79,7 @@ public class MedicoTest {
     @Test
     public void test07MedicoPuedeProtegerUnJugador(){
         // Arrange
-        Jugador medico = new Jugador(new Medico(), "medico"); //FIXME: remove
+        Jugador medico = new Jugador(this.medico, "medico");
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
         Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         FaseNocturna fase = new FaseNocturna();
