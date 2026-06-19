@@ -1,23 +1,36 @@
 package edu.fiuba.algo3.modelo.mazo;
-import java.util.Map;
+import edu.fiuba.algo3.modelo.roles.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class Pequenia implements ConfiguracionDeMazo {
+public class Pequenia extends CreadorDeMazo {
     private final Random random = new Random();
 
+    public Pequenia(int cantidadDeRoles){
+        this.cantidadDeRoles = cantidadDeRoles;
+    }
     @Override
-    public void obtenerConfig(Map<String, Integer> config) {
+    public List<Rol> obtenerRoles() {
+        List<Rol> roles = new ArrayList<>();
         if(random.nextBoolean()) {
-            config.put("Detective", 1);
+            roles.add(new Detective());
         } else {
-            config.put("Medico", 1);
+            roles.add(new Medico());
         }
 
-        if(random.nextBoolean()) {
-            config.put("Mafioso", 1);
-        } else {
-            config.put("Mafioso", 2);
-        }
+        int cantidadDeMafiosos;
 
+        if(random.nextBoolean()) {
+            cantidadDeMafiosos = 1;
+        } else {
+            cantidadDeMafiosos = 2;
+        }
+        for(int i = 0; i < cantidadDeMafiosos; i++){
+            roles.add(new Mafioso());
+        }
+        rellenarConCiudadanos(roles);
+        return roles;
     }
 }
