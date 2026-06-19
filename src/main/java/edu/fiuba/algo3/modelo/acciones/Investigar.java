@@ -1,9 +1,9 @@
-package edu.fiuba.algo3.modelo.comandos;
+package edu.fiuba.algo3.modelo.acciones;
 
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-public class Investigar implements Command {
+public class Investigar implements AccionNocturna {
     private final FaseNocturna fase;
     private final Jugador jugadorBase;
     private final Jugador objetivo;

@@ -33,10 +33,6 @@ public class Candidato {
         jugador.morir();
     }
 
-    public boolean estaVivo(){
-        return jugador.estaVivo();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

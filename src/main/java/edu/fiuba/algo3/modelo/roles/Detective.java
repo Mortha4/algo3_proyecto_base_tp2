@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.modelo.roles;
+import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
+import edu.fiuba.algo3.modelo.acciones.AccionNocturna;
+import edu.fiuba.algo3.modelo.acciones.Votar;
+import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
-import edu.fiuba.algo3.modelo.comandos.Command;
-import edu.fiuba.algo3.modelo.comandos.Investigar;
+import edu.fiuba.algo3.modelo.acciones.Investigar;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.visitors.Visitante;
 import edu.fiuba.algo3.modelo.visitors.VisitanteDetective;
@@ -17,8 +20,12 @@ public class Detective extends Rol {
     }
 
     @Override
-    public Command accionNocturna(FaseNocturna fase, Jugador base, Jugador objetivo) {
+    public AccionNocturna accionNocturna(FaseNocturna fase, Jugador base, Jugador objetivo) {
         return new Investigar(fase, base, objetivo);
+    }
+    @Override
+    public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
+        return new Votar(fase, base, objetivo);
     }
 
 }

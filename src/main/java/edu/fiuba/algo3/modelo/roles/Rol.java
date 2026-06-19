@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo.roles;
+import edu.fiuba.algo3.modelo.acciones.AccionNocturna;
+import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
-import edu.fiuba.algo3.modelo.comandos.Command;
+import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.visitors.Visitante;
-
-import java.util.Objects;
 
 public abstract class Rol {
     protected Visitante visitante;
@@ -15,10 +15,7 @@ public abstract class Rol {
 
     public abstract Rol aceptar(Visitante visitante);
 
-    public abstract Command accionNocturna(FaseNocturna faseNocturna, Jugador base, Jugador objetivo);
+    public abstract AccionNocturna accionNocturna(FaseNocturna faseNocturna, Jugador base, Jugador objetivo);
+    public abstract AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo);
 
-    @Override
-    public boolean equals(Object o) {
-        return o != null && getClass() == o.getClass();
-    }
 }

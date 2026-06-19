@@ -1,26 +1,31 @@
 package edu.fiuba.algo3.modelo.fase;
+import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
+import edu.fiuba.algo3.modelo.excepciones.NoSeEncontroElCandidatoException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
 public class Votacion {
     private Candidato prioritario = null;
-    private Set<Candidato> candidatos;
+    private final Set<Candidato> candidatos;
 
     public Votacion() {
         this.candidatos = new HashSet<>();
     }
 
-    public void registrarVoto(Jugador objetivo) {
-        Candidato candidato = buscarCandidato(objetivo);
-        if(candidato == null){
-            candidato = new Candidato(objetivo);
+    public void registrarVoto(Jugador votante, Jugador objetivo) {
+        Candidato candidato;
+        try {
+            candidato = buscarCandidato(objetivo);
+        } catch (NoSeEncontroElCandidatoException exc){
+            candidato = votante.crearCandidato(objetivo);
             candidatos.add(candidato);
         }
         candidato.sumarVoto();
+
     }
 
-    public void registrarVotoPrioritario(Jugador objetivo) {
-        registrarVoto(objetivo);
+    public void registrarVotoPrioritario(Jugador votante, Jugador objetivo) {
+        registrarVoto(votante, objetivo);
         this.prioritario = new Candidato(objetivo);
     }
 
@@ -40,16 +45,17 @@ public class Votacion {
             if (empatados.contains(prioritario)) {
                 return prioritario;
             }
-            return null;
+            throw new NoHuboDecisionException();
         }
         return masVotado;
     }
+
     public Candidato buscarCandidato(Jugador objetivo){
         for(Candidato candidato: candidatos){
             if(candidato.esIgualQue(objetivo)){
                 return candidato;
             }
         }
-        return null;
+        throw new NoSeEncontroElCandidatoException();
     }
 }
