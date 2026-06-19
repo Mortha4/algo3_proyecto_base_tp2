@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_2;
+package edu.fiuba.algo3.unitarios;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -86,21 +86,5 @@ public class MedicoTest {
                 "Se pudo atacat al protegido");
     }
 
-    @Test
-    public void test08MedicoNoPuedeProtegerDosVecesAlMismo(){
-        // Arrange
-        Jugador medico = new Jugador(new Medico(), "medico");
-        Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
-        FaseNocturna noche1 = new FaseNocturna();
 
-        // Act
-        medico.accionNocturna(noche1, ciudadano);
-        FaseNocturna noche2 = new FaseNocturna(null, ciudadano);
-
-        // Assert
-        assertThrows(NoSePuedeProtegerDosVecesSeguidas.class,
-                () -> medico.accionNocturna(noche2, ciudadano),
-                "El medico pudo proteger dos veces seguidas al mismo jugador");
-
-    }
 }

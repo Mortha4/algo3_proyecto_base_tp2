@@ -1,14 +1,18 @@
 package edu.fiuba.algo3.entrega_2;
+
+import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidas;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidas;
+import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class DetectiveTest {
+public class Entrega2Test {
     @Test
     public void test01DetectivePuedeVerUnDetective(){
         // Arrange
@@ -22,6 +26,7 @@ public class DetectiveTest {
         assertEquals(Ciudadano.class, result.getClass(),
                 "Un detective no puede ver el bando de un detective");
     }
+
     @Test
     public void test02DetectivePuedeVerUnMedico(){
         // Arrange
@@ -36,6 +41,7 @@ public class DetectiveTest {
                 "Un detective no puede ver el bando de un medico");
 
     }
+
     @Test
     public void test03DetectivePuedeVerUnCiudadano(){
         // Arrange
@@ -50,6 +56,7 @@ public class DetectiveTest {
                 "Un detective no puede ver el bando de un ciudadano");
 
     }
+
     @Test
     public void test04DetectivePuedeVerUnSheriff(){
         // Arrange
@@ -64,6 +71,7 @@ public class DetectiveTest {
                 "Un detective no puede ver el bando de un sheriff");
 
     }
+
     @Test
     public void test05DetectivePuedeVerUnMafioso(){
         // Arrange
@@ -78,6 +86,7 @@ public class DetectiveTest {
                 "Un detective no puede ver el bando de un mafioso");
 
     }
+
     @Test
     public void test06DetectivePuedeVerUnPadrino(){
         // Arrange
@@ -107,6 +116,87 @@ public class DetectiveTest {
 
         assertThrows(NoSePuedeInvestigarDosVecesSeguidas.class,
                 () -> detective.accionNocturna(segundaNoche, ciudadano),
-                "No se lanza una excepcion al investigar dos veces al mismo jugador");
+                "No se lanza una excepción al investigar dos veces al mismo jugador");
     }
+
+    @Test
+    public void test08MedicoNoPuedeProtegerDosVecesAlMismo(){
+        // Arrange
+        Jugador medico = new Jugador(new Medico(), "medico");
+        Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
+        FaseNocturna noche1 = new FaseNocturna();
+
+        // Act
+        medico.accionNocturna(noche1, ciudadano);
+        FaseNocturna noche2 = new FaseNocturna(null, ciudadano);
+
+        // Assert
+        assertThrows(NoSePuedeProtegerDosVecesSeguidas.class,
+                () -> medico.accionNocturna(noche2, ciudadano),
+                "El medico pudo proteger dos veces seguidas al mismo jugador");
+
+    }
+
+    @Test
+    public void test01VotacionSinEmpateSoloUsaJugadoresVivos(){
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
+        FaseDiurna fase = new FaseDiurna();
+
+        // Act y assert
+        ciudadano1.morir();
+        assertThrows(SeleccionInvalidaException.class, () -> ciudadano2.accionDiurna(fase, ciudadano1),
+                "Se pudo votar a un muerto");
+
+    }
+
+    @Test
+    public void test02EnEmpateNoMuereNadie(){
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
+        FaseDiurna fase = new FaseDiurna();
+
+        // Act
+        ciudadano1.accionDiurna(fase, ciudadano2);
+        ciudadano2.accionDiurna(fase, ciudadano1);
+        // Assert
+        assertThrows(NoHuboDecisionException.class,
+                fase::finalizar,
+                "Se elimino a alguien al empatar");
+    }
+
+    @Test
+    public void test04VotacionValidaFinalizaCorrectamente(){
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
+        Jugador ciudadano3 = new Jugador(new Ciudadano(), "ciudadano3");
+        FaseDiurna fase = new FaseDiurna();
+
+        // Act
+        ciudadano1.accionDiurna(fase, ciudadano3);
+        ciudadano2.accionDiurna(fase, ciudadano3);
+        ciudadano3.accionDiurna(fase, ciudadano2);
+        fase.finalizar();
+        // Assert
+        assertFalse(ciudadano3.estaVivo(), "En una votación valida, no se elimino el jugador mas votado");
+    }
+
+    @Test
+    public void test05JugadorMuertoNoPuedeSeguirVotando(){
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
+        FaseDiurna fase = new FaseDiurna();
+
+        // Act
+        ciudadano1.morir();
+        // Assert
+        assertThrows(SeleccionInvalidaException.class,
+                () -> ciudadano1.accionDiurna(fase, ciudadano2),
+                "Un jugador muerto puede seguir votando");
+    }
+
 }

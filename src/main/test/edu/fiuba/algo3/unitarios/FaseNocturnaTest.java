@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_1;
+package edu.fiuba.algo3.unitarios;
 
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -32,15 +32,6 @@ public class FaseNocturnaTest {
         fase = new FaseNocturna();
     }
 
-    @Test
-    public void test01LaMafiaPuedeSeleccionarVictimaValida() {
-        // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        fase.finalizar();
-
-        // Assert
-        assertFalse(ciudadano1.estaVivo(),"La mafia no pudo matar a una víctima valida");
-    }
 
     @Test
     public void test02LaMafiaNoPuedeSeleccionarVictimaMuerta() {
@@ -92,16 +83,6 @@ public class FaseNocturnaTest {
         // Assert
         assertFalse(medico.estaVivo(),
                 "No se desempató con el voto del padrino");
-    }
-
-    @Test
-    public void test07NoSePuedeMatarAOtroMafioso(){
-        // Act
-
-        // Assert
-        assertThrows(NoVotableException.class,
-                () -> mafioso1.accionNocturna(fase, mafioso2),
-                "Los mafiosos pudieron eliminar a otro mafioso1");
     }
 
     @Test

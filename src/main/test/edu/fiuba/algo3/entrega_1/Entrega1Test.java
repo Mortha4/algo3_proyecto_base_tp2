@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
-import edu.fiuba.algo3.modelo.excepciones.NoHayMasCartasException;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.fase.FaseNocturna;
+import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.mazo.Mazo;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MazoTest {
-
-
+public class Entrega1Test {
     @Test
     public void test01MazoPara5JugadoresTieneLaCantidadCorrectaDeRoles(){
         //arrange
@@ -73,13 +73,14 @@ public class MazoTest {
             if(rol instanceof Sheriff) cantSheriff++;
         }
         //assert
-        assertTrue(cantMafiosos == 3,"Cantidad de mafiosos invalido");
+        assertEquals(3, cantMafiosos, "Cantidad de mafiosos invalido");
         assertEquals(1,cantMedico,"solo debe existir un medico");
         assertEquals(1,cantPadrinos,"solo debe existir un padrino");
         assertEquals(1,cantDetective,"solo debe existir un detective");
         assertEquals(1,cantSheriff,"solo debe existir un sheriff");
         assertEquals(3, cantCiudadanos, "Cantidad de ciudadano invalida");
     }
+
     @Test
     public void test04UnMazoDe4RolesLanzaExcepcion(){
         // Arrange
@@ -89,6 +90,7 @@ public class MazoTest {
         assertThrows(CantidadDeJugadoresException.class, ()-> new Mazo(cantidadDeRoles),
                 "No se puede crear un mazo con menos de 5 roles.");
     }
+
     @Test
     public void test05UnMazoDe13RolesLanzaExcepcion(){
         // Arrange
@@ -127,7 +129,7 @@ public class MazoTest {
         // assert
         assertThrows(NoHayMasCartasException.class,
                 mazo::agarrarCarta,
-                "El tamanio del mazo cambio al mezclarlo");
+                "El tamaño del mazo cambio al mezclarlo");
     }
 
     @Test
@@ -157,7 +159,7 @@ public class MazoTest {
         // assert
         assertThrows(NoHayMasCartasException.class,
                 mazo::agarrarCarta,
-                "El tamanio del mazo cambio al mezclarlo");
+                "El tamaño del mazo cambio al mezclarlo");
     }
 
     @Test
@@ -227,6 +229,172 @@ public class MazoTest {
         // assert
         assertThrows(NoHayMasCartasException.class,
                 mazo::agarrarCarta,
-                "El tamanio del mazo cambio al mezclarlo");
+                "El tamaño del mazo cambio al mezclarlo");
+    }
+
+    @Test
+    public void test15JugadorNoPuedeVerElRolDeOtroJugador(){
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
+        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
+
+        // Act y Assert
+        assertThrows(NoVisibleException.class, () -> ciudadano1.verRol(ciudadano2), "Un jugador puede ver el rol de otro");
+    }
+
+    @Test
+    public void test16JugadorPuedeVerSuRol(){
+        // Arrange
+        Medico medico = new Medico();
+        Jugador jugador = new Jugador(medico, "medico");
+
+        // Act y Assert
+        assertEquals(medico, jugador.verRol(jugador));
+    }
+
+    @Test
+    public void test17MafiosoPuedeVerUnMafioso(){
+        // Arrange
+        Mafioso mafioso = new Mafioso();
+        Mafioso mafiosoObservado = new Mafioso();
+
+        // Act
+        Rol result = mafioso.verBando(mafiosoObservado);
+
+        // Assert
+        assertEquals(result, mafiosoObservado, "El mafioso no pudo ver el bando de otro mafioso");
+    }
+
+    @Test
+    public void test18MafiosoNoPuedeVerUnCiudadano(){
+        // Arrange
+        Mafioso mafioso = new Mafioso();
+        Ciudadano ciudadanoObservado = new Ciudadano();
+
+        // Act y Assert
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(ciudadanoObservado),
+                "El mafioso no pudo ver el bando de un ciudadano");
+    }
+
+    @Test
+    public void test19MafiosoNoPuedeVerUnSheriff(){
+        // Arrange
+        Mafioso mafioso = new Mafioso();
+        Sheriff sheriffObservado = new Sheriff();
+
+        // Act y Assert
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(sheriffObservado),
+                "El mafioso no pudo ver el bando de un sheriff");
+    }
+
+    @Test
+    public void test20MafiosoNoPuedeVerUnDetective(){
+        // Arrange
+        Mafioso mafioso = new Mafioso();
+        Detective detectiveObservado = new Detective();
+
+        // Act y Assert
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(detectiveObservado),
+                "El mafioso no pudo ver el bando de un detective");
+    }
+
+    @Test
+    public void test21MafiosoNoPuedeVerUnMedico(){
+        // Arrange
+        Mafioso mafioso = new Mafioso();
+        Medico medicoObservado = new Medico();
+
+        // Act y Assert
+        assertThrows(NoVisibleException.class, () -> mafioso.verBando(medicoObservado),
+                "El mafioso no pudo ver el bando de un medico");
+    }
+
+    @Test
+    public void test22MafiosoPuedeVerUnPadrino(){
+        // Arrange
+        Mafioso mafioso = new Mafioso();
+        Padrino padrinoObservado = new Padrino();
+
+        // Act
+        Rol result = mafioso.verBando(padrinoObservado);
+
+        // Assert
+        assertEquals(new Mafioso(), result, "El mafioso no pudo observar un padrino.");
+    }
+
+    @Test
+    public void test23LaMafiaPuedeSeleccionarVictimaValida() {
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
+        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
+        FaseNocturna fase = new FaseNocturna();
+
+        // Act
+        mafioso1.accionNocturna(fase, ciudadano1);
+        fase.finalizar();
+
+        // Assert
+        assertFalse(ciudadano1.estaVivo(),"La mafia no pudo matar a una víctima valida");
+    }
+
+    @Test
+    public void test24LaMafiaNoPuedeSeleccionarVictimaMuerta() {
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
+        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
+        FaseNocturna fase = new FaseNocturna();
+
+        ciudadano1.morir();
+
+        // Act y Assert
+        assertThrows(SeleccionInvalidaException.class, () -> mafioso1.accionNocturna(fase, ciudadano1),
+                "La mafia seleccionó una víctima invalida");
+    }
+
+    @Test
+    public void test25ElMedicoProtegeAlMismoJugadorQueEligioLaMafia(){
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
+        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
+        Jugador medico = new Jugador(new Medico(), "medico");
+        FaseNocturna fase = new FaseNocturna();
+
+        // Act
+        mafioso1.accionNocturna(fase, ciudadano1);
+        medico.accionNocturna(fase, ciudadano1);
+
+        // Assert
+        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,"El medico protegió al objetivo de la mafia");
+    }
+
+    @Test
+    public void test26LaMafiaEligeAUnJugadorNoProtegido(){
+        // Arrange
+        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
+        Jugador ciudadano2= new Jugador(new Ciudadano(), "ciudadano2");
+        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
+        Jugador medico = new Jugador(new Medico(), "medico");
+        FaseNocturna fase = new FaseNocturna();
+
+        // Act
+        mafioso1.accionNocturna(fase, ciudadano1);
+        medico.accionNocturna(fase, ciudadano2);
+        fase.finalizar();
+
+        // Assert
+        assertFalse(ciudadano1.estaVivo(),"El objetivo fue eliminado");
+    }
+
+    @Test
+    public void test27NoSePuedeMatarAOtroMafioso(){
+        // Arrange
+        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
+        Jugador mafioso2 = new Jugador(new Mafioso(), "mafioso2");
+        FaseNocturna fase = new FaseNocturna();
+
+        // Act y Assert
+        assertThrows(NoVotableException.class,
+                () -> mafioso1.accionNocturna(fase, mafioso2),
+                "Los mafiosos pudieron eliminar a otro mafioso1");
     }
 }
