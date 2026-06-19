@@ -25,7 +25,7 @@ public class FaseNocturnaTest {
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         ciudadano2= new Jugador(new Ciudadano(), "ciudadano2");
         mafioso1 = new Jugador(new Mafioso(), "mafioso1");
-        mafioso2 = new Jugador(new Mafioso(), "mafioso2");;
+        mafioso2 = new Jugador(new Mafioso(), "mafioso2");
         medico = new Jugador(new Medico(), "medico");
         padrino = new Jugador(new Padrino(), "padrino");
         detective = new Jugador(new Detective(), "detective");
@@ -97,9 +97,10 @@ public class FaseNocturnaTest {
     @Test
     public void test07NoSePuedeMatarAOtroMafioso(){
         // Act
-        mafioso1.accionNocturna(fase, mafioso2);
+
         // Assert
-        assertThrows(NoHuboDecisionException.class, fase::finalizar,
+        assertThrows(NoVotableException.class,
+                () -> mafioso1.accionNocturna(fase, mafioso2),
                 "Los mafiosos pudieron eliminar a otro mafioso1");
     }
 

@@ -24,8 +24,8 @@ public class Jugador {
         throw new NoVisibleException();
     }
 
-    public void verBando(Jugador otroJugador){
-        rol.verBando(otroJugador.rol);
+    public Rol verBando(Jugador otroJugador){
+        return rol.verBando(otroJugador.rol);
     }
 
     public void morir() {
