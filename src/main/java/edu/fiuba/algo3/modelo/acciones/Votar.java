@@ -1,24 +1,24 @@
-package edu.fiuba.algo3.modelo.comandos;
-
-import edu.fiuba.algo3.modelo.fase.Fase;
-import edu.fiuba.algo3.modelo.fase.FaseNocturna;
+package edu.fiuba.algo3.modelo.acciones;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-public class Votar implements Command {
+public class Votar implements AccionNocturna, AccionDiurna{
     private final Jugador objetivo;
+    private final Jugador votante;
     private final Fase fase;
 
     public Votar(Fase fase, Jugador votante, Jugador objetivo) {
-        this.fase = fase;
-        if((!objetivo.estaVivo()) || votante.equals(objetivo)) {
+        if(votante.equals(objetivo)) {
             throw new SeleccionInvalidaException();
         }
+        this.fase = fase;
         this.objetivo = objetivo;
+        this.votante = votante;
     }
 
     @Override
     public void execute() {
-        fase.registrarVoto(objetivo);
+        fase.registrarVoto(votante, objetivo);
     }
 }
