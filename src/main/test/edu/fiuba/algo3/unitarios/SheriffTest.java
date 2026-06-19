@@ -16,22 +16,22 @@ public class SheriffTest {
     }
 
     @Test
-    public void test01SheriffNoPuedeVerUnSheriff(){
-        // Arrange
-        Sheriff otroSheriff = new Sheriff();
-
-        // Act y Assert
-        assertThrows(NoVisibleException.class, () -> sheriff.verBando(otroSheriff),
-                "El sheriff pudo ver el bando de un ciudadano");
-    }
-
-    @Test
     public void test02SheriffNoPuedeVerUnCiudadano(){
         // Arrange
         Ciudadano ciudadano = new Ciudadano();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> sheriff.verBando(ciudadano),
+                "El sheriff pudo ver el bando de un ciudadano");
+    }
+
+    @Test
+    public void test04SheriffNoPuedeVerUnMedico(){
+        // Arrange
+        Medico medico = new Medico();
+
+        // Act y Assert
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(medico),
                 "El sheriff pudo ver el bando de un ciudadano");
     }
 
@@ -46,12 +46,12 @@ public class SheriffTest {
     }
 
     @Test
-    public void test04SheriffNoPuedeVerUnMedico(){
+    public void test01SheriffNoPuedeVerUnSheriff(){
         // Arrange
-        Medico medico = new Medico();
+        Sheriff otroSheriff = new Sheriff();
 
         // Act y Assert
-        assertThrows(NoVisibleException.class, () -> sheriff.verBando(medico),
+        assertThrows(NoVisibleException.class, () -> sheriff.verBando(otroSheriff),
                 "El sheriff pudo ver el bando de un ciudadano");
     }
 

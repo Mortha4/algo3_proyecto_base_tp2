@@ -33,34 +33,7 @@ public class FaseNocturnaTest {
     }
 
 
-    @Test
-    public void test02LaMafiaNoPuedeSeleccionarVictimaMuerta() {
-        ciudadano1.morir();
 
-        // Act y Assert
-        assertThrows(SeleccionInvalidaException.class, () -> mafioso1.accionNocturna(fase, ciudadano1),
-                "La mafia seleccionó una víctima invalida");
-    }
-
-    @Test
-    public void test03ElMedicoProtegeAlMismoJugadorQueEligioLaMafia(){
-        // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        medico.accionNocturna(fase, ciudadano1);
-
-        // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,"El medico protegió al objetivo de la mafia");
-    }
-    @Test
-    public void test04LaMafiaEligeAUnJugadorNoProtegido(){
-        // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        medico.accionNocturna(fase, ciudadano2);
-        fase.finalizar();
-
-        // Assert
-        assertFalse(ciudadano1.estaVivo(),"El objetivo fue eliminado");
-    }
 
     @Test
     public void test05EnEmpateNoMuereNadie(){

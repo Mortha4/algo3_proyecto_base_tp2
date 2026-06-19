@@ -17,22 +17,22 @@ public class MedicoTest {
     }
 
     @Test
-    public void test01MedicoNoPuedeVerUnMedico(){
-        // Arrange
-        Medico otroMedico = new Medico();
-
-        // Act y Assert
-        assertThrows(NoVisibleException.class, () -> medico.verBando(otroMedico),
-                "El medico pudo ver el bando de un ciudadano");
-    }
-
-    @Test
     public void test02MedicoNoPuedeVerUnCiudadano(){
         // Arrange
         Ciudadano ciudadano = new Ciudadano();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> medico.verBando(ciudadano),
+                "El medico pudo ver el bando de un ciudadano");
+    }
+
+    @Test
+    public void test01MedicoNoPuedeVerUnMedico(){
+        // Arrange
+        Medico otroMedico = new Medico();
+
+        // Act y Assert
+        assertThrows(NoVisibleException.class, () -> medico.verBando(otroMedico),
                 "El medico pudo ver el bando de un ciudadano");
     }
 
