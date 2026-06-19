@@ -17,4 +17,5 @@ public abstract class Rol {
 
     public abstract AccionNocturna accionNocturna(FaseNocturna faseNocturna, Jugador base, Jugador objetivo);
     public abstract AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo);
+
 }
