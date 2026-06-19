@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RepartoDeCartasTest {
 
+    // FIXME: remove and make MazoTest instead
 
     @Test
     public void Test01EnUnaPatidaCon5JugadoresTodosRecibenUnRol(){

@@ -2,12 +2,20 @@ package edu.fiuba.algo3.unitarios;
 
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PadrinoTest {
+    private Padrino padrino;
+
+    @BeforeEach
+    public void arrange() {
+        padrino = new Padrino();
+    }
+
     @Test
     public void test01PadrinoPuedeVerUnPadrino(){
         // Arrange
