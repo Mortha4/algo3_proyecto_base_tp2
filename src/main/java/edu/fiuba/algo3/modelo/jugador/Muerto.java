@@ -27,5 +27,10 @@ public class Muerto implements Estado {
     }
 
     @Override
+    public void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol) {
+        throw new SeleccionInvalidaException();
+    }
+
+    @Override
     public boolean estaVivo(){ return false; }
 }

@@ -1,11 +1,10 @@
 package edu.fiuba.algo3.modelo.fase;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
-import edu.fiuba.algo3.modelo.excepciones.NoSeEncontroElCandidatoException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
 public class Votacion {
-    private Candidato prioritario = null;
+    private Candidato prioritario;
     private final Set<Candidato> candidatos;
 
     public Votacion() {

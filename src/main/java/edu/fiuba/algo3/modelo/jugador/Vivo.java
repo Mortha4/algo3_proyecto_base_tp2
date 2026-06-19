@@ -19,5 +19,10 @@ public class Vivo implements Estado {
         fase.ejecutar(rol.accionDiurna(fase, ejecutor, objetivo));
     }
 
+    @Override
+    public void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol) {
+        fase.ejecutar(rol.votar(fase, votante, votado));
+    }
+
     public boolean estaVivo(){return true;}
 }

@@ -112,7 +112,6 @@ public class Entrega2Test {
         // Act
         detective.accionNocturna(primeraNoche, ciudadano);
         FaseNocturna segundaNoche = new FaseNocturna(ciudadano, null);
-        //TODO: HACER QUE AL TERMINAR UNA FASE SE GUARDE UN MEMENTO, Y CADA FASENOCTURNA SE CONSTRUYA RECIBIENDO EL ULTIMO INVESTIGADO
 
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
                 () -> detective.accionNocturna(segundaNoche, ciudadano),
@@ -146,7 +145,7 @@ public class Entrega2Test {
 
         // Act y assert
         ciudadano1.morir();
-        assertThrows(SeleccionInvalidaException.class, () -> ciudadano2.accionDiurna(fase, ciudadano1),
+        assertThrows(SeleccionInvalidaException.class, () -> ciudadano2.votar(fase, ciudadano1),
                 "Se pudo votar a un muerto");
 
     }
@@ -159,8 +158,8 @@ public class Entrega2Test {
         FaseDiurna fase = new FaseDiurna();
 
         // Act
-        ciudadano1.accionDiurna(fase, ciudadano2);
-        ciudadano2.accionDiurna(fase, ciudadano1);
+        ciudadano1.votar(fase, ciudadano2);
+        ciudadano2.votar(fase, ciudadano1);
         // Assert
         assertThrows(NoHuboDecisionException.class,
                 fase::finalizar,
@@ -176,9 +175,9 @@ public class Entrega2Test {
         FaseDiurna fase = new FaseDiurna();
 
         // Act
-        ciudadano1.accionDiurna(fase, ciudadano3);
-        ciudadano2.accionDiurna(fase, ciudadano3);
-        ciudadano3.accionDiurna(fase, ciudadano2);
+        ciudadano1.votar(fase, ciudadano3);
+        ciudadano2.votar(fase, ciudadano3);
+        ciudadano3.votar(fase, ciudadano2);
         fase.finalizar();
         // Assert
         assertFalse(ciudadano3.estaVivo(), "En una votación valida, no se elimino el jugador mas votado");

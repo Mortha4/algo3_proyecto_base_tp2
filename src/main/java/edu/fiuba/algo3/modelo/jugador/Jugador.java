@@ -63,4 +63,8 @@ public class Jugador {
     public void accionDiurna(FaseDiurna faseDiurna, Jugador objetivo){
         estado.accionDiurna(faseDiurna, this, objetivo, rol);
     }
+
+    public void votar(FaseDiurna fase, Jugador votado) {
+        estado.votar(fase, this, votado, rol);
+    }
 }

@@ -15,7 +15,7 @@ public class FaseDiurnaTest {
 
         // Act y Assert
         assertThrows(SeleccionInvalidaException.class,
-                () -> ciudadano1.accionDiurna(fase, ciudadano1),
+                () -> ciudadano1.votar(fase, ciudadano1),
                 "Un jugador se voto a si mismo");
     }
 }

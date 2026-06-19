@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.modelo.roles;
-import edu.fiuba.algo3.modelo.acciones.AccionNocturna;
-import edu.fiuba.algo3.modelo.acciones.Votar;
-import edu.fiuba.algo3.modelo.acciones.VotarNocturno;
+import edu.fiuba.algo3.modelo.acciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
-import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.visitors.Visitante;
 import edu.fiuba.algo3.modelo.visitors.VisitanteMafioso;
@@ -25,6 +22,6 @@ public class Mafioso extends Rol {
     }
     @Override
     public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
-        return new Votar(fase, base, objetivo);
+        return new Nada();
     }
 }
