@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.jugador;
+import edu.fiuba.algo3.modelo.fase.Candidato;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
@@ -37,6 +38,14 @@ public class Jugador {
 
     public void accionNocturna(FaseNocturna faseNocturna, Jugador objetivo){
         estado.accionNocturna(faseNocturna, this, objetivo, rol);
+    }
+
+    public Candidato crearCandidato(Jugador otroJugador){
+        return estado.crearCandidato(otroJugador);
+    }
+
+    public Candidato devolverCandidato(Jugador jugador){
+        return estado.devolverCandidato(jugador);
     }
 
     public void accionDiurna(FaseDiurna faseDiurna, Jugador objetivo){
