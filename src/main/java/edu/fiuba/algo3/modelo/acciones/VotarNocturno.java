@@ -7,7 +7,7 @@ public class VotarNocturno extends Votar implements AccionNocturna{
     public VotarNocturno(Fase fase, Jugador votante, Jugador objetivo) {
         super(fase, votante, objetivo);
         if (votante.tieneMismoRol(objetivo)) {
-            throw new NoVotableException();
+            throw new VotarMismoRolException();
         }
     }
 }
