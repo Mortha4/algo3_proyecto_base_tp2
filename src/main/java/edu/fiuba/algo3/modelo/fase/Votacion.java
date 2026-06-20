@@ -23,6 +23,10 @@ public class Votacion {
     }
 
     public Candidato obtenerMasVotado() {
+        if(candidatos.isEmpty()) {
+            throw new NoHuboDecisionException();
+        }
+
         Candidato masVotado = candidatos.iterator().next();
         List<Candidato> empatados = new ArrayList<>();
 

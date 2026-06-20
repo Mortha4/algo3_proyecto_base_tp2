@@ -151,4 +151,14 @@ public class FaseNocturnaTest {
                 () -> medico.accionNocturna(fase, ciudadano1),
                 "Construyendose una fase desde un FaseNocturnaData, no deberia permitir proteger al ultimoprotegido");
     }
+
+    @Test
+    public void test10unaFaseNocturnaObtieneCorrectamenteUnInvestigadoDeFaseNocturnaData(){
+        FaseNocturnaData data = new FaseNocturnaData(ciudadano1, ciudadano2, new Candidato(medico));
+        fase = new FaseNocturna(data);
+
+        assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
+                () -> detective.accionNocturna(fase, ciudadano2),
+                "Construyendose una fase desde un FaseNocturnaData, no deberia permitir investigar al ultimoInvestigado");
+    }
 }

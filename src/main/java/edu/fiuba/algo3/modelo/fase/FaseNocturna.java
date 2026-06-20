@@ -14,10 +14,10 @@ public class FaseNocturna extends Fase {
         super();
     }
 
-    public FaseNocturna(Jugador ultimoInvestigado, Jugador ultimoProtegido) {
+    public FaseNocturna(FaseNocturnaData info) {
         super();
-        this.ultimoProtegido = ultimoProtegido;
-        this.ultimoInvestigado = ultimoInvestigado;
+        this.ultimoProtegido = info.getProtegido();
+        this.ultimoInvestigado = info.getInvestigado();
     }
 
     public void ejecutar(AccionNocturna comando) {
@@ -50,5 +50,9 @@ public class FaseNocturna extends Fase {
         if (objetivo.equals(this.protegido)) {
             throw new ObjetivoProtegidoException();
         }
+    }
+
+    public FaseNocturnaData exportarInfo(){
+        return new FaseNocturnaData(ultimoProtegido, ultimoInvestigado, votacion.obtenerMasVotado());
     }
 }

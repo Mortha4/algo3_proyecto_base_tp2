@@ -13,8 +13,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Entrega2Test {
+
     @Test
-    public void test01DetectivePuedeVerUnDetective(){
+    public void test01DetectivePuedeIdentificarAOtroDetective(){
         // Arrange
         Detective detective = new Detective();
         Detective otroDetective = new Detective();
@@ -24,11 +25,11 @@ public class Entrega2Test {
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
-                "Un detective no puede ver el bando de un detective");
+                "El detective debería identificar a otro detective como ciudadano");
     }
 
     @Test
-    public void test02DetectivePuedeVerUnMedico(){
+    public void test02DetectivePuedeIdentificarAUnMedico(){
         // Arrange
         Detective detective = new Detective();
         Medico medico = new Medico();
@@ -38,12 +39,11 @@ public class Entrega2Test {
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
-                "Un detective no puede ver el bando de un medico");
-
+                "El detective debería identificar a un médico como ciudadano");
     }
 
     @Test
-    public void test03DetectivePuedeVerUnCiudadano(){
+    public void test03DetectivePuedeIdentificarAUnCiudadano(){
         // Arrange
         Detective detective = new Detective();
         Ciudadano ciudadano = new Ciudadano();
@@ -53,12 +53,11 @@ public class Entrega2Test {
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
-                "Un detective no puede ver el bando de un ciudadano");
-
+                "El detective debería identificar a un ciudadano como ciudadano");
     }
 
     @Test
-    public void test04DetectivePuedeVerUnSheriff(){
+    public void test04DetectivePuedeIdentificarAUnSheriff(){
         // Arrange
         Detective detective = new Detective();
         Sheriff sheriff = new Sheriff();
@@ -68,12 +67,11 @@ public class Entrega2Test {
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
-                "Un detective no puede ver el bando de un sheriff");
-
+                "El detective debería identificar a un sheriff como ciudadano");
     }
 
     @Test
-    public void test05DetectivePuedeVerUnMafioso(){
+    public void test05DetectivePuedeIdentificarAUnMafioso(){
         // Arrange
         Detective detective = new Detective();
         Mafioso mafioso = new Mafioso();
@@ -83,12 +81,11 @@ public class Entrega2Test {
 
         // Assert
         assertEquals(Mafioso.class, result.getClass(),
-                "Un detective no puede ver el bando de un mafioso");
-
+                "El detective debería identificar a un mafioso como mafioso");
     }
 
     @Test
-    public void test06DetectivePuedeVerUnPadrino(){
+    public void test06DetectivePuedeIdentificarAUnPadrinoComoCiudadano(){
         // Arrange
         Detective detective = new Detective();
         Padrino padrino = new Padrino();
@@ -98,60 +95,66 @@ public class Entrega2Test {
 
         // Assert
         assertEquals(Ciudadano.class, result.getClass(),
-                "Un detective no puede ver el bando de un padrino");
-
+                "El detective debería identificar a un padrino como ciudadano");
     }
 
     @Test
-    public void test07DetectiveNoPuedeInvestigarAlMismoJugadorDosNochesSeguidas(){
+    public void test07UnDetectiveNoPuedeInvestigarAlMismoJugadorDosNochesSeguidas(){
         // Arrange
         Jugador detective = new Jugador(new Detective(), "detective");
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         FaseNocturna primeraNoche = new FaseNocturna();
 
         // Act
         detective.accionNocturna(primeraNoche, ciudadano);
-        FaseNocturna segundaNoche = new FaseNocturna(ciudadano, null);
+        mafioso.accionNocturna(primeraNoche, ciudadano);
 
+        FaseNocturna segundaNoche = new FaseNocturna(primeraNoche.exportarInfo());
+
+        // Assert
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
                 () -> detective.accionNocturna(segundaNoche, ciudadano),
-                "No se lanza una excepción al investigar dos veces al mismo jugador");
+                "Un detective no debería poder investigar al mismo jugador dos noches seguidas");
     }
 
     @Test
-    public void test08MedicoNoPuedeProtegerDosVecesAlMismo(){
+    public void test08UnMedicoNoPuedeProtegerAlMismoJugadorDosNochesSeguidas(){
         // Arrange
         Jugador medico = new Jugador(new Medico(), "medico");
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
+        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         FaseNocturna noche1 = new FaseNocturna();
 
         // Act
         medico.accionNocturna(noche1, ciudadano);
-        FaseNocturna noche2 = new FaseNocturna(null, ciudadano);
+        mafioso.accionNocturna(noche1, ciudadano);
+        FaseNocturna noche2 = new FaseNocturna(noche1.exportarInfo());
 
         // Assert
         assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
                 () -> medico.accionNocturna(noche2, ciudadano),
-                "El medico pudo proteger dos veces seguidas al mismo jugador");
-
+                "Un médico no debería poder proteger al mismo jugador dos noches seguidas");
     }
 
     @Test
-    public void test01VotacionSinEmpateSoloUsaJugadoresVivos(){
+    public void test09NoSePuedeVotarAUnJugadorMuerto(){
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
         FaseDiurna fase = new FaseDiurna();
 
-        // Act y assert
+        // Act
         ciudadano1.morir();
-        assertThrows(SeleccionInvalidaException.class, () -> ciudadano2.votar(fase, ciudadano1),
-                "Se pudo votar a un muerto");
 
+        // Assert
+        assertThrows(SeleccionInvalidaException.class,
+                () -> ciudadano2.votar(fase, ciudadano1),
+                "No debería poder votarse a un jugador muerto");
     }
 
     @Test
-    public void test02EnEmpateNoMuereNadie(){
+    public void test10NoSeEliminaNingunJugadorEnCasoDeEmpate(){
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
@@ -160,14 +163,15 @@ public class Entrega2Test {
         // Act
         ciudadano1.votar(fase, ciudadano2);
         ciudadano2.votar(fase, ciudadano1);
+
         // Assert
         assertThrows(NoHuboDecisionException.class,
                 fase::finalizar,
-                "Se elimino a alguien al empatar");
+                "No debería eliminarse ningún jugador cuando hay un empate en la votación");
     }
 
     @Test
-    public void test04VotacionValidaFinalizaCorrectamente(){
+    public void test11SeEliminaAlJugadorMasVotadoEnUnaVotacionValida(){
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
@@ -179,12 +183,14 @@ public class Entrega2Test {
         ciudadano2.votar(fase, ciudadano3);
         ciudadano3.votar(fase, ciudadano2);
         fase.finalizar();
+
         // Assert
-        assertFalse(ciudadano3.estaVivo(), "En una votación valida, no se elimino el jugador mas votado");
+        assertFalse(ciudadano3.estaVivo(),
+                "El jugador más votado debería ser eliminado en una votación válida");
     }
 
     @Test
-    public void test05JugadorMuertoNoPuedeSeguirVotando(){
+    public void test12UnJugadorMuertoNoPuedeVotar(){
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
@@ -192,10 +198,10 @@ public class Entrega2Test {
 
         // Act
         ciudadano1.morir();
+
         // Assert
         assertThrows(SeleccionInvalidaException.class,
                 () -> ciudadano1.accionDiurna(fase, ciudadano2),
-                "Un jugador muerto puede seguir votando");
+                "Un jugador muerto no debería poder votar");
     }
-
 }
