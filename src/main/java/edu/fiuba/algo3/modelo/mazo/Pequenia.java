@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.mazo;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
 import edu.fiuba.algo3.modelo.roles.*;
 
 import java.util.ArrayList;
@@ -9,6 +10,10 @@ public class Pequenia extends CreadorDeMazo {
     private final Random random = new Random();
 
     public Pequenia(int cantidadDeRoles){
+        if (cantidadDeRoles < 5 || cantidadDeRoles > 6) {
+            throw new CantidadDeJugadoresException();
+        }
+
         this.cantidadDeRoles = cantidadDeRoles;
     }
     @Override

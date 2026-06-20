@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.mazo;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
 import edu.fiuba.algo3.modelo.roles.Detective;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Medico;
@@ -12,6 +13,10 @@ public class Mediana extends CreadorDeMazo {
     private final Random random = new Random();
 
     public Mediana(int cantidadDeRoles){
+        if (cantidadDeRoles < 7 || cantidadDeRoles > 9) {
+            throw new CantidadDeJugadoresException();
+        }
+
         this.cantidadDeRoles = cantidadDeRoles;
     }
 
