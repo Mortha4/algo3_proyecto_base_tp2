@@ -74,6 +74,6 @@ public class Jugador {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Jugador jugador = (Jugador) o;
-        return Objects.equals(rol, jugador.rol) && Objects.equals(nombre, jugador.nombre) && Objects.equals(estado, jugador.estado);
+        return Objects.equals(rol, jugador.rol) && Objects.equals(nombre, jugador.nombre);
     }
 }
