@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 //import javafx.scene.layout.StackPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
@@ -52,20 +54,42 @@ public class App extends Application {
     }
 
     private VBox crearZonaCentral(){
-        TarjetaDeJugador tarjeta = new TarjetaDeJugador("UnNombre", "UnRol");
-        VBox zona = new VBox(tarjeta);
+        VBox zona = new VBox(crearGrilla(8));
         zona.setAlignment(Pos.CENTER);
         zona.setPadding(new Insets(20));
         zona.setStyle("-fx-background-color: #aed6f1;");
         return zona;
     }
 
+    private GridPane crearGrilla(int cantidad){
+        GridPane grilla = new GridPane();
+        grilla.setHgap(15);
+        grilla.setVgap(15);
+        grilla.setPadding(new Insets(15));
+        grilla.setAlignment(Pos.CENTER);
+        for(int i = 0; i < cantidad; i++){
+            TarjetaDeJugador tarjeta = new TarjetaDeJugador ("Jugador "+ (i+1),"unRol");
+            int columna = i%2;
+            int fila = i/2;
+            grilla.add(tarjeta, columna, fila);
+        }
+        return grilla;
+    }
+
+
+
     private VBox crearZonaInferior(String mensaje){
-        Label placeholderAbajo = new Label(mensaje);
-        VBox zona = new VBox(placeholderAbajo);
-        zona.setAlignment(Pos.CENTER);
+        Label mensajes = new Label(mensaje);
+
+        HBox fila1 = Botones.crearFilaDeBotones("Cancelar", "Confirmar");
+        HBox fila2 = Botones.crearFilaDeBotones("Boton1", "Boton2");
+        HBox barraDeMensajes = new HBox(mensajes);
+        barraDeMensajes.setAlignment(Pos.CENTER);
+        barraDeMensajes.setPadding(new Insets(10));
+        barraDeMensajes.setStyle("-fx-border-color #cccccc");
+        
+        VBox zona = new VBox(10,fila1,fila2, barraDeMensajes);
         zona.setPadding(new Insets(15));
-        zona.setStyle("-fx-border-color: #cccccc");
         return zona;
     }
 

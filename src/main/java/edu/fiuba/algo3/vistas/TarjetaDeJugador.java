@@ -25,16 +25,16 @@ public class TarjetaDeJugador extends HBox{
         Label labelRol = new Label(Rol);
         labelRol.setStyle("-fx-border-color: #cccccc; -fx-padding: 2 8 2 8; -fx-font-size: 11px;");
 
-        HBox mazo = new HBox(3);
+        HBox casillas = new HBox(3);
         for (int i = 0; i < 8; i++) {
-            Region tarjeta = new Region();
-            tarjeta.setMinSize(18,22);
-            tarjeta.setMaxSize(18,22);
-            tarjeta.setStyle("-fx-border-color: #999999;");
-            mazo.getChildren().add(tarjeta);
+            Region casilla = new Region();
+            casilla.setMinSize(18,22);
+            casilla.setMaxSize(18,22);
+            casilla.setStyle("-fx-border-color: #999999;");
+            casillas.getChildren().add(casilla);
         }
 
-        VBox datos = new VBox(6, labelNombre, labelRol, mazo);
+        VBox datos = new VBox(6, labelNombre, labelRol, casillas);
         datos.setAlignment(Pos.CENTER_LEFT);
 
         this.getChildren().addAll(jugador,datos);
