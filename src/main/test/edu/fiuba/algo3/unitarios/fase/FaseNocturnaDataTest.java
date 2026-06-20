@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.fase;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;

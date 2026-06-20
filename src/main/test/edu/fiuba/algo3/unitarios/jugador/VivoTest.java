@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.jugador;
 
 import edu.fiuba.algo3.modelo.fase.Candidato;
 import edu.fiuba.algo3.modelo.jugador.Jugador;

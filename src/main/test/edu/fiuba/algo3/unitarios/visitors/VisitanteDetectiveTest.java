@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.visitors;
 
 import edu.fiuba.algo3.modelo.roles.*;
 import edu.fiuba.algo3.modelo.visitors.VisitanteDetective;

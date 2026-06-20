@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.mazo;
 
 import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
 import edu.fiuba.algo3.modelo.mazo.Grande;
