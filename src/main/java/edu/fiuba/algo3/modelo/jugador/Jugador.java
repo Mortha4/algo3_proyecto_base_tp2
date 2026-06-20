@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
+import java.util.Objects;
+
 public class Jugador {
     private final Rol rol;
     private final String nombre;
@@ -66,5 +68,12 @@ public class Jugador {
 
     public void votar(FaseDiurna fase, Jugador votado) {
         estado.votar(fase, this, votado, rol);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Jugador jugador = (Jugador) o;
+        return Objects.equals(rol, jugador.rol) && Objects.equals(nombre, jugador.nombre) && Objects.equals(estado, jugador.estado);
     }
 }
