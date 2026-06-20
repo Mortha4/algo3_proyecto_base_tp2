@@ -16,8 +16,16 @@ public class FaseNocturna extends Fase {
 
     public FaseNocturna(FaseNocturnaData info) {
         super();
-        this.ultimoProtegido = info.getProtegido();
-        this.ultimoInvestigado = info.getInvestigado();
+        info.darProtegidoPara(this);
+        info.darInvestigadoPara(this);
+    }
+
+    public void setUltimoProtegido(Jugador ultimoProtegido){
+        this.ultimoProtegido = ultimoProtegido;
+    }
+
+    public void setUltimoInvestigado(Jugador ultimoInvestigado){
+        this.ultimoInvestigado = ultimoInvestigado;
     }
 
     public void ejecutar(AccionNocturna comando) {
