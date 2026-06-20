@@ -154,7 +154,7 @@ public class FaseNocturnaTest {
 
     @Test
     public void test10unaFaseNocturnaObtieneCorrectamenteUnInvestigadoDeFaseNocturnaData(){
-        FaseNocturnaData data = new FaseNocturnaData(ciudadano1, ciudadano2, new Candidato(medico));
+        FaseNocturnaData data = new FaseNocturnaData(ciudadano1, ciudadano2, new CandidatoNulo());
         fase = new FaseNocturna(data);
 
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,

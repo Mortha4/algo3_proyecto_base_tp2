@@ -108,7 +108,6 @@ public class Entrega2Test {
 
         // Act
         detective.accionNocturna(primeraNoche, ciudadano);
-        mafioso.accionNocturna(primeraNoche, ciudadano);
 
         FaseNocturna segundaNoche = new FaseNocturna(primeraNoche.exportarInfo());
 
@@ -128,7 +127,6 @@ public class Entrega2Test {
 
         // Act
         medico.accionNocturna(noche1, ciudadano);
-        mafioso.accionNocturna(noche1, ciudadano);
         FaseNocturna noche2 = new FaseNocturna(noche1.exportarInfo());
 
         // Assert

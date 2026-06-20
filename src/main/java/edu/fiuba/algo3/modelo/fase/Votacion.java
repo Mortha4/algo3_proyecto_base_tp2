@@ -24,7 +24,7 @@ public class Votacion {
 
     public Candidato obtenerMasVotado() {
         if(candidatos.isEmpty()) {
-            throw new NoHuboDecisionException();
+            return new CandidatoNulo();
         }
 
         Candidato masVotado = candidatos.iterator().next();
