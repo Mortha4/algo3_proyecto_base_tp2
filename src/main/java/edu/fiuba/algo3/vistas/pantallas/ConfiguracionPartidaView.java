@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas.pantallas;
 
 import edu.fiuba.algo3.vistas.Juego;
 import edu.fiuba.algo3.vistas.utilidades.BotonGuardar;
+import edu.fiuba.algo3.vistas.utilidades.BotonVolver;
 import edu.fiuba.algo3.vistas.utilidades.ContadorJugadores;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
@@ -39,8 +40,9 @@ public class ConfiguracionPartidaView extends StackPane {
         //botoneras
 
         BotonGuardar botonGuardar = new BotonGuardar(320);
+        BotonVolver botonVolver = new BotonVolver(200);
 
-        contenido.getChildren().addAll(contador, botonGuardar);
+        contenido.getChildren().addAll(contador, botonGuardar,botonVolver);
         contenido.setSpacing(40);
 
         this.getChildren().addAll(fondoView, contenido);
