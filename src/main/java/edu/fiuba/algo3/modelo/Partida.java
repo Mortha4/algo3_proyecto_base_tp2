@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.fase.Candidato;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.mazo.Mazo;
 import java.util.ArrayList;
@@ -25,6 +26,10 @@ public class Partida {
 
     public List<Jugador> getJugadores(){
         return jugadores;
+    }
+
+    public Candidato recibirMasVotado(Candidato masVotado){
+        return masVotado;
     }
 
 
