@@ -3,6 +3,8 @@ package edu.fiuba.algo3.vistas;
 import edu.fiuba.algo3.vistas.utilidades.*;
 //import edu.fiuba.algo3.SystemInfo;
 import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +19,10 @@ import javafx.geometry.Insets;
 import javafx.stage.Stage;
 
 
-public class Juego {
+public class Juego extends Parent {
+    public Juego(Stage stage) {
+    }
+
     public static BorderPane verPartida(){
         BorderPane raiz = new BorderPane();
         raiz.setTop(crearZonaSuperior("Fase Actual"));
@@ -63,5 +68,10 @@ public class Juego {
         VBox zona = new VBox(10,fila1,fila2, barraDeMensajes);
         zona.setPadding(new Insets(15));
         return zona;
+    }
+
+    @Override
+    public Node getStyleableNode() {
+        return super.getStyleableNode();
     }
 }
