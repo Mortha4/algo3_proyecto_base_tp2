@@ -2,8 +2,10 @@ package edu.fiuba.algo3.vistas.pantallas;
 
 import edu.fiuba.algo3.vistas.Juego;
 import edu.fiuba.algo3.vistas.utilidades.BotonGuardar;
+import edu.fiuba.algo3.vistas.utilidades.BotonRolMafioso;
 import edu.fiuba.algo3.vistas.utilidades.BotonVolver;
 import edu.fiuba.algo3.vistas.utilidades.ContadorJugadores;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -23,29 +25,41 @@ public class ConfiguracionPartidaView extends StackPane {
         Image imagenFondo = new Image(getClass().getResourceAsStream("/menuConfig.png"));
         ImageView fondoView = new ImageView(imagenFondo);
 
-        //contenedores
-        VBox  contenido = new VBox();
-        contenido.setAlignment(Pos.CENTER);
+
 
         //organizo tamaños
         fondoView.setFitWidth(600);
         fondoView.setFitHeight(720);
         fondoView.setSmooth(false);
-        contenido.setPadding(new javafx.geometry.Insets(120, 0, 0, 0));
 
-        //contador
+
+        VBox rootLayout = new VBox();
+        rootLayout.setAlignment(Pos.CENTER);
+        rootLayout.setPadding(new Insets(100, 40, 40, 40));
+        rootLayout.setSpacing(30);
+
+        VBox bloqueOpciones = new VBox();
+        bloqueOpciones.setAlignment(Pos.CENTER);
+        bloqueOpciones.setSpacing(15);
+
+
 
         ContadorJugadores contador = new ContadorJugadores();
+        BotonRolMafioso rolMafia = new BotonRolMafioso();
+        bloqueOpciones.getChildren().addAll(contador, rolMafia);
 
-        //botoneras
+        //botones volver y guardar
+        VBox bloqueBotones = new VBox();
+        bloqueBotones.setAlignment(Pos.CENTER);
+        bloqueBotones.setSpacing(12);
 
         BotonGuardar botonGuardar = new BotonGuardar(320);
         BotonVolver botonVolver = new BotonVolver(200);
 
-        contenido.getChildren().addAll(contador, botonGuardar,botonVolver);
-        contenido.setSpacing(40);
+        bloqueBotones.getChildren().addAll(botonGuardar, botonVolver);
 
-        this.getChildren().addAll(fondoView, contenido);
+        rootLayout.getChildren().addAll(bloqueOpciones, bloqueBotones);
+        this.getChildren().addAll(fondoView, rootLayout);
 
 
     }

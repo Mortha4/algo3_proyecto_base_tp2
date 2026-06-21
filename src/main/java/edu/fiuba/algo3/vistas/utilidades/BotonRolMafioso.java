@@ -8,16 +8,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class ContadorJugadores extends StackPane {
+public class BotonRolMafioso extends StackPane {
 
-    private final Text txtCantidad;
     private int cantidad;
 
-    public ContadorJugadores(){
+    public BotonRolMafioso(){
 
-        Image imgPergamino = new Image(getClass().getResourceAsStream("/contador.png"));
+        Image imgPergamino = new Image(getClass().getResourceAsStream("/rolMafioso.png"));
         ImageView vistaPergamino = new ImageView(imgPergamino);
 
         //tamaños
@@ -28,29 +28,6 @@ public class ContadorJugadores extends StackPane {
         this.setMaxWidth(anchoCaja);
         this.setAlignment(Pos.CENTER);
 
-        //botones
-        BotonAgregar btnAdd = new BotonAgregar();
-        BotonRestar btnRes = new BotonRestar();
-
-        //texto dinamico
-
-        this.txtCantidad = new Text(String.valueOf(5));
-        this.txtCantidad.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-fill: #ffcc00;");
-
-
-        btnAdd.accionSumar(() -> {
-            if (this.cantidad < 8) {
-                this.cantidad++;
-                actualizarPantalla();
-            }
-        });
-
-        btnRes.accionRestar(() -> {
-            if (this.cantidad > 5) {
-                this.cantidad--;
-                actualizarPantalla();
-            }
-        });
 
 
         //espaciadores
@@ -67,16 +44,11 @@ public class ContadorJugadores extends StackPane {
         controles.setAlignment(Pos.CENTER);
         controles.setPadding(new Insets(12, 30, 0, 22));
 
-        controles.getChildren().addAll(btnRes,espaciadorIzquierdo,this.txtCantidad,espaciadorDerecho,btnAdd);
-
+        controles.getChildren().addAll(espaciadorIzquierdo,espaciadorDerecho);
 
         this.getChildren().addAll(vistaPergamino,controles);
     }
 
-
-    private void actualizarPantalla(){
-        this.txtCantidad.setText(String.valueOf(this.cantidad));
-    }
 
 
 

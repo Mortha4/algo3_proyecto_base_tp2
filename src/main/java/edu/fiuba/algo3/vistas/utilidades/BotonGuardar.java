@@ -13,7 +13,7 @@ public class BotonGuardar extends Button {
 
     public BotonGuardar(double ancho){
         imagenNormal = new Image(getClass().getResourceAsStream("/botonGuardar.png"));
-        
+
         vistaImagen = new ImageView(imagenNormal);
 
         vistaImagen.setFitWidth(ancho);
