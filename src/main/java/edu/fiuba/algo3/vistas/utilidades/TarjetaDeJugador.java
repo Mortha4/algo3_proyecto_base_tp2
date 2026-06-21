@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vistas;
+package edu.fiuba.algo3.vistas.utilidades;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
