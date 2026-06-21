@@ -103,7 +103,6 @@ public class Entrega2Test {
         // Arrange
         Jugador detective = new Jugador(new Detective(), "detective");
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         FaseNocturna primeraNoche = new FaseNocturna();
 
         // Act
@@ -122,7 +121,6 @@ public class Entrega2Test {
         // Arrange
         Jugador medico = new Jugador(new Medico(), "medico");
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         FaseNocturna noche1 = new FaseNocturna();
 
         // Act
