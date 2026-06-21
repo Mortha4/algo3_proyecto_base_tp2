@@ -1,12 +1,11 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
 import edu.fiuba.algo3.vistas.Juego;
-import edu.fiuba.algo3.vistas.utilidades.BotonCartoon;
+import edu.fiuba.algo3.vistas.utilidades.BotonGuardar;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
@@ -30,9 +29,15 @@ public class ConfiguracionPartidaView extends StackPane {
         fondoView.setFitWidth(600);
         fondoView.setFitHeight(720);
         fondoView.setSmooth(false);
+        contenido.setPadding(new javafx.geometry.Insets(120, 0, 0, 0));
 
+        //botoneras
 
+        BotonGuardar botonGuardar = new BotonGuardar(320);
+        contenido.getChildren().addAll(botonGuardar);
         this.getChildren().addAll(fondoView, contenido);
+
+
     }
 
     private void irAlJuego() {
