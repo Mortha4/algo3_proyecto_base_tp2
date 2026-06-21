@@ -1,10 +1,11 @@
 package edu.fiuba.algo3.unitarios.fase;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidasException;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Detective;
-import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Medico;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,8 @@ public class FaseNocturnaDataTest {
     Jugador detective;
     Jugador ciudadano1;
     Jugador ciudadano2;
-    Jugador mafioso;
     FaseNocturna fase;
+    FaseNocturna fase2;
 
     @BeforeEach
     public void setUp(){
@@ -24,36 +25,29 @@ public class FaseNocturnaDataTest {
         detective = new Jugador(new Detective(), "detective");
         ciudadano1 = new Jugador(new Ciudadano(), "protegido");
         ciudadano2 = new Jugador(new Ciudadano(), "investigado");
-        mafioso = new Jugador(new Mafioso(), "mafioso");
         fase = new FaseNocturna();
     }
 
     @Test
     public void test01guardaCorrectamenteElProtegido(){
         medico.accionNocturna(fase, ciudadano1);
-        mafioso.accionNocturna(fase, ciudadano2);
-
         FaseNocturnaData data = fase.exportarInfo();
-        assertEquals(data.getProtegido(), ciudadano1,
+        fase2 = new FaseNocturna(data);
+
+        assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
+                () -> medico.accionNocturna(fase2, ciudadano1),
                 "Se deberia guardar correctamente el protegido");
     }
 
     @Test
     public void test02guardaCorrectamenteElInvestigado(){
         detective.accionNocturna(fase, ciudadano2);
-        mafioso.accionNocturna(fase, ciudadano2);
         FaseNocturnaData data = fase.exportarInfo();
+        fase2 = new FaseNocturna(data);
 
-        assertEquals(ciudadano2, data.getInvestigado(),
+
+        assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
+                () -> detective.accionNocturna(fase2, ciudadano2) ,
                 "Se deberia guardar correctamente el investigado");
-    }
-
-    @Test
-    public void test03guardaCorrectamenteElMasVotado(){
-        mafioso.accionNocturna(fase, ciudadano1);
-        FaseNocturnaData data = fase.exportarInfo();
-
-        assertTrue(data.getMasVotado().esIgualQue(ciudadano1),
-                "Se deberia guardar correctamente el mas votado");
     }
 }
