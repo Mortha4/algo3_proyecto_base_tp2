@@ -12,6 +12,7 @@ public class App extends Application {
 
         ConfiguracionPartidaView pantallaConfig = new ConfiguracionPartidaView(stage);
         Scene escena = new Scene(pantallaConfig, 600, 720);
+        //Scene escena = new Scene(Juego.verPartida(), 600, 720);
 
         stage.setTitle("Configuración de Partida");
         stage.setScene(escena);
