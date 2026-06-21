@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.roles;
 
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.*;

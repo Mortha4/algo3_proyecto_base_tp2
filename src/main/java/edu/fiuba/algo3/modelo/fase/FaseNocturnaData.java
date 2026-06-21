@@ -23,4 +23,12 @@ public class FaseNocturnaData {
     public Candidato getMasVotado() {
         return masVotado;
     }
+
+    public void darProtegidoPara(FaseNocturna fase) {
+        fase.setUltimoProtegido(protegido);
+    }
+
+    public void darInvestigadoPara(FaseNocturna fase){
+        fase.setUltimoInvestigado(investigado);
+    }
 }

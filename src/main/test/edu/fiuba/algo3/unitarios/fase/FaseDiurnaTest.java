@@ -1,5 +1,7 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.fase;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
+import edu.fiuba.algo3.modelo.excepciones.VotarMismoRolException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
@@ -14,7 +16,7 @@ public class FaseDiurnaTest {
         FaseDiurna fase = new FaseDiurna();
 
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(VotarAlMismoJugadorException.class,
                 () -> ciudadano1.votar(fase, ciudadano1),
                 "Un jugador no debería poder votarse a sí mismo");
     }

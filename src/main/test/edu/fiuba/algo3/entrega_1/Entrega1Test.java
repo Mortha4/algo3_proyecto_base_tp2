@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Entrega1Test {
     @Test
-    public void test01MazoPara5JugadoresTieneLaCantidadCorrectaDeRoles(){
+    public void test01MazoPara5JugadoresTieneLaDistribucionCorrectaDeRoles(){
         //arrange
         int cantidadJugadores = 5, cantMafiosos = 0, cantCiudadanos = 0, cantDetective = 0, cantMedico = 0;
         Mazo mazo = new Mazo(cantidadJugadores);
@@ -30,13 +30,16 @@ public class Entrega1Test {
         }
 
         //assert
-        assertTrue(cantMafiosos == 1 || cantMafiosos == 2, "Cantidad de mafiosos invalida");
-        assertEquals(1, cantMedico + cantDetective,  "Solamente se permite un rol especial");
-        assertTrue(cantCiudadanos == 2 || cantCiudadanos == 3,"Cantidad de ciudadano invalida");
+        assertTrue(cantMafiosos == 1 || cantMafiosos == 2,
+                "Un mazo para 5 jugadores debería tener 1 o 2 mafiosos");
+        assertEquals(1, cantMedico + cantDetective,
+                "Un mazo para 5 jugadores debería tener exactamente un rol especial");
+        assertTrue(cantCiudadanos == 2 || cantCiudadanos == 3,
+                "Un mazo para 5 jugadores debería tener 2 o 3 ciudadanos");
     }
 
     @Test
-    public void test02MazoPara7JugadoresTieneLaCantidadCorrectaDeRoles(){
+    public void test02MazoPara7JugadoresTieneLaDistribucionCorrectaDeRoles(){
         //arrange
         int cantidadJugadores = 7, cantMafiosos = 0, cantCiudadanos = 0, cantDetective = 0, cantMedico = 0;
         Mazo mazo = new Mazo(cantidadJugadores);
@@ -50,13 +53,16 @@ public class Entrega1Test {
             if(rol instanceof Medico) cantMedico++;
         }
         //assert
-        assertTrue(cantMafiosos >= 2 && cantMafiosos <= 3, "Cantidad de mafiosos invalida");
-        assertEquals(2, cantMedico + cantDetective,  "Solamente se permiten 2 roles especiales");
-        assertTrue(cantCiudadanos == 2 || cantCiudadanos == 3,"Cantidad de ciudadano invalida");
+        assertTrue(cantMafiosos >= 2 && cantMafiosos <= 3,
+                "Un mazo para 7 jugadores debería tener 2 o 3 mafiosos");
+        assertEquals(2, cantMedico + cantDetective,
+                "Un mazo para 7 jugadores debería tener exactamente 2 roles especiales");
+        assertTrue(cantCiudadanos == 2 || cantCiudadanos == 3,
+                "Un mazo para 7 jugadores debería tener 2 o 3 ciudadanos");
     }
 
     @Test
-    public void test03MazoPara10JugadoresTieneLaCantidadCorrectaDeRoles(){
+    public void test03MazoPara10JugadoresTieneLaDistribucionCorrectaDeRoles(){
         //arrange
         int cantidadJugadores = 10, cantMafiosos = 0, cantCiudadanos = 0,
                 cantDetective = 0, cantMedico = 0, cantPadrinos = 0, cantSheriff = 0;
@@ -73,36 +79,42 @@ public class Entrega1Test {
             if(rol instanceof Sheriff) cantSheriff++;
         }
         //assert
-        assertEquals(3, cantMafiosos, "Cantidad de mafiosos invalido");
-        assertEquals(1,cantMedico,"solo debe existir un medico");
-        assertEquals(1,cantPadrinos,"solo debe existir un padrino");
-        assertEquals(1,cantDetective,"solo debe existir un detective");
-        assertEquals(1,cantSheriff,"solo debe existir un sheriff");
-        assertEquals(3, cantCiudadanos, "Cantidad de ciudadano invalida");
+        assertEquals(3, cantMafiosos,
+                "Un mazo para 10 jugadores debería tener exactamente 3 mafiosos");
+        assertEquals(1,cantMedico,
+                "Un mazo para 10 jugadores debería tener exactamente un médico");
+        assertEquals(1,cantPadrinos,
+                "Un mazo para 10 jugadores debería tener exactamente un padrino");
+        assertEquals(1,cantDetective,
+                "Un mazo para 10 jugadores debería tener exactamente un detective");
+        assertEquals(1,cantSheriff,
+                "Un mazo para 10 jugadores debería tener exactamente un sheriff");
+        assertEquals(3, cantCiudadanos,
+                "Un mazo para 10 jugadores debería tener exactamente 3 ciudadanos");
     }
 
     @Test
-    public void test04UnMazoDe4RolesLanzaExcepcion(){
+    public void test04NoSePuedeCrearUnMazoConMenosDe5Roles(){
         // Arrange
         int cantidadDeRoles = 4;
 
         // Act y Assert
         assertThrows(CantidadDeJugadoresException.class, ()-> new Mazo(cantidadDeRoles),
-                "No se puede crear un mazo con menos de 5 roles.");
+                "No debería poder crearse un mazo con menos de 5 roles");
     }
 
     @Test
-    public void test05UnMazoDe13RolesLanzaExcepcion(){
+    public void test05NoSePuedeCrearUnMazoConMasDe12Roles(){
         // Arrange
         int cantidadDeRoles = 13;
 
         // Act y Assert
         assertThrows(CantidadDeJugadoresException.class, ()-> new Mazo(cantidadDeRoles),
-                "No se puede crear un mazo con mas de 12 roles.");
+                "No debería poder crearse un mazo con más de 12 roles");
     }
 
     @Test
-    public void test06UnMazoDe5RolesSeMezcla(){
+    public void test06UnMazoDe5RolesCambiaElOrdenAlMezclarse(){
         //arrange
         Mazo mazo = new Mazo(5);
         List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
@@ -112,11 +124,11 @@ public class Entrega1Test {
 
         //assert
         assertNotEquals(mazoOriginal, mazo.getRoles(),
-                "El mezclador debería haber cambiado el orden de los elementos");
+                "Un mazo de 5 roles debería cambiar el orden de sus cartas al mezclarse");
     }
 
     @Test
-    public void test07UnMazoDe5RolesMantieneSuTamanioAlMezclar(){
+    public void test07UnMazoDe5RolesMantieneSuTamanioAlMezclarse(){
         // arrange
         Mazo mazo = new Mazo(5);
 
@@ -129,11 +141,11 @@ public class Entrega1Test {
         // assert
         assertThrows(NoHayMasCartasException.class,
                 mazo::agarrarCarta,
-                "El tamaño del mazo cambio al mezclarlo");
+                "Un mazo de 5 roles debería mantener su tamaño al mezclarse");
     }
 
     @Test
-    public void test08UnMazoCon5RolesMantieneSusRolesAlMezclar(){
+    public void test08UnMazoDe5RolesMantieneSusRolesAlMezclarse(){
         // arrange
         Mazo mazo = new Mazo(5);
         List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
@@ -143,11 +155,11 @@ public class Entrega1Test {
 
         // assert
         assertTrue(mazoOriginal.containsAll(mazo.getRoles()),
-                "El mazo mezclado no contiene las mismas cartas");
+                "Un mazo de 5 roles debería conservar las mismas cartas al mezclarse");
     }
 
     @Test
-    public void test09UnMazoCon7RolesMantieneSuTamanioAlMezclar(){
+    public void test09UnMazoDe7RolesMantieneSuTamanioAlMezclarse(){
         // arrange
         Mazo mazo = new Mazo(7);
         // act
@@ -159,11 +171,11 @@ public class Entrega1Test {
         // assert
         assertThrows(NoHayMasCartasException.class,
                 mazo::agarrarCarta,
-                "El tamaño del mazo cambio al mezclarlo");
+                "Un mazo de 7 roles debería mantener su tamaño al mezclarse");
     }
 
     @Test
-    public void test10UnMazoCon7RolesMantieneSusRolesAlMezclar(){
+    public void test10UnMazoDe7RolesMantieneSusRolesAlMezclarse(){
         Mazo mazo = new Mazo(7);
         List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
 
@@ -172,11 +184,11 @@ public class Entrega1Test {
 
         // assert
         assertTrue(mazoOriginal.containsAll(mazo.getRoles()),
-                "El mazo mezclado no contiene las mismas cartas");
+                "Un mazo de 7 roles debería conservar las mismas cartas al mezclarse");
     }
 
     @Test
-    public void test11UnMazoCon7RolesSeMezcla(){
+    public void test11UnMazoDe7RolesCambiaElOrdenAlMezclarse(){
         //arrange
         Mazo mazo = new Mazo(7);
         List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
@@ -186,11 +198,11 @@ public class Entrega1Test {
 
         //assert
         assertNotEquals(mazoOriginal, mazo.getRoles(),
-                "El mezclador debería haber cambiado el orden de los elementos");
+                "Un mazo de 7 roles debería cambiar el orden de sus cartas al mezclarse");
     }
 
     @Test
-    public void test12UnMazoCon10RolesSeMezcla(){
+    public void test12UnMazoDe10RolesCambiaElOrdenAlMezclarse(){
         //arrange
         Mazo mazo = new Mazo(10);
         List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
@@ -200,11 +212,11 @@ public class Entrega1Test {
 
         //assert
         assertNotEquals(mazoOriginal, mazo.getRoles(),
-                "El mezclador debería haber cambiado el orden de los elementos");
+                "Un mazo de 10 roles debería cambiar el orden de sus cartas al mezclarse");
     }
 
     @Test
-    public void test13UnMazoCon10RolesMantieneSusRolesAlMezclar(){
+    public void test13UnMazoDe10RolesMantieneSusRolesAlMezclarse(){
         Mazo mazo = new Mazo(10);
         List<Rol> mazoOriginal = new ArrayList<>(mazo.getRoles());
 
@@ -213,11 +225,11 @@ public class Entrega1Test {
 
         // assert
         assertTrue(mazoOriginal.containsAll(mazo.getRoles()),
-                "El mazo mezclado no contiene las mismas cartas");
+                "Un mazo de 10 roles debería conservar las mismas cartas al mezclarse");
     }
 
     @Test
-    public void test14UnMazoCon10RolesMantieneSuTamanioAlMezclar(){
+    public void test14UnMazoDe10RolesMantieneSuTamanioAlMezclarse(){
         // arrange
         Mazo mazo = new Mazo(10);
         // act
@@ -229,31 +241,33 @@ public class Entrega1Test {
         // assert
         assertThrows(NoHayMasCartasException.class,
                 mazo::agarrarCarta,
-                "El tamaño del mazo cambio al mezclarlo");
+                "Un mazo de 10 roles debería mantener su tamaño al mezclarse");
     }
 
     @Test
-    public void test15JugadorNoPuedeVerElRolDeOtroJugador(){
+    public void test15UnJugadorNoPuedeVerElRolDeOtroJugador(){
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
 
         // Act y Assert
-        assertThrows(NoVisibleException.class, () -> ciudadano1.verRol(ciudadano2), "Un jugador puede ver el rol de otro");
+        assertThrows(NoVisibleException.class, () -> ciudadano1.verRol(ciudadano2),
+                "Un jugador no debería poder ver el rol de otro jugador");
     }
 
     @Test
-    public void test16JugadorPuedeVerSuRol(){
+    public void test16UnJugadorPuedeVerSuPropioRol(){
         // Arrange
         Medico medico = new Medico();
         Jugador jugador = new Jugador(medico, "medico");
 
         // Act y Assert
-        assertEquals(medico, jugador.verRol(jugador));
+        assertEquals(medico, jugador.verRol(jugador),
+                "Un jugador debería poder ver su propio rol");
     }
 
     @Test
-    public void test17MafiosoPuedeVerUnMafioso(){
+    public void test17UnMafiosoPuedeIdentificarAOtroMafioso(){
         // Arrange
         Mafioso mafioso = new Mafioso();
         Mafioso mafiosoObservado = new Mafioso();
@@ -262,55 +276,56 @@ public class Entrega1Test {
         Rol result = mafioso.verBando(mafiosoObservado);
 
         // Assert
-        assertEquals(result, mafiosoObservado, "El mafioso no pudo ver el bando de otro mafioso");
+        assertEquals(mafiosoObservado, result,
+                "Un mafioso debería poder identificar a otro mafioso");
     }
 
     @Test
-    public void test18MafiosoNoPuedeVerUnCiudadano(){
+    public void test18UnMafiosoNoPuedeIdentificarAUnCiudadano(){
         // Arrange
         Mafioso mafioso = new Mafioso();
         Ciudadano ciudadanoObservado = new Ciudadano();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> mafioso.verBando(ciudadanoObservado),
-                "El mafioso no pudo ver el bando de un ciudadano");
+                "Un mafioso no debería poder identificar a un ciudadano");
     }
 
     @Test
-    public void test19MafiosoNoPuedeVerUnSheriff(){
+    public void test19UnMafiosoNoPuedeIdentificarAUnSheriff(){
         // Arrange
         Mafioso mafioso = new Mafioso();
         Sheriff sheriffObservado = new Sheriff();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> mafioso.verBando(sheriffObservado),
-                "El mafioso no pudo ver el bando de un sheriff");
+                "Un mafioso no debería poder identificar a un sheriff");
     }
 
     @Test
-    public void test20MafiosoNoPuedeVerUnDetective(){
+    public void test20UnMafiosoNoPuedeIdentificarAUnDetective(){
         // Arrange
         Mafioso mafioso = new Mafioso();
         Detective detectiveObservado = new Detective();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> mafioso.verBando(detectiveObservado),
-                "El mafioso no pudo ver el bando de un detective");
+                "Un mafioso no debería poder identificar a un detective");
     }
 
     @Test
-    public void test21MafiosoNoPuedeVerUnMedico(){
+    public void test21UnMafiosoNoPuedeIdentificarAUnMedico(){
         // Arrange
         Mafioso mafioso = new Mafioso();
         Medico medicoObservado = new Medico();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> mafioso.verBando(medicoObservado),
-                "El mafioso no pudo ver el bando de un medico");
+                "Un mafioso no debería poder identificar a un médico");
     }
 
     @Test
-    public void test22MafiosoPuedeVerUnPadrino(){
+    public void test22UnMafiosoPuedeIdentificarAUnPadrinoComoMafioso(){
         // Arrange
         Mafioso mafioso = new Mafioso();
         Padrino padrinoObservado = new Padrino();
@@ -319,11 +334,12 @@ public class Entrega1Test {
         Rol result = mafioso.verBando(padrinoObservado);
 
         // Assert
-        assertEquals(new Mafioso(), result, "El mafioso no pudo observar un padrino.");
+        assertEquals(new Mafioso(), result,
+                "Un mafioso debería identificar a un padrino como mafioso");
     }
 
     @Test
-    public void test23LaMafiaPuedeSeleccionarVictimaValida() {
+    public void test23LaMafiaPuedeEliminarAUnaVictimaValida() {
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
@@ -334,11 +350,12 @@ public class Entrega1Test {
         fase.finalizar();
 
         // Assert
-        assertFalse(ciudadano1.estaVivo(),"La mafia no pudo matar a una víctima valida");
+        assertFalse(ciudadano1.estaVivo(),
+                "La mafia debería poder eliminar a una víctima válida");
     }
 
     @Test
-    public void test24LaMafiaNoPuedeSeleccionarVictimaMuerta() {
+    public void test24LaMafiaNoPuedeSeleccionarAUnaVictimaMuerta() {
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
@@ -347,12 +364,13 @@ public class Entrega1Test {
         ciudadano1.morir();
 
         // Act y Assert
+
         assertThrows(ObjetivoMuertoException.class, () -> mafioso1.accionNocturna(fase, ciudadano1),
                 "La mafia seleccionó una víctima invalida");
     }
 
     @Test
-    public void test25ElMedicoProtegeAlMismoJugadorQueEligioLaMafia(){
+    public void test25ElMedicoPuedeProtegerAlJugadorElegidoPorLaMafia(){
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
@@ -364,11 +382,12 @@ public class Entrega1Test {
         medico.accionNocturna(fase, ciudadano1);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,"El medico protegió al objetivo de la mafia");
+        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,
+                "La fase nocturna debería indicar que el objetivo de la mafia fue protegido por el médico");
     }
 
     @Test
-    public void test26LaMafiaEligeAUnJugadorNoProtegido(){
+    public void test26LaMafiaEliminaAUnJugadorNoProtegido(){
         // Arrange
         Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         Jugador ciudadano2= new Jugador(new Ciudadano(), "ciudadano2");
@@ -382,11 +401,12 @@ public class Entrega1Test {
         fase.finalizar();
 
         // Assert
-        assertFalse(ciudadano1.estaVivo(),"El objetivo fue eliminado");
+        assertFalse(ciudadano1.estaVivo(),
+                "La mafia debería eliminar a un jugador que no fue protegido por el médico");
     }
 
     @Test
-    public void test27NoSePuedeMatarAOtroMafioso(){
+    public void test27LaMafiaNoPuedeEliminarAOtroMafioso(){
         // Arrange
         Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
         Jugador mafioso2 = new Jugador(new Mafioso(), "mafioso2");
@@ -395,6 +415,6 @@ public class Entrega1Test {
         // Act y Assert
         assertThrows(VotarMismoRolException.class,
                 () -> mafioso1.accionNocturna(fase, mafioso2),
-                "Los mafiosos pudieron eliminar a otro mafioso1");
+                "La mafia no debería poder eliminar a otro mafioso");
     }
 }

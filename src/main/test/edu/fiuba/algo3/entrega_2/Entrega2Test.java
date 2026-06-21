@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidasException;
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -103,12 +100,10 @@ public class Entrega2Test {
         // Arrange
         Jugador detective = new Jugador(new Detective(), "detective");
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         FaseNocturna primeraNoche = new FaseNocturna();
 
         // Act
         detective.accionNocturna(primeraNoche, ciudadano);
-        mafioso.accionNocturna(primeraNoche, ciudadano);
 
         FaseNocturna segundaNoche = new FaseNocturna(primeraNoche.exportarInfo());
 
@@ -123,12 +118,10 @@ public class Entrega2Test {
         // Arrange
         Jugador medico = new Jugador(new Medico(), "medico");
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         FaseNocturna noche1 = new FaseNocturna();
 
         // Act
         medico.accionNocturna(noche1, ciudadano);
-        mafioso.accionNocturna(noche1, ciudadano);
         FaseNocturna noche2 = new FaseNocturna(noche1.exportarInfo());
 
         // Assert
@@ -148,7 +141,7 @@ public class Entrega2Test {
         ciudadano1.morir();
 
         // Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(ObjetivoMuertoException.class,
                 () -> ciudadano2.votar(fase, ciudadano1),
                 "No debería poder votarse a un jugador muerto");
     }
@@ -200,7 +193,7 @@ public class Entrega2Test {
         ciudadano1.morir();
 
         // Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(JugadorMuertoException.class,
                 () -> ciudadano1.accionDiurna(fase, ciudadano2),
                 "Un jugador muerto no debería poder votar");
     }
