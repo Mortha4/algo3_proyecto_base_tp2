@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.acciones;
-import edu.fiuba.algo3.modelo.excepciones.NoVotableException;
+import edu.fiuba.algo3.modelo.excepciones.VotarMismoRolException;
 import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 

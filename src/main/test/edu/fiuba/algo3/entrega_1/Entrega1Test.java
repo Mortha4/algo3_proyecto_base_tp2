@@ -347,7 +347,7 @@ public class Entrega1Test {
         ciudadano1.morir();
 
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class, () -> mafioso1.accionNocturna(fase, ciudadano1),
+        assertThrows(ObjetivoMuertoException.class, () -> mafioso1.accionNocturna(fase, ciudadano1),
                 "La mafia seleccionó una víctima invalida");
     }
 
@@ -393,7 +393,7 @@ public class Entrega1Test {
         FaseNocturna fase = new FaseNocturna();
 
         // Act y Assert
-        assertThrows(NoVotableException.class,
+        assertThrows(VotarMismoRolException.class,
                 () -> mafioso1.accionNocturna(fase, mafioso2),
                 "Los mafiosos pudieron eliminar a otro mafioso1");
     }
