@@ -47,8 +47,14 @@ public class Juego {
     private static VBox crearZonaInferior(String mensaje){
         Label mensajes = new Label(mensaje);
 
-        HBox fila1 = Botones.crearFilaDeBotones ("Cancelar", "Confirmar");
-        HBox fila2 = Botones.crearFilaDeBotones("Boton1", "Boton2");
+        Button cancelar = Botones.crearBoton("Cancelar", "rojo");
+        Button confirmar = Botones.crearBoton("Confirmar", "verde");
+        HBox fila1 = Botones.crearFilaDeBotones (cancelar, confirmar);
+
+        Button Boton1 = Botones.crearBoton("Mostrar Investigacion", "amarillo");
+        Button Boton2 = Botones.crearBoton("Revelar Rol", "azul");
+        HBox fila2 = Botones.crearFilaDeBotones (Boton1, Boton2);
+
         HBox barraDeMensajes = new HBox(mensajes);
         barraDeMensajes.setAlignment(Pos.CENTER);
         barraDeMensajes.setPadding(new Insets(10));
@@ -58,12 +64,4 @@ public class Juego {
         zona.setPadding(new Insets(15));
         return zona;
     }
-
-/*     private HBox botones(){
-        Button cancelar = Botones.crearBoton("Cancelar", "rojo");
-        Button confirmar = Botones.crearBoton("Confirmar", "verde");
-        Hbox fila1 = 
-
-    } */
-
 }

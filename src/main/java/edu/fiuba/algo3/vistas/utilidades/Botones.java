@@ -11,16 +11,16 @@ public class Botones{
         cambiarColor(boton,estilo);
         return boton;
     }
-    public static HBox crearFilaDeBotones(String nombreBoton1,String nombreBoton2){
-        Button boton1 = new Button(nombreBoton1);
-        Button boton2 = new Button(nombreBoton2);
+    public static HBox crearFilaDeBotones(Button boton1,Button boton2){
         HBox fila = new HBox(10,boton1,boton2);
         fila.setAlignment(Pos.CENTER);
 
         HBox.setHgrow(boton1, Priority.ALWAYS);
-        HBox.setHgrow(boton2, Priority.ALWAYS);
-        boton1.setMaxWidth(Double.MAX_VALUE);
-        boton2.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(boton2, Priority.ALWAYS); // Mismo ancho preferido para los dos + que se estiren = mitad y mitad
+        boton1.setPrefWidth(0);
+        boton2.setPrefWidth(0);
+        boton1.setMaxWidth(270);
+        boton2.setMaxWidth(270);
         return fila;
     }
     private static void cambiarColor(Button boton,String nombre){
@@ -44,8 +44,8 @@ public class Botones{
                 break;
             case "azul":
                 fondo = "#d6e4f5"; 
-                borde = "#e6d28a"; 
-                texto = "#a9c5e8";
+                borde = "#a9c5e8"; 
+                texto = "#333";
                 break;
             default:
                 fondo = "#fff"; 
@@ -58,7 +58,8 @@ public class Botones{
             "-fx-text-fill: " + texto + ";" +
             "-fx-font-weight: bold;" +
             "-fx-padding: " + pad + ";" +
-            "-fx-border-color: " + borde + ";"
-        );        
+            "-fx-border-color: " + borde + ";" +
+            "-fx-border-width: 1;"
+        );
     }
 }
