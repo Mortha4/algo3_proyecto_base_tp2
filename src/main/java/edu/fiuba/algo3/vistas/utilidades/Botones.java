@@ -16,9 +16,7 @@ public class Botones{
         fila.setAlignment(Pos.CENTER);
 
         HBox.setHgrow(boton1, Priority.ALWAYS);
-        HBox.setHgrow(boton2, Priority.ALWAYS); // Mismo ancho preferido para los dos + que se estiren = mitad y mitad
-        boton1.setPrefWidth(0);
-        boton2.setPrefWidth(0);
+        HBox.setHgrow(boton2, Priority.ALWAYS);
         boton1.setMaxWidth(270);
         boton2.setMaxWidth(270);
         return fila;

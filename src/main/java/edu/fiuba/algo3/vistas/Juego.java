@@ -42,7 +42,7 @@ public class Juego extends Parent {
     }
 
     private static VBox crearZonaCentral(){
-        VBox zona = new VBox(Grilla.crearGrilla(8));
+        VBox zona = new VBox(Grilla.crearGrilla(12));
         zona.setAlignment(Pos.CENTER);
         zona.setPadding(new Insets(20));
         zona.setStyle("-fx-background-color: #aed6f1;");
