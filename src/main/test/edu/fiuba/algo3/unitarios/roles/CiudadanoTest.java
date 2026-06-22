@@ -1,71 +1,78 @@
-package edu.fiuba.algo3.unitarios;
+package edu.fiuba.algo3.unitarios.roles;
 
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CiudadanoTest {
+    private Ciudadano ciudadano;
+
+    @BeforeEach
+    public void arrange() {
+        ciudadano = new Ciudadano();
+    }
+
     @Test
-    public void test01CiudadanoNoPuedeVerUnCiudadano(){
+    public void test01CiudadanoNoPuedeVerBandoDeOtroCiudadano() {
         // Arrange
-        Ciudadano ciudadano = new Ciudadano();
         Ciudadano otroCiudadano = new Ciudadano();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> ciudadano.verBando(otroCiudadano),
-                "Un ciudadano puede ver el bando de otro ciudadano");
+                "Un ciudadano no debería poder ver el bando de otro ciudadano");
     }
+
     @Test
-    public void test02CiudadanoNoPuedeVerUnMedico(){
+    public void test02CiudadanoNoPuedeVerBandoDeUnMedico() {
         // Arrange
-        Ciudadano ciudadano = new Ciudadano();
         Medico medico = new Medico();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> ciudadano.verBando(medico),
-                "Un ciudadano puede ver el bando de otro ciudadano");
+                "Un ciudadano no debería poder ver el bando de un médico");
     }
+
     @Test
-    public void test03CiudadanoNoPuedeVerUnDetective(){
+    public void test03CiudadanoNoPuedeVerBandoDeUnDetective() {
         // Arrange
-        Ciudadano ciudadano = new Ciudadano();
         Detective detective = new Detective();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> ciudadano.verBando(detective),
-                "Un ciudadano puede ver el bando de otro ciudadano");
+                "Un ciudadano no debería poder ver el bando de un detective");
     }
+
     @Test
-    public void test04CiudadanoNoPuedeVerUnSheriff(){
+    public void test04CiudadanoNoPuedeVerBandoDeUnSheriff() {
         // Arrange
-        Ciudadano ciudadano = new Ciudadano();
         Sheriff sheriff = new Sheriff();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> ciudadano.verBando(sheriff),
-                "Un ciudadano puede ver el bando de otro ciudadano");
+                "Un ciudadano no debería poder ver el bando de un sheriff");
     }
+
     @Test
-    public void test05CiudadanoNoPuedeVerUnMafioso(){
+    public void test05CiudadanoNoPuedeVerBandoDeUnMafioso() {
         // Arrange
-        Ciudadano ciudadano = new Ciudadano();
         Mafioso mafioso = new Mafioso();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> ciudadano.verBando(mafioso),
-                "Un ciudadano puede ver el bando de otro ciudadano");
+                "Un ciudadano no debería poder ver el bando de un mafioso");
     }
+
     @Test
-    public void test06CiudadanoNoPuedeVerUnPadrino(){
+    public void test06CiudadanoNoPuedeVerBandoDeUnPadrino() {
         // Arrange
-        Ciudadano ciudadano = new Ciudadano();
         Padrino padrino = new Padrino();
 
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> ciudadano.verBando(padrino),
-                "Un ciudadano puede ver el bando de otro ciudadano");
+                "Un ciudadano no debería poder ver el bando de un padrino");
     }
 
 }

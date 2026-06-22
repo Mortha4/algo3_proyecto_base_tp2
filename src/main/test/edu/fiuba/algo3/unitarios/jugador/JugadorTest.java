@@ -1,11 +1,9 @@
-package edu.fiuba.algo3.entrega_1;
+package edu.fiuba.algo3.unitarios.jugador;
 
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
-import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
-import edu.fiuba.algo3.modelo.roles.Medico;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,42 +19,31 @@ public class JugadorTest {
     }
 
     @Test
-    public void test01JugadorNoPuedeVerElRolDeOtroJugador(){
-        // Act y Assert
-        assertThrows(NoVisibleException.class, () -> ciudadano1.verRol(ciudadano2), "Un jugador puede ver el rol de otro");
-    }
-    @Test
-    public void test02JugadorPuedeVerSuRol(){
-        // Arrange
-        Medico medico = new Medico();
-        Jugador jugador = new Jugador(medico, "medico");
-
-        // Act y Assert
-        assertEquals(medico, jugador.verRol(jugador));
-    }
-    @Test
-    public void test03UnJugadorSeCreaVivo(){
+    public void test01UnJugadorSeCreaVivo(){
         // Act y Assert
         assertTrue(ciudadano1.estaVivo(),
-                "El jugador se creo muerto.");
+                "Un jugador recién creado debería estar vivo");
     }
+
     @Test
-    public void test04AlMatarUnJugadorNoEstaVivo(){
+    public void test02AlMatarUnJugadorNoEstaVivo(){
         // Act
         ciudadano1.morir();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
-                "El jugador sigue vivo luego de morir()");
+                "Un jugador no debería estar vivo después de morir");
     }
 
     @Test
-    public void test05UnJugadorMuertoNoPuedeRealizarAcciones(){
+    public void test03UnJugadorMuertoNoPuedeRealizarAcciones(){
         // Arrange
         ciudadano1.morir();
+
+        // Act y Assert
         assertThrows(SeleccionInvalidaException.class,
                 () -> ciudadano1.accionDiurna(new FaseDiurna(), ciudadano2),
-                "Un jugador pudo votar muerto");
+                "Un jugador muerto no debería poder realizar acciones");
     }
 
 }

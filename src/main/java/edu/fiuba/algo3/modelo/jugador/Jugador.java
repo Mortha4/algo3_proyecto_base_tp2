@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
+import java.util.Objects;
+
 public class Jugador {
     private final Rol rol;
     private final String nombre;
@@ -25,7 +27,19 @@ public class Jugador {
     }
 
     public Rol verBando(Jugador otroJugador){
-        return rol.verBando(otroJugador.rol);
+        return otroJugador.compararCon(this.rol);
+    }
+
+    public Rol compararCon(Rol rol){
+        return rol.verBando(this.rol);
+    }
+
+    public boolean tieneMismoRol(Jugador otroJugador){
+        return otroJugador.tieneMismoRol(this.rol);
+    }
+
+    public boolean tieneMismoRol(Rol rol){
+        return this.rol.equals(rol);
     }
 
     public void morir() {
@@ -50,5 +64,16 @@ public class Jugador {
 
     public void accionDiurna(FaseDiurna faseDiurna, Jugador objetivo){
         estado.accionDiurna(faseDiurna, this, objetivo, rol);
+    }
+
+    public void votar(FaseDiurna fase, Jugador votado) {
+        estado.votar(fase, this, votado, rol);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Jugador jugador = (Jugador) o;
+        return Objects.equals(rol, jugador.rol) && Objects.equals(nombre, jugador.nombre);
     }
 }

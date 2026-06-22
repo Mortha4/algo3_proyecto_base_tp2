@@ -22,6 +22,6 @@ public class Padrino extends Rol {
     }
     @Override
     public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
-        return new Votar(fase, base, objetivo);
+        return new Nada();
     }
 }
