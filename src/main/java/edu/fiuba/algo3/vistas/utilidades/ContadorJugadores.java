@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class ContadorJugadores extends StackPane {
@@ -36,7 +37,15 @@ public class ContadorJugadores extends StackPane {
 
         this.txtCantidad = new Text(String.valueOf(this.cantidad));
         this.txtCantidad.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-fill: #ffcc00;");
-        
+        this.txtCantidad.setFont(
+                Font.loadFont(
+                        getClass().getResourceAsStream("/fonts/depixelbreit.woff"),
+                        34
+                )
+        );
+
+        StackPane contenedorTexto = new StackPane(this.txtCantidad);
+        contenedorTexto.setPrefWidth(80);
 
 
 
@@ -65,11 +74,11 @@ public class ContadorJugadores extends StackPane {
 
         //contenido
 
-        HBox controles = new HBox(30);
+        HBox controles = new HBox(5);
         controles.setAlignment(Pos.CENTER);
-        controles.setPadding(new Insets(12, 30, 0, 22));
+        controles.setPadding(new Insets(12, 22, 0, 20));
 
-        controles.getChildren().addAll(btnRes,espaciadorIzquierdo,this.txtCantidad,espaciadorDerecho,btnAdd);
+        controles.getChildren().addAll(btnRes,espaciadorIzquierdo,contenedorTexto,espaciadorDerecho,btnAdd);
 
 
         this.getChildren().addAll(vistaPergamino,controles);

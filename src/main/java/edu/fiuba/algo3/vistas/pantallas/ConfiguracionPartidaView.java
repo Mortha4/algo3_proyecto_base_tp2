@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
 import edu.fiuba.algo3.vistas.Juego;
-import edu.fiuba.algo3.vistas.utilidades.BotonGuardar;
-import edu.fiuba.algo3.vistas.utilidades.BotonRolMafioso;
-import edu.fiuba.algo3.vistas.utilidades.BotonVolver;
-import edu.fiuba.algo3.vistas.utilidades.ContadorJugadores;
+import edu.fiuba.algo3.vistas.utilidades.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
@@ -46,7 +43,8 @@ public class ConfiguracionPartidaView extends StackPane {
 
         ContadorJugadores contador = new ContadorJugadores();
         BotonRolMafioso rolMafia = new BotonRolMafioso();
-        bloqueOpciones.getChildren().addAll(contador, rolMafia);
+        BotonRolMedico rolMedico = new BotonRolMedico();
+        bloqueOpciones.getChildren().addAll(contador, rolMafia,rolMedico);
 
         //botones volver y guardar
         VBox bloqueBotones = new VBox();
