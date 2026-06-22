@@ -1,0 +1,32 @@
+@startuml
+class Mazo{
+    + Mazo(cantidadDeCartas : int)
+    + agarrarCarta() : Rol
+    + mezclar() : void
+    + getRoles() : List<Rol>
+}
+
+interface ConfiguracionDeMazo{
+    + obtenerConfig(configuracion : Map<String, Integer>)
+}
+
+class Grande{
+    + obtenerConfig(configuracion : Map<String, Integer>)
+}
+class Mediana {
+    + obtenerConfig(configuracion : Map<String, Integer>)
+}
+class Pequenia {
+    + obtenerConfig(configuracion : Map<String, Integer>)
+}
+class CreadorDeConfiguracion{
+    + crearConfig(cantidadDeJugadores : int) : ConfiguracionDeMazo
+}
+
+Mazo -> ConfiguracionDeMazo
+Mazo ..> "usa a..." CreadorDeConfiguracion
+CreadorDeConfiguracion ..> "retorna una..." ConfiguracionDeMazo
+Grande ..|> ConfiguracionDeMazo
+Mediana ..|> ConfiguracionDeMazo
+Pequenia ..|> ConfiguracionDeMazo
+@enduml

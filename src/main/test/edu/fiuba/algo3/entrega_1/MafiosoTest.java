@@ -72,7 +72,7 @@ public class MafiosoTest {
         Rol result = mafioso.verBando(padrinoObservado);
 
         // Assert
-        assertEquals(result, padrinoObservado, "El mafioso no pudo observar un padrino.");
+        assertEquals(new Mafioso(), result, "El mafioso no pudo observar un padrino.");
     }
 
 

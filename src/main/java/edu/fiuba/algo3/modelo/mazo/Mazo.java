@@ -1,6 +1,5 @@
-package edu.fiuba.algo3.modelo;
-import edu.fiuba.algo3.modelo.configuraciones.ConfiguracionDeMazo;
-import edu.fiuba.algo3.modelo.configuraciones.CreadorDeConfiguracion;
+package edu.fiuba.algo3.modelo.mazo;
+import edu.fiuba.algo3.modelo.excepciones.NoHayMasCartasException;
 import edu.fiuba.algo3.modelo.roles.*;
 import java.util.*;
 
@@ -15,7 +14,11 @@ public class Mazo {
     }
 
     public Rol agarrarCarta(){
-        return cartas.remove(0);
+        try{
+            return cartas.remove(0);
+        }catch (IndexOutOfBoundsException e){
+            throw new NoHayMasCartasException();
+        }
     }
 
     public void mezclar(){
@@ -24,10 +27,6 @@ public class Mazo {
             Collections.shuffle(this.cartas);
         }while(copia.equals(cartas));
 
-    }
-
-    public int getCantidadDeRoles(){
-        return cartas.size();
     }
 
     public List<Rol> getRoles(){

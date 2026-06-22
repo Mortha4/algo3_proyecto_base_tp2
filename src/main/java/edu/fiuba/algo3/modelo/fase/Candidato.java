@@ -33,14 +33,14 @@ public class Candidato {
         jugador.morir();
     }
 
-    public boolean estaVivo(){
-        return jugador.estaVivo();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Candidato candidato = (Candidato) o;
         return jugador.equals(candidato.jugador);
+    }
+
+    public boolean esIgualQue(Jugador objetivo) {
+        return this.jugador.equals(objetivo);
     }
 }

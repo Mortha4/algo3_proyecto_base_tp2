@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.configuraciones;
+package edu.fiuba.algo3.modelo.mazo;
 import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
 
 public class CreadorDeConfiguracion {
@@ -7,11 +7,11 @@ public class CreadorDeConfiguracion {
             throw new CantidadDeJugadoresException();
         }
         if(cantidadDeJugadores <= 6) {
-            return new ConfiguracionPequenia();
+            return new Pequenia();
         } else if (cantidadDeJugadores <= 9 ) {
-            return new ConfiguracionMediana();
+            return new Mediana();
         } else {
-            return new ConfiguracionDeMazoGrande();
+            return new Grande();
         }
     }
 }
