@@ -413,7 +413,7 @@ public class Entrega1Test {
         FaseNocturna fase = new FaseNocturna();
 
         // Act y Assert
-        assertThrows(VotarMismoRolException.class,
+        assertThrows(VotacionEntreMafiososException.class,
                 () -> mafioso1.accionNocturna(fase, mafioso2),
                 "La mafia no debería poder eliminar a otro mafioso");
     }

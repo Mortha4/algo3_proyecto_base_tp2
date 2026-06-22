@@ -3,6 +3,7 @@ package edu.fiuba.algo3.unitarios.acciones;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.acciones.VotarPrioritario;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
@@ -82,7 +83,7 @@ public class VotarPrioritarioTest {
     @Test
     public void test04UnJugadorNoPuedeVotarseASiMismoConVotoPrioritario() {
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(VotarAlMismoJugadorException.class,
                 () -> new VotarPrioritario(fase, padrino, padrino),
                 "Un jugador no debería poder votarse a sí mismo con voto prioritario");
     }

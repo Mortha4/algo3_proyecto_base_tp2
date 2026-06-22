@@ -3,6 +3,7 @@ package edu.fiuba.algo3.unitarios.acciones;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -125,7 +126,7 @@ public class VotarTest {
     @Test
     public void test06UnJugadorNoPuedeVotarseASiMismo() {
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(VotarAlMismoJugadorException.class,
                 () -> new Votar(faseDiurna, ciudadano1, ciudadano1),
                 "Un jugador no debería poder votarse a sí mismo");
     }

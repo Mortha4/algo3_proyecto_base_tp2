@@ -3,6 +3,8 @@ package edu.fiuba.algo3.unitarios.acciones;
 import edu.fiuba.algo3.modelo.acciones.VotarNocturno;
 import edu.fiuba.algo3.modelo.excepciones.NoVotableException;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.VotacionEntreMafiososException;
+import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
@@ -69,7 +71,7 @@ public class VotarNocturnoTest {
     @Test
     public void test04UnMafiosoNoPuedeVotarseASiMismoDuranteLaNoche() {
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(VotarAlMismoJugadorException.class,
                 () -> new VotarNocturno(fase, mafioso1, mafioso1),
                 "Un mafioso no debería poder votarse a sí mismo durante la noche");
     }
