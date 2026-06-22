@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 public class ContadorJugadores extends StackPane {
 
     private final Text txtCantidad;
-    private int cantidad;
+    private int cantidad=5;
 
     public ContadorJugadores(){
 
@@ -34,12 +34,14 @@ public class ContadorJugadores extends StackPane {
 
         //texto dinamico
 
-        this.txtCantidad = new Text(String.valueOf(5));
+        this.txtCantidad = new Text(String.valueOf(this.cantidad));
         this.txtCantidad.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-fill: #ffcc00;");
+        
+
 
 
         btnAdd.accionSumar(() -> {
-            if (this.cantidad < 8) {
+            if (this.cantidad < 12) {
                 this.cantidad++;
                 actualizarPantalla();
             }
