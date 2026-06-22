@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.acciones;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
@@ -10,7 +10,7 @@ public class Votar implements AccionNocturna, AccionDiurna{
 
     public Votar(Fase fase, Jugador votante, Jugador objetivo) {
         if(votante.equals(objetivo)) {
-            throw new SeleccionInvalidaException();
+            throw new VotarAlMismoJugadorException();
         }
         this.fase = fase;
         this.objetivo = objetivo;

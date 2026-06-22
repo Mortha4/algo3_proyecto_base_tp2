@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.unitarios.jugador;
 
+import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
+import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoNoPuedeVotarException;
 import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
@@ -28,7 +30,7 @@ public class MuertoTest {
         Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
 
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class, () -> muerto.crearCandidato(jugador),
+        assertThrows(JugadorMuertoException.class, () -> muerto.crearCandidato(jugador),
                 "Un estado muerto no debería poder crear candidatos");
     }
 
@@ -39,7 +41,7 @@ public class MuertoTest {
         Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
 
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(JugadorMuertoException.class,
                 () -> muerto.accionNocturna(new FaseNocturna(), jugador, jugador, new Ciudadano()),
                 "Un estado muerto no debería poder realizar acciones nocturnas");
     }
@@ -51,7 +53,7 @@ public class MuertoTest {
         Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
 
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(JugadorMuertoException.class,
                 () -> muerto.accionDiurna(new FaseDiurna(), jugador, jugador, new Ciudadano()),
                 "Un estado muerto no debería poder realizar acciones diurnas");
     }
@@ -63,7 +65,7 @@ public class MuertoTest {
         Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
 
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(JugadorMuertoNoPuedeVotarException.class,
                 () -> muerto.votar(new FaseDiurna(), jugador, jugador, new Ciudadano()),
                 "Un estado muerto no debería poder votar");
     }

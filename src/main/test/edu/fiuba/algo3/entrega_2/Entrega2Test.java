@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidasException;
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -144,7 +141,7 @@ public class Entrega2Test {
         ciudadano1.morir();
 
         // Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(ObjetivoMuertoException.class,
                 () -> ciudadano2.votar(fase, ciudadano1),
                 "No debería poder votarse a un jugador muerto");
     }
@@ -196,7 +193,7 @@ public class Entrega2Test {
         ciudadano1.morir();
 
         // Assert
-        assertThrows(SeleccionInvalidaException.class,
+        assertThrows(JugadorMuertoException.class,
                 () -> ciudadano1.accionDiurna(fase, ciudadano2),
                 "Un jugador muerto no debería poder votar");
     }
