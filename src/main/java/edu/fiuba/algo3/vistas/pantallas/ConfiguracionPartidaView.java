@@ -1,71 +1,66 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
 import edu.fiuba.algo3.vistas.Juego;
-import edu.fiuba.algo3.vistas.utilidades.*;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
+import javafx.scene.Scene;
+import javafx.scene.layout.*;
+import edu.fiuba.algo3.vistas.utilidades.*;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class ConfiguracionPartidaView extends StackPane {
 
-    private Stage stage;
+    private final Stage stage;
 
     public ConfiguracionPartidaView(Stage stage) {
         this.stage = stage;
 
-        //agrego imagenes
-        Image imagenFondo = new Image(getClass().getResourceAsStream("/menuConfig.png"));
-        ImageView fondoView = new ImageView(imagenFondo);
+
+        ImageView background = new ImageView(new Image("/menuConfig.png"));
+        background.setFitWidth(600);
+        background.setFitHeight(720);
+        background.setPreserveRatio(false);
+
+        VBox loyout = new VBox(-70);
+        loyout.setAlignment(Pos.BOTTOM_CENTER);
 
 
 
-        //organizo tamaños
-        fondoView.setFitWidth(600);
-        fondoView.setFitHeight(720);
-        fondoView.setSmooth(false);
 
+        // Botón
+        ContadorJugadores btn1 = new ContadorJugadores();
 
-        VBox rootLayout = new VBox();
-        rootLayout.setAlignment(Pos.CENTER);
-        rootLayout.setPadding(new Insets(100, 40, 40, 40));
-        rootLayout.setSpacing(30);
+        BotonRolMafioso btn0= new BotonRolMafioso();
+        BotonRolMedico btn2 = new BotonRolMedico();
+        BotonRolDetective btn3 = new BotonRolDetective();
+        BotonGuardar btnSave = new BotonGuardar(200);
 
-        VBox bloqueOpciones = new VBox();
-        bloqueOpciones.setAlignment(Pos.CENTER);
-        bloqueOpciones.setSpacing(15);
+        VBox espaciador = new VBox(-270);
+        espaciador.setAlignment(Pos.TOP_CENTER);
 
 
 
-        ContadorJugadores contador = new ContadorJugadores();
-        BotonRolMafioso rolMafia = new BotonRolMafioso();
-        BotonRolMedico rolMedico = new BotonRolMedico();
-        bloqueOpciones.getChildren().addAll(contador, rolMafia,rolMedico);
+        // VBox con botones centrados
+        VBox menuBox = new VBox(-50);
+        menuBox.setAlignment(Pos.CENTER);
+        menuBox.getChildren().addAll(btn1);
 
-        //botones volver y guardar
-        VBox bloqueBotones = new VBox();
-        bloqueBotones.setAlignment(Pos.CENTER);
-        bloqueBotones.setSpacing(12);
+        VBox roles = new VBox(-140);
+        roles.setAlignment(Pos.CENTER);
 
-        BotonGuardar botonGuardar = new BotonGuardar(320);
-        BotonVolver botonVolver = new BotonVolver(200);
+        roles.getChildren().addAll(btn0,btn2,btn3);
 
-        bloqueBotones.getChildren().addAll(botonGuardar, botonVolver);
-
-        rootLayout.getChildren().addAll(bloqueOpciones, bloqueBotones);
-        this.getChildren().addAll(fondoView, rootLayout);
+        VBox opciones = new VBox(-10);
+        opciones.setAlignment(Pos.BOTTOM_CENTER);
+        opciones.getChildren().addAll(btnSave);
 
 
-    }
+        loyout.getChildren().addAll(espaciador,menuBox,roles,opciones);
 
-    private void irAlJuego() {
-        // Lógica limpia para cambiar de pantalla usando el stage
-        Juego pantallaJuego = new Juego(stage);
-        this.stage.getScene().setRoot(pantallaJuego); // Cambia el contenido sin recrear el Stage
-        this.stage.setTitle("Juego en Progreso");
+
+        // Agregar directamente a THIS (que ya es el StackPane raíz)
+        this.getChildren().addAll(background,loyout);
     }
 }

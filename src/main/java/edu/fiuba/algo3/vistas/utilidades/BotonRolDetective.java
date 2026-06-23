@@ -4,15 +4,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.StackPane;
 
-public class BotonRolMedico extends StackPane {
+public class BotonRolDetective extends StackPane {
 
     private int cantidad;
 
-    public BotonRolMedico(){
+    public BotonRolDetective(){
 
-        Image imgPergamino = new Image(getClass().getResourceAsStream("/rolMedico.png"));
+        Image imgPergamino = new Image(getClass().getResourceAsStream("/rolDetective.png"));
         ImageView vistaPergamino = new ImageView(imgPergamino);
 
         //tamaños
@@ -26,9 +26,9 @@ public class BotonRolMedico extends StackPane {
 
         BotonSwitch boton = new BotonSwitch();
         StackPane.setAlignment(boton, Pos.CENTER_RIGHT);
-        StackPane.setMargin(boton, new Insets(-6, -2, 0, 0));
+        StackPane.setMargin(boton, new Insets(-12, 1, 0, 0));
 
-
+        
         this.getChildren().addAll(vistaPergamino,boton);
     }
 

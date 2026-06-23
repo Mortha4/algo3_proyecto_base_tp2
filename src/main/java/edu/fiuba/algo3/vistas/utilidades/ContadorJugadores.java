@@ -2,12 +2,14 @@ package edu.fiuba.algo3.vistas.utilidades;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -39,13 +41,25 @@ public class ContadorJugadores extends StackPane {
         this.txtCantidad.setStyle("-fx-font-size: 34px; -fx-font-weight: bold; -fx-fill: #ffcc00;");
         this.txtCantidad.setFont(
                 Font.loadFont(
-                        getClass().getResourceAsStream("/fonts/depixelbreit.woff"),
+                        getClass().getResourceAsStream("/fonts/PIXELITE.ttf"),
                         34
                 )
         );
 
+
         StackPane contenedorTexto = new StackPane(this.txtCantidad);
         contenedorTexto.setPrefWidth(80);
+
+        this.txtCantidad.setFill(Color.web("#F2B55B"));
+        this.txtCantidad.setStroke(Color.web("#D18B47"));
+        this.txtCantidad.setStrokeWidth(2);
+        DropShadow sombra = new DropShadow();
+        sombra.setRadius(0);
+        sombra.setOffsetX(4);
+        sombra.setOffsetY(4);
+        sombra.setColor(Color.BLACK);
+
+        this.txtCantidad.setEffect(sombra);
 
 
 
