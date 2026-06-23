@@ -58,7 +58,7 @@ public class InvestigarTest {
         Investigar investigar = new Investigar(fase, detective, ciudadano);
 
         // Act y Assert
-        assertDoesNotThrow(() -> fase.ejecutar(investigar),
+        assertDoesNotThrow(() -> fase.ejecutarComando(investigar),
                 "La fase nocturna debería poder ejecutar la acción investigar");
     }
 

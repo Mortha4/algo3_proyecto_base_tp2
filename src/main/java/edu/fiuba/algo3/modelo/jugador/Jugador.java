@@ -55,8 +55,8 @@ public class Jugador {
         return this.estado.estaVivo();
     }
 
-    public void accionNocturna(FaseNocturna faseNocturna, Jugador objetivo){
-        estado.accionNocturna(faseNocturna, this, objetivo, rol);
+    public void accion(FaseNocturna faseNocturna, Jugador objetivo){
+        estado.accion(faseNocturna, this, objetivo, rol);
     }
 
     public Candidato crearCandidato(Jugador otroJugador){
@@ -67,8 +67,8 @@ public class Jugador {
         return estado.devolverCandidato(jugador);
     }
 
-    public void accionDiurna(FaseDiurna faseDiurna, Jugador objetivo){
-        estado.accionDiurna(faseDiurna, this, objetivo, rol);
+    public void accion(FaseDiurna faseDiurna, Jugador objetivo){
+        estado.accion(faseDiurna, this, objetivo, rol);
     }
 
     public void votar(FaseDiurna fase, Jugador votado) {

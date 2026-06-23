@@ -23,11 +23,11 @@ public class Mafioso extends Rol {
     }
 
     @Override
-    public AccionNocturna accionNocturna(FaseNocturna fase, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseNocturna fase, Jugador base, Jugador objetivo) {
         return new VotarNocturno(fase, base, objetivo);
     }
     @Override
-    public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
         return new Nada();
     }
 }

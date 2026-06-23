@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo.roles;
-
-import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
-import edu.fiuba.algo3.modelo.acciones.AccionNocturna;
+import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.excepciones.RolNuloException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
@@ -20,12 +18,12 @@ public class RolNulo extends Rol {
     }
 
     @Override
-    public AccionNocturna accionNocturna(FaseNocturna faseNocturna, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseNocturna faseNocturna, Jugador base, Jugador objetivo) {
         throw new RolNuloException();
     }
 
     @Override
-    public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
         throw new RolNuloException();
     }
 }

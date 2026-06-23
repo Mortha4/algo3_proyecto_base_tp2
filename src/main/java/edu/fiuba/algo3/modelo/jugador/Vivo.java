@@ -12,12 +12,12 @@ public class Vivo implements Estado {
         return new Candidato(jugador);
     }
 
-    public void accionNocturna(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol){
-        faseNocturna.ejecutar(rol.accionNocturna(faseNocturna, ejecutor, objetivo));
+    public void accion(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol){
+        faseNocturna.ejecutarComando(rol.accion(faseNocturna, ejecutor, objetivo));
     }
 
-    public void accionDiurna(FaseDiurna fase, Jugador ejecutor, Jugador objetivo, Rol rol){
-        fase.ejecutar(rol.accionDiurna(fase, ejecutor, objetivo));
+    public void accion(FaseDiurna fase, Jugador ejecutor, Jugador objetivo, Rol rol){
+        fase.ejecutar(rol.accion(fase, ejecutor, objetivo));
     }
 
     @Override

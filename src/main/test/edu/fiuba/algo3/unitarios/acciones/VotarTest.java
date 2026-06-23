@@ -2,7 +2,6 @@ package edu.fiuba.algo3.unitarios.acciones;
 
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
@@ -167,7 +166,7 @@ public class VotarTest {
         Votar votar = new Votar(faseNocturna, mafioso1, ciudadano1);
 
         // Act
-        faseNocturna.ejecutar(votar);
+        faseNocturna.ejecutarComando(votar);
         faseNocturna.finalizar();
 
         // Assert

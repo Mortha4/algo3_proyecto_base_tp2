@@ -53,8 +53,8 @@ public class ProtegerTest {
         Votar votar = new Votar(fase, mafioso, ciudadano1);
 
         // Act
-        fase.ejecutar(proteger);
-        fase.ejecutar(votar);
+        fase.ejecutarComando(proteger);
+        fase.ejecutarComando(votar);
 
         // Assert
         assertThrows(ObjetivoProtegidoException.class, fase::finalizar,

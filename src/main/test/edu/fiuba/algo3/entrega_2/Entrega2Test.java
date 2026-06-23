@@ -103,13 +103,13 @@ public class Entrega2Test {
         FaseNocturna primeraNoche = new FaseNocturna();
 
         // Act
-        detective.accionNocturna(primeraNoche, ciudadano);
+        detective.accion(primeraNoche, ciudadano);
 
         FaseNocturna segundaNoche = new FaseNocturna(primeraNoche.exportarInfo());
 
         // Assert
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
-                () -> detective.accionNocturna(segundaNoche, ciudadano),
+                () -> detective.accion(segundaNoche, ciudadano),
                 "Un detective no debería poder investigar al mismo jugador dos noches seguidas");
     }
 
@@ -121,12 +121,12 @@ public class Entrega2Test {
         FaseNocturna noche1 = new FaseNocturna();
 
         // Act
-        medico.accionNocturna(noche1, ciudadano);
+        medico.accion(noche1, ciudadano);
         FaseNocturna noche2 = new FaseNocturna(noche1.exportarInfo());
 
         // Assert
         assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
-                () -> medico.accionNocturna(noche2, ciudadano),
+                () -> medico.accion(noche2, ciudadano),
                 "Un médico no debería poder proteger al mismo jugador dos noches seguidas");
     }
 
@@ -194,7 +194,7 @@ public class Entrega2Test {
 
         // Assert
         assertThrows(JugadorMuertoException.class,
-                () -> ciudadano1.accionDiurna(fase, ciudadano2),
+                () -> ciudadano1.accion(fase, ciudadano2),
                 "Un jugador muerto no debería poder votar");
     }
 }

@@ -2,7 +2,6 @@ package edu.fiuba.algo3.unitarios.acciones;
 
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.acciones.VotarPrioritario;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -72,7 +71,7 @@ public class VotarPrioritarioTest {
         VotarPrioritario votoPrioritario = new VotarPrioritario(fase, padrino, ciudadano1);
 
         // Act
-        fase.ejecutar(votoPrioritario);
+        fase.ejecutarComando(votoPrioritario);
         fase.finalizar();
 
         // Assert

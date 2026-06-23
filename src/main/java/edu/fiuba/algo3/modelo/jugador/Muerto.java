@@ -21,12 +21,12 @@ public class Muerto implements Estado {
     }
 
     @Override
-    public void accionNocturna(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol) {
+    public void accion(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol) {
         throw new JugadorMuertoException();
     }
 
     @Override
-    public void accionDiurna(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol) {
+    public void accion(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol) {
         throw new JugadorMuertoException();
     }
 

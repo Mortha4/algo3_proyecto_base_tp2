@@ -18,7 +18,7 @@ public class Detective extends Rol {
     }
 
     @Override
-    public AccionNocturna accionNocturna(FaseNocturna fase, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseNocturna fase, Jugador base, Jugador objetivo) {
         return new Investigar(fase, base, objetivo);
     }
 
@@ -26,7 +26,7 @@ public class Detective extends Rol {
         condicion.contar(this);
     }
     @Override
-    public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
         return new Nada();
     }
 

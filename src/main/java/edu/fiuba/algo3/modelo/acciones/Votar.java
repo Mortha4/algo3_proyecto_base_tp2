@@ -3,7 +3,7 @@ import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-public class Votar implements AccionNocturna, AccionDiurna{
+public class Votar implements Accion {
     protected final Jugador objetivo;
     protected final Jugador votante;
     protected final Fase fase;

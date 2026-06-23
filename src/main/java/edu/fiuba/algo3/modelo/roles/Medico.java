@@ -17,7 +17,7 @@ public class Medico extends Rol {
     }
 
     @Override
-    public AccionNocturna accionNocturna(FaseNocturna faseNocturna, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseNocturna faseNocturna, Jugador base, Jugador objetivo) {
         return new Proteger(faseNocturna, objetivo);
     }
 
@@ -26,7 +26,7 @@ public class Medico extends Rol {
     }
 
     @Override
-    public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
         return new Nada();
     }
 }

@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.fase;
-import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
+import edu.fiuba.algo3.modelo.acciones.Accion;
 
 public class FaseDiurna extends Fase{
 
@@ -11,7 +11,7 @@ public class FaseDiurna extends Fase{
         super();
     }
 
-    public void ejecutar(AccionDiurna comando) {
+    public void ejecutar(Accion comando) {
         comando.execute();
     }
 
