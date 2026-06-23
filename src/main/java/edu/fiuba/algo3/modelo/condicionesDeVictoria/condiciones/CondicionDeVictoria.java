@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
+import edu.fiuba.algo3.modelo.excepciones.SinJugadoresException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
 import java.util.List;
@@ -10,6 +11,9 @@ public abstract class CondicionDeVictoria {
     private final List<Jugador> jugadores;
 
     protected CondicionDeVictoria(List<Jugador> jugadores){
+        if(jugadores.isEmpty()){
+            throw new SinJugadoresException();
+        }
         this.jugadores = jugadores;
     }
 
