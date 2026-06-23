@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores;
 
 public interface Ganador {
-    String anunciar();
+    void anunciar();
 }

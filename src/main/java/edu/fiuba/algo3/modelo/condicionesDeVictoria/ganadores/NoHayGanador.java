@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores;
 
 public class NoHayGanador implements Ganador {
     @Override
-    public String anunciar() {
-        return "";
+    public void anunciar() {
+        // TODO: ANUNCIAR EN LA VISTA
     }
 }
