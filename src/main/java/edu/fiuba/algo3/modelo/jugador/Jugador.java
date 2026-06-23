@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.jugador;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.Candidato;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
@@ -24,6 +25,10 @@ public class Jugador {
         }
 
         throw new NoVisibleException();
+    }
+
+    public void contarRol(CondicionDeVictoria condicion){
+        estado.contar(condicion, rol);
     }
 
     public Rol verBando(Jugador otroJugador){

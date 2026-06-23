@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.jugador;
 
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoNoPuedeVotarException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
@@ -34,6 +35,9 @@ public class Muerto implements Estado {
     public void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol) {
         throw new JugadorMuertoNoPuedeVotarException();
     }
+
+    @Override
+    public void contar(CondicionDeVictoria condicion, Rol rol) {}
 
     @Override
     public boolean estaVivo(){ return false; }

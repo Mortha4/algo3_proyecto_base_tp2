@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.roles;
 import edu.fiuba.algo3.modelo.acciones.*;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -14,6 +15,11 @@ public class Mafioso extends Rol {
     @Override
     public Rol aceptar(Visitante visitante) {
         return visitante.visitar(this);
+    }
+
+    @Override
+    public void contarRol(CondicionDeVictoria condicion) {
+        condicion.contar(this);
     }
 
     @Override

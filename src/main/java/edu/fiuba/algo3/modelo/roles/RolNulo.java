@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.roles;
 
 import edu.fiuba.algo3.modelo.acciones.AccionDiurna;
 import edu.fiuba.algo3.modelo.acciones.AccionNocturna;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.excepciones.RolNuloException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
@@ -12,6 +13,10 @@ public class RolNulo extends Rol {
     @Override
     public Rol aceptar(Visitante visitante) {
         throw new RolNuloException();
+    }
+
+    public void contarRol(CondicionDeVictoria condicion) {
+        condicion.contar(this);
     }
 
     @Override
