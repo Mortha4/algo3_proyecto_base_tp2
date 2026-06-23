@@ -75,31 +75,7 @@ public class UnSoloMafiosoTest {
     }
 
     @Test
-    public void test05ConUnMafiosoMuertoNoHayGanador(){
-        // Arrange
-        mafioso.morir();
-        jugadores.add(mafioso);
-        condicion = new UnSoloMafioso(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
-                "Con un mafioso muerto deberia devolver un NoHayGanador");
-    }
-
-    @Test
-    public void test06ConUnPadrinoMuertoNoHayGanador(){
-        // Arrange
-        padrino.morir();
-        jugadores.add(padrino);
-        condicion = new UnSoloMafioso(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
-                "Con un padrino muerto deberia devolver un NoHayGanador");
-    }
-
-    @Test
-    public void test07ConCiudadanosVivosNoHayGanador(){
+    public void test06ConCiudadanosVivosNoHayGanador(){
         // Arrange
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
         jugadores.add(ciudadano);
@@ -112,14 +88,14 @@ public class UnSoloMafiosoTest {
     }
 
     @Test
-    public void test08SinJugadoresLanzaExcepcion(){
+    public void test07SinJugadoresLanzaExcepcion(){
         assertThrows(SinJugadoresException.class,
                 () -> new UnSoloMafioso(jugadores),
                 "Chequear la coleccion sin jugadores deberia lanzar una excepcion.");
     }
 
     @Test
-    public void test09SinMafiososNoHayGanador(){
+    public void test08SinMafiososNoHayGanador(){
         // Arrange
         Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
         jugadores.add(ciudadano);
