@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVicto
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoNoPuedeVotarException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
