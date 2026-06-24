@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.jugador;
+import edu.fiuba.algo3.modelo.acciones.Nada;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.roles.Rol;
@@ -13,7 +14,7 @@ public class Vivo implements Estado {
     }
 
     public void accion(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol){
-        faseNocturna.ejecutarComando(rol.accion(faseNocturna, ejecutor, objetivo));
+        faseNocturna.ejecutar(rol.accion(faseNocturna, ejecutor, objetivo));
     }
 
     public void accion(FaseDiurna fase, Jugador ejecutor, Jugador objetivo, Rol rol){
@@ -28,6 +29,11 @@ public class Vivo implements Estado {
     @Override
     public void contar(CondicionDeVictoria condicion, Rol rol) {
         rol.contarRol(condicion);
+    }
+
+    @Override
+    public void noActuar(Fase fase, Jugador jugador) {
+        fase.ejecutar(new Nada());
     }
 
     public boolean estaVivo(){return true;}

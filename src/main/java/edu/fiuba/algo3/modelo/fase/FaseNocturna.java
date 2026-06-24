@@ -28,7 +28,7 @@ public class FaseNocturna extends Fase {
         this.ultimoInvestigado = ultimoInvestigado;
     }
 
-    public void ejecutarComando(Accion comando) {
+    public void ejecutar(Accion comando) {
         comando.execute();
     }
 

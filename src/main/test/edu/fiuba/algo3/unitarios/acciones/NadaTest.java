@@ -55,8 +55,8 @@ public class NadaTest {
         Votar votar = new Votar(fase, mafioso, ciudadano);
 
         // Act
-        fase.ejecutarComando(nada);
-        fase.ejecutarComando(votar);
+        fase.ejecutar(nada);
+        fase.ejecutar(votar);
         fase.finalizar();
 
         // Assert

@@ -166,7 +166,7 @@ public class VotarTest {
         Votar votar = new Votar(faseNocturna, mafioso1, ciudadano1);
 
         // Act
-        faseNocturna.ejecutarComando(votar);
+        faseNocturna.ejecutar(votar);
         faseNocturna.finalizar();
 
         // Assert

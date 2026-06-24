@@ -71,7 +71,7 @@ public class VotarPrioritarioTest {
         VotarPrioritario votoPrioritario = new VotarPrioritario(fase, padrino, ciudadano1);
 
         // Act
-        fase.ejecutarComando(votoPrioritario);
+        fase.ejecutar(votoPrioritario);
         fase.finalizar();
 
         // Assert

@@ -50,7 +50,7 @@ public class VotarNocturnoTest {
         VotarNocturno votar = new VotarNocturno(fase, mafioso1, ciudadano);
 
         // Act
-        fase.ejecutarComando(votar);
+        fase.ejecutar(votar);
         fase.finalizar();
 
         // Assert
