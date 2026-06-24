@@ -34,6 +34,7 @@
       <version>${javafx-version}</version>
     </dependency>
 
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
@@ -57,7 +58,16 @@
       <artifactId>slf4j-simple</artifactId>
       <version>1.7.30</version>
     </dependency>
+
+
+
+
   </dependencies>
+
+
+
+
+
   <profiles>
     <profile>
       <id>package</id>

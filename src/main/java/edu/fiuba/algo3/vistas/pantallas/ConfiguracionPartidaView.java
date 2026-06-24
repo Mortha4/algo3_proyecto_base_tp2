@@ -12,10 +12,8 @@ import javafx.stage.Stage;
 
 public class ConfiguracionPartidaView extends StackPane {
 
-    private final Stage stage;
 
-    public ConfiguracionPartidaView(Stage stage) {
-        this.stage = stage;
+    public ConfiguracionPartidaView() {
 
 
         ImageView background = new ImageView(new Image("/menuConfig.png"));
@@ -60,7 +58,6 @@ public class ConfiguracionPartidaView extends StackPane {
         loyout.getChildren().addAll(espaciador,menuBox,roles,opciones);
 
 
-        // Agregar directamente a THIS (que ya es el StackPane raíz)
         this.getChildren().addAll(background,loyout);
     }
 }
