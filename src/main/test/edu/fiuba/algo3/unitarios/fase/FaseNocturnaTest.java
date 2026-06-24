@@ -161,4 +161,11 @@ public class FaseNocturnaTest {
                 () -> detective.accion(fase, ciudadano2),
                 "Construyendose una fase desde un FaseNocturnaData, no deberia permitir investigar al ultimoInvestigado");
     }
+
+    @Test
+    public void test11unJugadorPuedeElegirNoActuar(){
+        // Act y Assert
+        assertDoesNotThrow(() -> ciudadano1.noActuar(fase),
+                "Cuando un jugador elige NoActuar, no deberia lanzar una excepcion.");
+    }
 }

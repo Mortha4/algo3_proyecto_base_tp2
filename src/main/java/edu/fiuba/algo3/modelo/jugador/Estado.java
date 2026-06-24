@@ -11,4 +11,5 @@ public interface Estado {
     void accion(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol);
     void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol);
     void contar(CondicionDeVictoria condicion, Rol rol);
+    void noActuar(Fase fase, Jugador jugador);
 }
