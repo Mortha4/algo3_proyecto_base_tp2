@@ -79,6 +79,10 @@ public class Jugador {
         estado.noActuar(fase, this);
     }
 
+    public void nominar(Fase fase, Jugador nominado) {
+        estado.nominar(fase, this, nominado);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

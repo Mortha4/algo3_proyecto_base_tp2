@@ -1,12 +1,15 @@
 package edu.fiuba.algo3.unitarios.acciones;
 
+import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.acciones.Nada;
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,11 +17,19 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NadaTest {
+    private Jugador ciudadano;
+    private Jugador mafioso;
+    private Accion nada;
+
+    @BeforeEach
+    public void arrange(){
+        ciudadano = new Jugador(new Ciudadano(), "ciudadano");
+        mafioso =  new Jugador(new Mafioso(), "mafioso");
+        nada = new Nada();
+    }
+
     @Test
     public void test01ExecuteNoRealizaNingunaAccion() {
-        // Arrange
-        Nada nada = new Nada();
-
         // Act y Assert
         assertDoesNotThrow(nada::execute,
                 "La acción Nada no debería lanzar excepciones al ejecutarse");
@@ -28,9 +39,7 @@ public class NadaTest {
     public void test02NadaNoInterfiereConUnaVotacionDiurna() {
         // Arrange
         FaseDiurna fase = new FaseDiurna();
-        Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
-        Nada nada = new Nada();
+        fase.nominar(ciudadano, mafioso);
         Votar votar = new Votar(fase, ciudadano, mafioso);
 
         // Act
@@ -49,9 +58,7 @@ public class NadaTest {
     public void test03NadaNoInterfiereConUnaVotacionNocturna() {
         // Arrange
         FaseNocturna fase = new FaseNocturna();
-        Jugador ciudadano = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
-        Nada nada = new Nada();
+        fase.ejecutar(new Nominar(fase, mafioso, ciudadano));
         Votar votar = new Votar(fase, mafioso, ciudadano);
 
         // Act

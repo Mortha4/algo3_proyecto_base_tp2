@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.jugador;
 import edu.fiuba.algo3.modelo.acciones.Nada;
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.roles.Rol;
@@ -34,6 +35,11 @@ public class Vivo implements Estado {
     @Override
     public void noActuar(Fase fase, Jugador jugador) {
         fase.ejecutar(new Nada());
+    }
+
+    @Override
+    public void nominar(Fase fase, Jugador nominante, Jugador nominado) {
+        fase.ejecutar(new Nominar(fase, nominante, nominado));
     }
 
     public boolean estaVivo(){return true;}
