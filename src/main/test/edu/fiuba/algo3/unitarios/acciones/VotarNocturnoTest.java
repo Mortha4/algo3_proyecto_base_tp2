@@ -71,7 +71,7 @@ public class VotarNocturnoTest {
     @Test
     public void test03UnMafiosoNoPuedeVotarAOtroMafiosoDuranteLaNoche() {
         // Act y Assert
-        assertThrows(NoVotableException.class,
+        assertThrows(VotacionEntreMafiososException.class,
                 () -> new VotarNocturno(fase, mafioso1, mafioso2),
                 "Un mafioso no debería poder votar a otro mafioso durante la noche");
     }
