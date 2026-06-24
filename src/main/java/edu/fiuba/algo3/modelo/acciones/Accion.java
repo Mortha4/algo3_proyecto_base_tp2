@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.acciones;
 
-public interface AccionDiurna {
+public interface Accion {
     void execute();
 }

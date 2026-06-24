@@ -34,8 +34,8 @@ public class FaseNocturnaTest {
     @Test
     public void test01NoSeEliminaNingunJugadorEnCasoDeEmpate(){
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        mafioso2.accionNocturna(fase, medico);
+        mafioso1.accion(fase, ciudadano1);
+        mafioso2.accion(fase, medico);
 
         // Assert
         assertThrows(NoHuboDecisionException.class, fase::finalizar,
@@ -45,8 +45,8 @@ public class FaseNocturnaTest {
     @Test
     public void test02ElVotoDelPadrinoDesempataLaVotacion(){
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        padrino.accionNocturna(fase, medico);
+        mafioso1.accion(fase, ciudadano1);
+        padrino.accion(fase, medico);
         fase.finalizar();
 
         // Assert
@@ -57,8 +57,8 @@ public class FaseNocturnaTest {
     @Test
     public void test03SeEliminaAlJugadorMasVotadoCuandoNoHayEmpate(){
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        mafioso2.accionNocturna(fase, ciudadano1);
+        mafioso1.accion(fase, ciudadano1);
+        mafioso2.accion(fase, ciudadano1);
         fase.finalizar();
 
         // Assert
@@ -73,7 +73,7 @@ public class FaseNocturnaTest {
 
         // Assert
         assertThrows(JugadorMuertoException.class,
-                () -> mafioso1.accionNocturna(fase, ciudadano1),
+                () -> mafioso1.accion(fase, ciudadano1),
                 "Un mafioso muerto no debería poder votar");
     }
 
@@ -83,10 +83,10 @@ public class FaseNocturnaTest {
         mafioso1.morir();
 
         try {
-            mafioso1.accionNocturna(fase, ciudadano1);
+            mafioso1.accion(fase, ciudadano1);
         } catch(JugadorMuertoException ignored){}
 
-        mafioso2.accionNocturna(fase, ciudadano2);
+        mafioso2.accion(fase, ciudadano2);
 
         fase.finalizar();
 
@@ -101,10 +101,10 @@ public class FaseNocturnaTest {
         medico.morir();
 
         try{
-            medico.accionNocturna(fase, ciudadano1);
+            medico.accion(fase, ciudadano1);
         }catch (JugadorMuertoException ignored){}
 
-        mafioso1.accionNocturna(fase, ciudadano1);
+        mafioso1.accion(fase, ciudadano1);
 
         fase.finalizar();
 
@@ -119,10 +119,10 @@ public class FaseNocturnaTest {
         padrino.morir();
 
         try{
-            padrino.accionNocturna(fase, ciudadano1);
+            padrino.accion(fase, ciudadano1);
         }catch (JugadorMuertoException ignored){}
 
-        mafioso1.accionNocturna(fase, ciudadano2);
+        mafioso1.accion(fase, ciudadano2);
 
         fase.finalizar();
 
@@ -138,7 +138,7 @@ public class FaseNocturnaTest {
 
         // Assert
         assertThrows(JugadorMuertoException.class,
-                () -> detective.accionNocturna(fase, ciudadano1),
+                () -> detective.accion(fase, ciudadano1),
                 "Un detective muerto no debería poder investigar");
     }
 
@@ -148,7 +148,7 @@ public class FaseNocturnaTest {
         fase = new FaseNocturna(data);
 
         assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
-                () -> medico.accionNocturna(fase, ciudadano1),
+                () -> medico.accion(fase, ciudadano1),
                 "Construyendose una fase desde un FaseNocturnaData, no deberia permitir proteger al ultimoprotegido");
     }
 
@@ -158,7 +158,7 @@ public class FaseNocturnaTest {
         fase = new FaseNocturna(data);
 
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
-                () -> detective.accionNocturna(fase, ciudadano2),
+                () -> detective.accion(fase, ciudadano2),
                 "Construyendose una fase desde un FaseNocturnaData, no deberia permitir investigar al ultimoInvestigado");
     }
 }

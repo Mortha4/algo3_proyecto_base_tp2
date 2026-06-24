@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.roles;
 import edu.fiuba.algo3.modelo.acciones.*;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -17,12 +18,17 @@ public class Ciudadano extends Rol {
     }
 
     @Override
-    public AccionNocturna accionNocturna(FaseNocturna fase, Jugador base, Jugador objetivo) {
+    public void contarRol(CondicionDeVictoria condicion) {
+        condicion.contar(this);
+    }
+
+    @Override
+    public Accion accion(FaseNocturna fase, Jugador base, Jugador objetivo) {
         return new Nada();
     }
 
     @Override
-    public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
         return new Nada();
     }
 }

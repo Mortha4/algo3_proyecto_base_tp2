@@ -346,7 +346,7 @@ public class Entrega1Test {
         FaseNocturna fase = new FaseNocturna();
 
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
+        mafioso1.accion(fase, ciudadano1);
         fase.finalizar();
 
         // Assert
@@ -365,7 +365,7 @@ public class Entrega1Test {
 
         // Act y Assert
 
-        assertThrows(ObjetivoMuertoException.class, () -> mafioso1.accionNocturna(fase, ciudadano1),
+        assertThrows(ObjetivoMuertoException.class, () -> mafioso1.accion(fase, ciudadano1),
                 "La mafia seleccionó una víctima invalida");
     }
 
@@ -378,8 +378,8 @@ public class Entrega1Test {
         FaseNocturna fase = new FaseNocturna();
 
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        medico.accionNocturna(fase, ciudadano1);
+        mafioso1.accion(fase, ciudadano1);
+        medico.accion(fase, ciudadano1);
 
         // Assert
         assertThrows(ObjetivoProtegidoException.class, fase::finalizar,
@@ -396,8 +396,8 @@ public class Entrega1Test {
         FaseNocturna fase = new FaseNocturna();
 
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        medico.accionNocturna(fase, ciudadano2);
+        mafioso1.accion(fase, ciudadano1);
+        medico.accion(fase, ciudadano2);
         fase.finalizar();
 
         // Assert
@@ -413,8 +413,8 @@ public class Entrega1Test {
         FaseNocturna fase = new FaseNocturna();
 
         // Act y Assert
-        assertThrows(VotarMismoRolException.class,
-                () -> mafioso1.accionNocturna(fase, mafioso2),
+        assertThrows(VotacionEntreMafiososException.class,
+                () -> mafioso1.accion(fase, mafioso2),
                 "La mafia no debería poder eliminar a otro mafioso");
     }
 }

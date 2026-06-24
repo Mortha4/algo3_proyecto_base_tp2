@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.fase;
-import edu.fiuba.algo3.modelo.acciones.AccionNocturna;
+import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Rol;
@@ -28,10 +28,9 @@ public class FaseNocturna extends Fase {
         this.ultimoInvestigado = ultimoInvestigado;
     }
 
-    public void ejecutar(AccionNocturna comando) {
+    public void ejecutarComando(Accion comando) {
         comando.execute();
     }
-
 
     public void registrarVotoPrioritario(Jugador votante, Jugador objetivo) {
         this.votacion.registrarVotoPrioritario(votante, objetivo);
@@ -54,7 +53,7 @@ public class FaseNocturna extends Fase {
     }
 
     @Override
-    public void otrasExcepciones(Candidato objetivo) {
+    protected void otrasExcepciones(Candidato objetivo) {
         if (objetivo.equals(this.protegido)) {
             throw new ObjetivoProtegidoException();
         }

@@ -30,24 +30,24 @@ public class FaseNocturnaDataTest {
 
     @Test
     public void test01guardaCorrectamenteElProtegido(){
-        medico.accionNocturna(fase, ciudadano1);
+        medico.accion(fase, ciudadano1);
         FaseNocturnaData data = fase.exportarInfo();
         fase2 = new FaseNocturna(data);
 
         assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
-                () -> medico.accionNocturna(fase2, ciudadano1),
+                () -> medico.accion(fase2, ciudadano1),
                 "Se deberia guardar correctamente el protegido");
     }
 
     @Test
     public void test02guardaCorrectamenteElInvestigado(){
-        detective.accionNocturna(fase, ciudadano2);
+        detective.accion(fase, ciudadano2);
         FaseNocturnaData data = fase.exportarInfo();
         fase2 = new FaseNocturna(data);
 
 
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
-                () -> detective.accionNocturna(fase2, ciudadano2) ,
+                () -> detective.accion(fase2, ciudadano2) ,
                 "Se deberia guardar correctamente el investigado");
     }
 }

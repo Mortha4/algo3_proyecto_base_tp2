@@ -18,7 +18,6 @@ public class PartidaTest {
         Partida partida = new Partida(nombresDeJugadores);
 
         // Act
-        partida.repartirCartas();
         List<Jugador> jugadores = partida.getJugadores();
 
         // Assert
@@ -36,7 +35,6 @@ public class PartidaTest {
         Partida partida = new Partida(nombresDeJugadores);
 
         // Act
-        partida.repartirCartas();
         List<Jugador> jugadores = partida.getJugadores();
 
         // Assert
@@ -54,7 +52,6 @@ public class PartidaTest {
         Partida partida = new Partida(nombresDeJugadores);
 
         // Act
-        partida.repartirCartas();
         List<Jugador> jugadores = partida.getJugadores();
 
         // Assert

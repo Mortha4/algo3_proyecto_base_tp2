@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.jugador;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.Candidato;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
@@ -26,6 +27,10 @@ public class Jugador {
         throw new NoVisibleException();
     }
 
+    public void contarRol(CondicionDeVictoria condicion){
+        estado.contar(condicion, rol);
+    }
+
     public Rol verBando(Jugador otroJugador){
         return otroJugador.compararCon(this.rol);
     }
@@ -50,8 +55,8 @@ public class Jugador {
         return this.estado.estaVivo();
     }
 
-    public void accionNocturna(FaseNocturna faseNocturna, Jugador objetivo){
-        estado.accionNocturna(faseNocturna, this, objetivo, rol);
+    public void accion(FaseNocturna faseNocturna, Jugador objetivo){
+        estado.accion(faseNocturna, this, objetivo, rol);
     }
 
     public Candidato crearCandidato(Jugador otroJugador){
@@ -62,8 +67,8 @@ public class Jugador {
         return estado.devolverCandidato(jugador);
     }
 
-    public void accionDiurna(FaseDiurna faseDiurna, Jugador objetivo){
-        estado.accionDiurna(faseDiurna, this, objetivo, rol);
+    public void accion(FaseDiurna faseDiurna, Jugador objetivo){
+        estado.accion(faseDiurna, this, objetivo, rol);
     }
 
     public void votar(FaseDiurna fase, Jugador votado) {

@@ -85,8 +85,8 @@ public class MedicoTest {
         FaseNocturna fase = new FaseNocturna();
 
         // Act
-        medico.accionNocturna(fase, ciudadano);
-        mafioso.accionNocturna(fase, ciudadano);
+        medico.accion(fase, ciudadano);
+        mafioso.accion(fase, ciudadano);
 
         // Assert
         assertThrows(ObjetivoProtegidoException.class, fase::finalizar,

@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.modelo.jugador;
 
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoNoPuedeVotarException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
@@ -21,12 +21,12 @@ public class Muerto implements Estado {
     }
 
     @Override
-    public void accionNocturna(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol) {
+    public void accion(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol) {
         throw new JugadorMuertoException();
     }
 
     @Override
-    public void accionDiurna(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol) {
+    public void accion(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol) {
         throw new JugadorMuertoException();
     }
 
@@ -34,6 +34,9 @@ public class Muerto implements Estado {
     public void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol) {
         throw new JugadorMuertoNoPuedeVotarException();
     }
+
+    @Override
+    public void contar(CondicionDeVictoria condicion, Rol rol) {}
 
     @Override
     public boolean estaVivo(){ return false; }
