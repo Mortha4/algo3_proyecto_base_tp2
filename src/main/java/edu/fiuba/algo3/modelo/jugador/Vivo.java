@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.modelo.jugador;
-import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.roles.Rol;
 
@@ -18,6 +17,14 @@ public class Vivo implements Estado {
 
     public void accionDiurna(FaseDiurna fase, Jugador ejecutor, Jugador objetivo, Rol rol){
         fase.ejecutar(rol.accionDiurna(fase, ejecutor, objetivo));
+    }
+
+    @Override
+    public void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol) {
+
+
+
+        fase.ejecutar(rol.votar(fase, votante, votado));
     }
 
     public boolean estaVivo(){return true;}

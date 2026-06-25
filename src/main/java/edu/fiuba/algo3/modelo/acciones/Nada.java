@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.modelo.acciones;
 
-public class Nada implements AccionNocturna {
+public class Nada implements AccionNocturna, AccionDiurna {
 
     @Override
-    public void execute() {
-        // No hace nada
-    }
+    public void execute() {}
 }

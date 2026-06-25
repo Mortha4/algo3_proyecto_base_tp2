@@ -14,9 +14,17 @@ public class FaseNocturna extends Fase {
         super();
     }
 
-    public FaseNocturna(Jugador ultimoInvestigado, Jugador ultimoProtegido) {
+    public FaseNocturna(FaseNocturnaData info) {
         super();
+        info.darProtegidoPara(this);
+        info.darInvestigadoPara(this);
+    }
+
+    public void setUltimoProtegido(Jugador ultimoProtegido){
         this.ultimoProtegido = ultimoProtegido;
+    }
+
+    public void setUltimoInvestigado(Jugador ultimoInvestigado){
         this.ultimoInvestigado = ultimoInvestigado;
     }
 
@@ -31,7 +39,7 @@ public class FaseNocturna extends Fase {
 
     public void proteger(Jugador objetivo) {
         if (objetivo.equals(ultimoProtegido)) {
-            throw new NoSePuedeProtegerDosVecesSeguidas();
+            throw new NoSePuedeProtegerDosVecesSeguidasException();
         }
         this.protegido = new Candidato(objetivo);
         ultimoProtegido = objetivo;
@@ -39,7 +47,7 @@ public class FaseNocturna extends Fase {
 
     public Rol investigar(Jugador base, Jugador objetivo) {
         if (objetivo.equals(ultimoInvestigado)) {
-            throw new NoSePuedeInvestigarDosVecesSeguidas();
+            throw new NoSePuedeInvestigarDosVecesSeguidasException();
         }
         ultimoInvestigado = objetivo;
         return base.verBando(objetivo);
@@ -50,5 +58,9 @@ public class FaseNocturna extends Fase {
         if (objetivo.equals(this.protegido)) {
             throw new ObjetivoProtegidoException();
         }
+    }
+
+    public FaseNocturnaData exportarInfo(){
+        return new FaseNocturnaData(ultimoProtegido, ultimoInvestigado, votacion.obtenerMasVotado());
     }
 }

@@ -7,7 +7,15 @@ public class FaseDiurna extends Fase{
         super();
     }
 
+    public FaseDiurna(FaseDiurnaData info) {
+        super();
+    }
+
     public void ejecutar(AccionDiurna comando) {
         comando.execute();
+    }
+
+    public FaseDiurnaData exportarInfo(){
+        return new FaseDiurnaData(votacion.obtenerMasVotado());
     }
 }
