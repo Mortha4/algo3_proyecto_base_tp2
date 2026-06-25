@@ -13,6 +13,13 @@ public class Mazo {
         rellenar(cantidadDeCartas);
     }
 
+    public Mazo(int cantidadDeCartas, ConfiguracionDeMazo configuracion) {
+        this.configuracion = configuracion;
+        crearRoles();
+        rellenar(cantidadDeCartas);
+    }
+
+
     public Rol agarrarCarta(){
         try{
             return cartas.remove(0);
