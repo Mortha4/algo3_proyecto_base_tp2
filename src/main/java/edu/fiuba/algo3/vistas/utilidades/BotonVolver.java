@@ -46,5 +46,13 @@ public class BotonVolver extends Button {
 
     }
 
+    public void setOnActionGuardar(Runnable accion) {
+        this.setOnAction(e -> {
+            if (accion != null) {
+                accion.run();
+            }
+        });
+    }
+
 
 }

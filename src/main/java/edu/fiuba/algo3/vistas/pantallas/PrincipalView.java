@@ -18,7 +18,7 @@ public class PrincipalView extends StackPane {
         background.setFitHeight(720);
         background.setPreserveRatio(false);
 
-        // Contenedor de botones
+
         VBox menuBox = new VBox(20);
         menuBox.setAlignment(Pos.CENTER);
         menuBox.setMaxSize(300, 200);
@@ -31,7 +31,7 @@ public class PrincipalView extends StackPane {
         btnJugar.setStyle(btnStyle);
 
         btnJugar.setOnAction(e -> {
-            App.cambiarVentana(new ConfiguracionPartidaView());
+            App.cambiarVentana(new SeleccionJugadoresView());
         });
 
 
@@ -41,7 +41,6 @@ public class PrincipalView extends StackPane {
         btnSalir.setStyle(btnStyle);
 
         btnSalir.setOnAction(e -> Platform.exit());
-
 
 
         menuBox.getChildren().addAll(btnJugar, btnSalir);

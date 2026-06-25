@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.vistas.pantallas.ConfiguracionPartidaView;
 import edu.fiuba.algo3.vistas.pantallas.MainLayout;
+import edu.fiuba.algo3.vistas.pantallas.PrincipalView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -12,10 +13,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        root.setView(new MainLayout());
+        root.setView(new PrincipalView());
 
         Scene escena = new Scene(root, 1920, 720);
         stage.setScene(escena);
+
+
         stage.show();
     }
 

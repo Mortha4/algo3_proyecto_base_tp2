@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
+import edu.fiuba.algo3.vistas.App;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
