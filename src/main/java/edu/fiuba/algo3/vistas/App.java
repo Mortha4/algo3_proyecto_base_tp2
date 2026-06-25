@@ -20,6 +20,7 @@ public class App extends Application {
     }
 
     public static void cambiarVentana(javafx.scene.Node nuevaVista) {
+
         root.setView(nuevaVista);
     }
 
