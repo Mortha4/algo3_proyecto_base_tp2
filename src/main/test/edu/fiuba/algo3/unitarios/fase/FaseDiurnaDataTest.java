@@ -1,15 +1,11 @@
 package edu.fiuba.algo3.unitarios.fase;
 
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidasException;
-import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
-import edu.fiuba.algo3.modelo.fase.FaseDiurnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Detective;
 import edu.fiuba.algo3.modelo.roles.Medico;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

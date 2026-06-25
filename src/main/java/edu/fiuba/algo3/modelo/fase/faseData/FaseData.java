@@ -1,4 +1,6 @@
-package edu.fiuba.algo3.modelo.fase;
+package edu.fiuba.algo3.modelo.fase.faseData;
+
+import edu.fiuba.algo3.modelo.fase.Candidato;
 
 public abstract class FaseData {
     protected final Candidato masVotado;

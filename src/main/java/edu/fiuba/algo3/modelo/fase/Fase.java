@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.fase;
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.acciones.Accion;
+import edu.fiuba.algo3.modelo.fase.faseData.FaseData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public abstract class Fase {

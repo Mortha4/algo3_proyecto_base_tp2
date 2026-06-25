@@ -1,7 +1,9 @@
-package edu.fiuba.algo3.modelo.fase;
+package edu.fiuba.algo3.modelo.fase.faseData;
+import edu.fiuba.algo3.modelo.fase.Candidato;
+import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
-public class FaseNocturnaData extends FaseData{
+public class FaseNocturnaData extends FaseData {
     private final Jugador protegido;
     private final Jugador investigado;
 
