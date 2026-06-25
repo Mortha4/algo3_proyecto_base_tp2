@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.unitarios.roles;
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -86,6 +87,7 @@ public class MedicoTest {
 
         // Act
         medico.accion(fase, ciudadano);
+        fase.ejecutar(new Nominar(fase, mafioso, ciudadano));
         mafioso.accion(fase, ciudadano);
 
         // Assert

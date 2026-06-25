@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.unitarios.fase;
 
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.excepciones.*;
@@ -31,9 +32,17 @@ public class FaseNocturnaTest {
         fase = new FaseNocturna();
     }
 
+    public void nominarJugadores(Jugador ...jugadores){
+        Jugador nominador = new Jugador(new Ciudadano(), "nominador");
+        for(Jugador jugador: jugadores){
+            fase.ejecutar(new Nominar(fase, nominador, jugador));
+        }
+    }
+
     @Test
     public void test01NoSeEliminaNingunJugadorEnCasoDeEmpate(){
         // Act
+        nominarJugadores(ciudadano1, medico);
         mafioso1.accion(fase, ciudadano1);
         mafioso2.accion(fase, medico);
 
@@ -45,6 +54,7 @@ public class FaseNocturnaTest {
     @Test
     public void test02ElVotoDelPadrinoDesempataLaVotacion(){
         // Act
+        nominarJugadores(ciudadano1, medico);
         mafioso1.accion(fase, ciudadano1);
         padrino.accion(fase, medico);
         fase.finalizar();
@@ -57,6 +67,7 @@ public class FaseNocturnaTest {
     @Test
     public void test03SeEliminaAlJugadorMasVotadoCuandoNoHayEmpate(){
         // Act
+        nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
         mafioso2.accion(fase, ciudadano1);
         fase.finalizar();
@@ -86,6 +97,7 @@ public class FaseNocturnaTest {
             mafioso1.accion(fase, ciudadano1);
         } catch(JugadorMuertoException ignored){}
 
+        nominarJugadores(ciudadano2);
         mafioso2.accion(fase, ciudadano2);
 
         fase.finalizar();
@@ -104,6 +116,7 @@ public class FaseNocturnaTest {
             medico.accion(fase, ciudadano1);
         }catch (JugadorMuertoException ignored){}
 
+        nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
 
         fase.finalizar();
@@ -122,8 +135,8 @@ public class FaseNocturnaTest {
             padrino.accion(fase, ciudadano1);
         }catch (JugadorMuertoException ignored){}
 
+        nominarJugadores(ciudadano2);
         mafioso1.accion(fase, ciudadano2);
-
         fase.finalizar();
 
         // Assert
@@ -160,5 +173,12 @@ public class FaseNocturnaTest {
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
                 () -> detective.accion(fase, ciudadano2),
                 "Construyendose una fase desde un FaseNocturnaData, no deberia permitir investigar al ultimoInvestigado");
+    }
+
+    @Test
+    public void test11unJugadorPuedeElegirNoActuar(){
+        // Act y Assert
+        assertDoesNotThrow(() -> ciudadano1.noActuar(fase),
+                "Cuando un jugador elige NoActuar, no deberia lanzar una excepcion.");
     }
 }

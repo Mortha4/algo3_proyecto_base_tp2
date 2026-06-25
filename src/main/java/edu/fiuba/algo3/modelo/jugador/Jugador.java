@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.jugador;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.Candidato;
+import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.excepciones.NoVisibleException;
@@ -73,6 +74,13 @@ public class Jugador {
 
     public void votar(FaseDiurna fase, Jugador votado) {
         estado.votar(fase, this, votado, rol);
+    }
+    public void noActuar(Fase fase){
+        estado.noActuar(fase, this);
+    }
+
+    public void nominar(Fase fase, Jugador nominado) {
+        estado.nominar(fase, this, nominado);
     }
 
     @Override

@@ -1,20 +1,42 @@
 package edu.fiuba.algo3.entrega_2;
 
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Entrega2Test {
+    private Jugador ciudadano1;
+    private Jugador ciudadano2;
+    private Jugador ciudadano3;
+    private FaseDiurna fase;
+    private Detective detective;
+
+    @BeforeEach
+    public void arrange(){
+        ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
+        ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
+        ciudadano3 = new Jugador(new Ciudadano(), "ciudadano3");
+        fase = new FaseDiurna();
+        detective = new Detective();
+    }
+
+    public void nominarJugadores(Jugador ...jugadores){
+        Jugador nominador = new Jugador(new Ciudadano(), "nominador");
+        for(Jugador jugador: jugadores){
+            fase.ejecutar(new Nominar(fase, nominador, jugador));
+        }
+    }
 
     @Test
     public void test01DetectivePuedeIdentificarAOtroDetective(){
         // Arrange
-        Detective detective = new Detective();
         Detective otroDetective = new Detective();
 
         // Act
@@ -28,7 +50,6 @@ public class Entrega2Test {
     @Test
     public void test02DetectivePuedeIdentificarAUnMedico(){
         // Arrange
-        Detective detective = new Detective();
         Medico medico = new Medico();
 
         // Act
@@ -42,7 +63,6 @@ public class Entrega2Test {
     @Test
     public void test03DetectivePuedeIdentificarAUnCiudadano(){
         // Arrange
-        Detective detective = new Detective();
         Ciudadano ciudadano = new Ciudadano();
 
         // Act
@@ -131,29 +151,19 @@ public class Entrega2Test {
     }
 
     @Test
-    public void test09NoSePuedeVotarAUnJugadorMuerto(){
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
-        FaseDiurna fase = new FaseDiurna();
-
-        // Act
+    public void test09NoSePuedeNominarAUnJugadorMuerto(){
         ciudadano1.morir();
 
         // Assert
         assertThrows(ObjetivoMuertoException.class,
-                () -> ciudadano2.votar(fase, ciudadano1),
+                () -> ciudadano2.nominar(fase, ciudadano1),
                 "No debería poder votarse a un jugador muerto");
     }
 
     @Test
     public void test10NoSeEliminaNingunJugadorEnCasoDeEmpate(){
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
-        FaseDiurna fase = new FaseDiurna();
-
         // Act
+        nominarJugadores(ciudadano1, ciudadano2);
         ciudadano1.votar(fase, ciudadano2);
         ciudadano2.votar(fase, ciudadano1);
 
@@ -165,13 +175,8 @@ public class Entrega2Test {
 
     @Test
     public void test11SeEliminaAlJugadorMasVotadoEnUnaVotacionValida(){
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
-        Jugador ciudadano3 = new Jugador(new Ciudadano(), "ciudadano3");
-        FaseDiurna fase = new FaseDiurna();
-
         // Act
+        nominarJugadores(ciudadano3, ciudadano2);
         ciudadano1.votar(fase, ciudadano3);
         ciudadano2.votar(fase, ciudadano3);
         ciudadano3.votar(fase, ciudadano2);
@@ -184,11 +189,6 @@ public class Entrega2Test {
 
     @Test
     public void test12UnJugadorMuertoNoPuedeVotar(){
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
-        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
-        FaseDiurna fase = new FaseDiurna();
-
         // Act
         ciudadano1.morir();
 
