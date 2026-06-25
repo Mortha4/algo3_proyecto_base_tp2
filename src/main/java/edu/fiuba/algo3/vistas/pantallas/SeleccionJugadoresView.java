@@ -41,7 +41,24 @@ public class SeleccionJugadoresView extends StackPane {
         btnContinuar.setOnAction(e -> {
             int cantidad = spinnerJugadores.getValue();
 
-            App.cambiarVentana(new RepartoRolesView(1,cantidad,controlador));
+            Runnable accionContinue = () -> {
+                App.cambiarVentana(new InicioDeRondaView(1,null,() -> {
+
+                    System.out.println("Iniciando ronda...");
+                    App.cambiarVentana(new InicioDeRondaView(2,null,() -> {
+
+                        System.out.println("ultimo");
+                        App.cambiarVentana(new FinDePartida("inserte ganador",() -> {
+
+                            App.cambiarVentana(new PrincipalView());
+                        }));
+                    }));
+                }));
+
+            };
+
+
+            App.cambiarVentana(new RevelarRol("inserte su rol",accionContinue));
         });
 
         btnConfigurarRoles.setOnAction(e -> App.cambiarVentana(new ConfiguracionPartidaView()));
