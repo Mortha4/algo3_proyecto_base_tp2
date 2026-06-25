@@ -35,8 +35,9 @@ public class BotonJugar extends Button {
 
     private void initEventosEfecto() {
 
-        String rutaSonido = getClass().getResource("/sounds/click1.wav").toExternalForm();
+        String rutaSonido = getClass().getResource("/sounds/switch7.wav").toExternalForm();
         AudioClip clip = new AudioClip(rutaSonido);
+
 
         DropShadow sombra = new DropShadow();
         sombra.setColor(Color.web("#d4af37"));
@@ -51,6 +52,7 @@ public class BotonJugar extends Button {
             this.setCursor(Cursor.HAND);
         });
 
+
         this.setOnMouseExited(e -> {
             vistaImagen.setEffect(null);
             vistaImagen.setScaleX(1);
@@ -59,6 +61,19 @@ public class BotonJugar extends Button {
 
         this.setOnMouseExited(e -> {
             vistaImagen.setEffect(null);
+        });
+    }
+
+    public void setOnActionConSonido(Runnable accion) {
+        this.setOnMouseClicked(e -> {
+            String rutaClick = getClass().getResource("/sounds/click1.wav").toExternalForm();
+            AudioClip clipClick = new AudioClip(rutaClick);
+            clipClick.play();
+
+
+            javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(javafx.util.Duration.millis(100));
+            delay.setOnFinished(event -> accion.run());
+            delay.play();
         });
     }
 

@@ -34,8 +34,11 @@ public class BotonExit extends Button {
 
     private void initEventosEfecto() {
 
-        String rutaSonido = getClass().getResource("/sounds/click1.wav").toExternalForm();
+        String rutaSonido = getClass().getResource("/sounds/switch7.wav").toExternalForm();
         AudioClip clip = new AudioClip(rutaSonido);
+
+        String rutaClick = getClass().getResource("/sounds/click1.wav").toExternalForm();
+        AudioClip clipClick = new AudioClip(rutaClick);
 
         DropShadow sombra = new DropShadow();
         sombra.setColor(Color.web("#d4af37"));
@@ -48,6 +51,10 @@ public class BotonExit extends Button {
             vistaImagen.setScaleY(1.05);
             clip.play();
             this.setCursor(Cursor.HAND);
+        });
+
+        this.setOnMouseClicked(e -> {
+            clipClick.play();
         });
 
         this.setOnMouseExited(e -> {

@@ -28,7 +28,7 @@ public class PrincipalView extends StackPane {
 
         BotonJugar btnJugar = new BotonJugar(350);
 
-        btnJugar.setOnAction(e -> {
+        btnJugar.setOnActionConSonido(()-> {
             App.cambiarVentana(new SeleccionJugadoresView());
         });
 

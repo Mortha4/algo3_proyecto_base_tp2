@@ -43,6 +43,8 @@ public class ConfiguracionPartidaView extends StackPane {
 
         btnSave.setOnActionGuardar(() -> {
             ejecutarGuardado();
+            App.cambiarVentana(new SeleccionJugadoresView());
+
         });
 
 
@@ -77,14 +79,12 @@ public class ConfiguracionPartidaView extends StackPane {
 
 
     private void ejecutarGuardado() {
-        int cantidadJugadores = btn1.getCantidad();
 
-        partida.instancia().crearPartida(cantidadJugadores);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Configuración Guardada");
         alert.setHeaderText(null);
-        alert.setContentText("La partida ha sido configurada con " + cantidadJugadores + " jugadores.");
+        alert.setContentText("Guardado exitoso");
 
 
         alert.showAndWait();
