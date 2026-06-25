@@ -15,8 +15,8 @@ public class MainLayout extends StackPane {
         background.setFitHeight(720);
         background.setPreserveRatio(false);
 
-        this.getChildren().addAll(background, contentArea);
-        setView(new ConfiguracionPartidaView());
+        this.getChildren().addAll(background,contentArea);
+        setView(new PrincipalView());
     }
 
 

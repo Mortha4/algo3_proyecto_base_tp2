@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
+import edu.fiuba.algo3.vistas.App;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -29,6 +30,10 @@ public class PrincipalView extends StackPane {
         Button btnJugar = new Button("Jugar");
         btnJugar.setStyle(btnStyle);
 
+        btnJugar.setOnAction(e -> {
+            App.cambiarVentana(new ConfiguracionPartidaView());
+        });
+
 
 
         Button btnSalir = new Button("Salir");
@@ -36,6 +41,8 @@ public class PrincipalView extends StackPane {
         btnSalir.setStyle(btnStyle);
 
         btnSalir.setOnAction(e -> Platform.exit());
+
+
 
         menuBox.getChildren().addAll(btnJugar, btnSalir);
 
