@@ -63,7 +63,7 @@ public class Juego extends Parent {
         HBox barraDeMensajes = new HBox(mensajes);
         barraDeMensajes.setAlignment(Pos.CENTER);
         barraDeMensajes.setPadding(new Insets(10));
-        barraDeMensajes.setStyle("-fx-border-color #cccccc");
+        barraDeMensajes.setStyle("-fx-border-color: #cccccc");
         
         VBox zona = new VBox(10,fila1,fila2, barraDeMensajes);
         zona.setPadding(new Insets(15));
