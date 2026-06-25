@@ -42,5 +42,10 @@ public class Vivo implements Estado {
         fase.ejecutar(new Nominar(fase, nominante, nominado));
     }
 
+    @Override
+    public void revelarRolPara(FaseDiurna fase, Jugador jugador) {
+        fase.setRevelado(jugador);
+    }
+
     public boolean estaVivo(){return true;}
 }
