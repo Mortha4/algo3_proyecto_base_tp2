@@ -19,6 +19,9 @@ public class RevelarRol extends VBox{
         Label textoRol = new Label("[" + rol + "]");
         textoRol.setStyle("-fx-text-fill: #e0921e; -fx-font-size: 28px; -fx-font-weight: bold;");
 
+        Label infoRol = new Label("Informacion de las habilidades del rol");
+        infoRol.setStyle("-fx-text-fill: #fff; -fx-font-size: 18px; -fx-font-weight: bold;");
+
         Button continuar = new Button("Continuar");
         continuar.setStyle(
             "-fx-background-color: #6aa84f;" +
@@ -28,7 +31,7 @@ public class RevelarRol extends VBox{
             "-fx-padding: 12 30 12 30;"
         );
         continuar.setOnAction(e -> alContinuar.run());
-        this.getChildren().addAll(texto, textoRol, continuar);
+        this.getChildren().addAll(texto, textoRol,infoRol, continuar);
     }
 
 }
