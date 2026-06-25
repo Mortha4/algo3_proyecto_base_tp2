@@ -44,6 +44,10 @@ public class Jugador {
         return otroJugador.tieneMismoRol(this.rol);
     }
 
+    public void revelarRolPara(FaseDiurna fase){
+        estado.revelarRolPara(fase, this);
+    }
+
     public boolean tieneMismoRol(Rol rol){
         return this.rol.equals(rol);
     }

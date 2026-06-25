@@ -27,7 +27,7 @@ public class Sheriff extends Rol {
     }
 
     @Override
-    public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
-        return new Nada();
+    public Accion accion(FaseDiurna fase, Jugador revelador, Jugador revelado) {
+        return new Revelar(fase, revelador, revelado);
     }
 }

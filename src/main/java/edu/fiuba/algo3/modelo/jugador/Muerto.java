@@ -51,5 +51,10 @@ public class Muerto implements Estado {
     }
 
     @Override
+    public void revelarRolPara(FaseDiurna fase, Jugador jugador) {
+        throw new ObjetivoMuertoException();
+    }
+
+    @Override
     public boolean estaVivo(){ return false; }
 }
