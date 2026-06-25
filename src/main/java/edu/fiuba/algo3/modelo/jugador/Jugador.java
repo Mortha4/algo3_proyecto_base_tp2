@@ -72,7 +72,7 @@ public class Jugador {
         estado.accion(faseDiurna, this, objetivo, rol);
     }
 
-    public void votar(FaseDiurna fase, Jugador votado) {
+    public void votar(Fase fase, Jugador votado) {
         estado.votar(fase, this, votado, rol);
     }
     public void noActuar(Fase fase){
@@ -88,5 +88,9 @@ public class Jugador {
         if (o == null || getClass() != o.getClass()) return false;
         Jugador jugador = (Jugador) o;
         return Objects.equals(rol, jugador.rol) && Objects.equals(nombre, jugador.nombre);
+    }
+
+    public Rol getRol(){
+        return rol; // NO USAR DESDE EL MODELO
     }
 }

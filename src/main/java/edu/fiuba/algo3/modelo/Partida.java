@@ -38,30 +38,48 @@ public class Partida {
         }
     }
 
-    public List<Jugador> getJugadores(){
-        return jugadores;
-    }
-
     public Candidato recibirMasVotado(Candidato masVotado){
         return masVotado;
     }
 
     public void iniciar(){
-        faseActual = new FaseNocturna();
-        cicloFase();
-        faseActual = new FaseDiurna();
+        hacerDeNoche();
     }
 
-    private void cicloFase(){
-        // TODO: iterar sobre todos los jugadores pidiendo que hagan una accion (controller)
+    public void cambiarFase(){
         faseActual.finalizar();
-        faseActual.exportarInfo();
+        faseActual.cambiar(this);
         chequearCondicionesDeVictoria();
+    }
+
+    public void hacerDeNoche(){
+        if(informacionNoches.isEmpty()){
+            this.faseActual = new FaseNocturna();
+        } else {
+            this.faseActual = new FaseNocturna(informacionNoches.peek());
+        }
+    }
+    public void hacerDeDia(){
+        this.faseActual = new FaseDiurna();
+    }
+
+    public void apilarData(FaseDiurnaData data){
+        informacionDias.add(data);
+    }
+    public void apilarData(FaseNocturnaData data){
+        informacionNoches.add(data);
     }
 
     private void chequearCondicionesDeVictoria(){
         for(CondicionDeVictoria c: condiciones){
             c.chequear();
         }
+    }
+
+    public List<Jugador> getJugadores(){
+        return jugadores;
+    }
+    public Fase getFaseActual(){
+        return faseActual; // NO USAR DESDE EL MODELO
     }
 }

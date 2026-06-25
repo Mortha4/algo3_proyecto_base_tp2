@@ -9,7 +9,7 @@ public interface Estado {
     Candidato devolverCandidato(Jugador otroJugador);
     void accion(FaseNocturna faseNocturna, Jugador ejecutor, Jugador objetivo, Rol rol);
     void accion(FaseDiurna faseDiurna, Jugador ejecutor, Jugador objetivo, Rol rol);
-    void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol);
+    void votar(Fase fase, Jugador votante, Jugador votado, Rol rol);
     void contar(CondicionDeVictoria condicion, Rol rol);
     void noActuar(Fase fase, Jugador jugador);
     void nominar(Fase fase, Jugador jugador, Jugador nominado);

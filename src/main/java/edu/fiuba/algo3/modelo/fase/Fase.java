@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.fase;
+import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 
@@ -21,4 +22,7 @@ public abstract class Fase {
     public void nominar(Jugador nominante, Jugador nominado) {
         this.votacion.agregarCandidato(nominante, nominado);
     }
+
+    public abstract void cambiar(Partida partida);
+
 }
