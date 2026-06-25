@@ -19,4 +19,8 @@ public class PartidaController {
             System.err.println("Error al crear el mazo: " + e.getMessage());
         }
     }
+
+    public String obtenerRolDeJugador(int jugadorActual) {
+        return "implementar";
+    }
 }

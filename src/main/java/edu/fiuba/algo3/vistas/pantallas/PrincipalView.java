@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
 import edu.fiuba.algo3.vistas.App;
+import edu.fiuba.algo3.vistas.utilidades.BotonExit;
+import edu.fiuba.algo3.vistas.utilidades.BotonJugar;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
@@ -19,26 +20,20 @@ public class PrincipalView extends StackPane {
         background.setPreserveRatio(false);
 
 
-        VBox menuBox = new VBox(20);
+        VBox menuBox = new VBox(-50);
         menuBox.setAlignment(Pos.CENTER);
         menuBox.setMaxSize(300, 200);
 
 
-        String btnStyle = "-fx-font-size: 20px; -fx-pref-width: 200px; -fx-pref-height: 50px; " +
-                "-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-cursor: hand;";
 
-        Button btnJugar = new Button("Jugar");
-        btnJugar.setStyle(btnStyle);
+        BotonJugar btnJugar = new BotonJugar(350);
 
         btnJugar.setOnAction(e -> {
             App.cambiarVentana(new SeleccionJugadoresView());
         });
 
+        BotonExit btnSalir = new BotonExit(350);
 
-
-        Button btnSalir = new Button("Salir");
-
-        btnSalir.setStyle(btnStyle);
 
         btnSalir.setOnAction(e -> Platform.exit());
 

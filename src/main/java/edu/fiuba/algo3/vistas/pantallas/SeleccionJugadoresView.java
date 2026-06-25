@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
 
+import edu.fiuba.algo3.controllers.PartidaController;
 import edu.fiuba.algo3.vistas.App;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,6 +12,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class SeleccionJugadoresView extends StackPane {
+
+    private PartidaController controlador;
 
     public SeleccionJugadoresView() {
 
@@ -38,7 +41,7 @@ public class SeleccionJugadoresView extends StackPane {
         btnContinuar.setOnAction(e -> {
             int cantidad = spinnerJugadores.getValue();
 
-            App.cambiarVentana(new ConfiguracionPartidaView());
+            App.cambiarVentana(new RepartoRolesView(1,cantidad,controlador));
         });
 
         btnConfigurarRoles.setOnAction(e -> App.cambiarVentana(new ConfiguracionPartidaView()));
