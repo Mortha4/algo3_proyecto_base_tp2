@@ -103,6 +103,10 @@ public class ContadorJugadores extends StackPane {
         this.txtCantidad.setText(String.valueOf(this.cantidad));
     }
 
+    public int getCantidad(){
+        return this.cantidad;
+    }
+
 
 
 }

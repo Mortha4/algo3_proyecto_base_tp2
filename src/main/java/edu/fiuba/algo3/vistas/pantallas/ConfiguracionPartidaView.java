@@ -1,16 +1,19 @@
 package edu.fiuba.algo3.vistas.pantallas;
 
-import edu.fiuba.algo3.vistas.Juego;
+import edu.fiuba.algo3.controllers.PartidaController;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.layout.*;
 import edu.fiuba.algo3.vistas.utilidades.*;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 public class ConfiguracionPartidaView extends StackPane {
+
+    private int contadorJugadores= 5;
+    private ContadorJugadores btn1;
+    private PartidaController partida;
 
 
     public ConfiguracionPartidaView() {
@@ -28,12 +31,16 @@ public class ConfiguracionPartidaView extends StackPane {
 
 
         // Botón
-        ContadorJugadores btn1 = new ContadorJugadores();
+        btn1 = new ContadorJugadores();
 
         BotonRolMafioso btn0= new BotonRolMafioso();
         BotonRolMedico btn2 = new BotonRolMedico();
         BotonRolDetective btn3 = new BotonRolDetective();
         BotonGuardar btnSave = new BotonGuardar(200);
+
+        btnSave.setOnActionGuardar(() -> {
+            ejecutarGuardado();
+        });
 
         VBox espaciador = new VBox(-270);
         espaciador.setAlignment(Pos.TOP_CENTER);
@@ -59,5 +66,20 @@ public class ConfiguracionPartidaView extends StackPane {
 
 
         this.getChildren().addAll(background,loyout);
+    }
+
+
+    private void ejecutarGuardado() {
+        int cantidadJugadores = btn1.getCantidad();
+
+        partida.instancia().crearPartida(cantidadJugadores);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Configuración Guardada");
+        alert.setHeaderText(null);
+        alert.setContentText("La partida ha sido configurada con " + cantidadJugadores + " jugadores.");
+
+
+        alert.showAndWait();
     }
 }
