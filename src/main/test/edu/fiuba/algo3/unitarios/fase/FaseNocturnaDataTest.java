@@ -2,7 +2,7 @@ package edu.fiuba.algo3.unitarios.fase;
 import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidasException;
 import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
-import edu.fiuba.algo3.modelo.fase.FaseNocturnaData;
+import edu.fiuba.algo3.modelo.fase.faseData.FaseNocturnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Detective;

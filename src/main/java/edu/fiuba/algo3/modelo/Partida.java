@@ -3,19 +3,24 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.*;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
 import edu.fiuba.algo3.modelo.fase.*;
+import edu.fiuba.algo3.modelo.fase.faseData.FaseData;
+import edu.fiuba.algo3.modelo.fase.faseData.FaseDiurnaData;
+import edu.fiuba.algo3.modelo.fase.faseData.FaseNocturnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.mazo.Mazo;
+import edu.fiuba.algo3.vistas.Notificable;
 
 import java.util.*;
 
-public class Partida {
+public class Partida implements Observable {
+    private final List<Notificable> notificables = new ArrayList<>();
     private final List<String> nombres;
     private final List<Jugador> jugadores = new ArrayList<>();
     private final Mazo mazo;
     private final List<CondicionDeVictoria> condiciones;
     private Fase faseActual;
-    private Deque<FaseNocturnaData> informacionNoches = new ArrayDeque<>();
-    private Deque<FaseDiurnaData> informacionDias = new ArrayDeque<>();
+    private final Deque<FaseNocturnaData> informacionNoches = new ArrayDeque<>();
+    private final Deque<FaseDiurnaData> informacionDias = new ArrayDeque<>();
 
     public Partida(List<String> nombres)
     {
@@ -38,10 +43,6 @@ public class Partida {
         }
     }
 
-    public Candidato recibirMasVotado(Candidato masVotado){
-        return masVotado;
-    }
-
     public void iniciar(){
         hacerDeNoche();
     }
@@ -56,10 +57,12 @@ public class Partida {
         if(informacionNoches.isEmpty()){
             this.faseActual = new FaseNocturna();
         } else {
+            notificar(informacionDias.peek());
             this.faseActual = new FaseNocturna(informacionNoches.peek());
         }
     }
     public void hacerDeDia(){
+        notificar(informacionNoches.peek());
         this.faseActual = new FaseDiurna();
     }
 
@@ -72,7 +75,7 @@ public class Partida {
 
     private void chequearCondicionesDeVictoria(){
         for(CondicionDeVictoria c: condiciones){
-            c.chequear();
+            notificar(c.chequear());
         }
     }
 
@@ -81,5 +84,21 @@ public class Partida {
     }
     public Fase getFaseActual(){
         return faseActual; // NO USAR DESDE EL MODELO
+    }
+
+    @Override
+    public void agregarNotificable(Notificable notificable) {
+        notificables.add(notificable);
+    }
+
+    public void notificar(FaseData data){
+        for(Notificable notificable: notificables){
+            notificable.actualizar(data);
+        }
+    }
+    public void notificar(Ganador ganador){
+        for(Notificable notificable: notificables){
+            notificable.actualizar(ganador);
+        }
     }
 }
