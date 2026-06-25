@@ -13,8 +13,10 @@ public class InicioDeRondaView extends VBox{
 
         Label titulo = new Label("Ronda " + numeroDeRonda);
         titulo.setStyle("-fx-text-fill: #fff; -fx-font-size: 30px; -fx-font-weight: bold;");
-
-        String mensaje = (muerto == null) ? "Nadie murió esta noche" : "Murio " + muerto;
+        String mensaje = null;
+        if(numeroDeRonda > 0){
+            mensaje = (muerto == null) ? "Nadie murió esta noche" : "Murio " + muerto;
+        }
         Label labelMuerte = new Label(mensaje);
         labelMuerte.setStyle("-fx-text-fill: #ddd; -fx-font-size: 18px;");
         
