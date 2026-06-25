@@ -49,7 +49,7 @@ public class ConfiguracionPartidaView extends StackPane {
 
 
         btnBack.setOnAction( (P) -> {
-            App.cambiarVentana(new PrincipalView());
+            App.cambiarVentana(new SeleccionJugadoresView());
         });
 
         VBox espaciador = new VBox(-270);
