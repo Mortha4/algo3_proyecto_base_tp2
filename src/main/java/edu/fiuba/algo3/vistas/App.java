@@ -9,10 +9,11 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private static MainLayout root = new MainLayout();
+    private static MainLayout root;
 
     @Override
     public void start(Stage stage) {
+        root = new MainLayout();
         root.setView(new PrincipalView());
 
         Scene escena = new Scene(root, 1920, 720);
