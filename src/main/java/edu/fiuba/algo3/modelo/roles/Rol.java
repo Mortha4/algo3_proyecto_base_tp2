@@ -3,6 +3,7 @@ import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.acciones.Nada;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
+import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -21,7 +22,7 @@ public abstract class Rol {
     public Accion noActuar(){
         return new Nada();
     }
-    public Accion votar(FaseDiurna fase, Jugador base, Jugador objetivo) {
+    public Accion votar(Fase fase, Jugador base, Jugador objetivo) {
         return new Votar(fase, base, objetivo);
     }
 

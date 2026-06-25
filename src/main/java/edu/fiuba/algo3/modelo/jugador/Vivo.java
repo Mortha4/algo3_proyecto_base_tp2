@@ -23,7 +23,7 @@ public class Vivo implements Estado {
     }
 
     @Override
-    public void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol) {
+    public void votar(Fase fase, Jugador votante, Jugador votado, Rol rol) {
         fase.ejecutar(rol.votar(fase, votante, votado));
     }
 

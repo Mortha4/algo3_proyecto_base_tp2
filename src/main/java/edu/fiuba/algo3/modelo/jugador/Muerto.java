@@ -33,7 +33,7 @@ public class Muerto implements Estado {
     }
 
     @Override
-    public void votar(FaseDiurna fase, Jugador votante, Jugador votado, Rol rol) {
+    public void votar(Fase fase, Jugador votante, Jugador votado, Rol rol) {
         throw new JugadorMuertoNoPuedeVotarException();
     }
 

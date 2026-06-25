@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.fase;
+import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -61,6 +62,12 @@ public class FaseNocturna extends Fase {
     @Override
     public void registrarVoto(Jugador votante, Jugador objetivo) {
         this.votacion.registrarVoto(objetivo);
+    }
+
+    @Override
+    public void cambiar(Partida partida) {
+        partida.apilarData(exportarInfo());
+        partida.hacerDeDia();
     }
 
     public FaseNocturnaData exportarInfo(){
