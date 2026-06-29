@@ -8,16 +8,18 @@ import edu.fiuba.algo3.modelo.fase.faseData.FaseDiurnaData;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseNocturnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.mazo.Mazo;
+import edu.fiuba.algo3.modelo.roles.Rol;
 import edu.fiuba.algo3.vistas.Notificable;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class Partida implements Observable {
     private final List<Notificable> notificables = new ArrayList<>();
     private final List<String> nombres;
     private final List<Jugador> jugadores = new ArrayList<>();
     private final Mazo mazo;
-    private final List<CondicionDeVictoria> condiciones;
+    private List<CondicionDeVictoria> condiciones;
     private Fase faseActual;
     private final Deque<FaseNocturnaData> informacionNoches = new ArrayDeque<>();
     private final Deque<FaseDiurnaData> informacionDias = new ArrayDeque<>();
@@ -27,7 +29,18 @@ public class Partida implements Observable {
         this.nombres = nombres;
         mazo = new Mazo(nombres.size());
         repartirCartas();
+        inicializarCondiciones();
 
+    }
+
+    public Partida(List<String> nombres, Set<Supplier<Rol>> config){
+        this.nombres = nombres;
+        mazo = new Mazo(config, nombres.size());
+        repartirCartas();
+        inicializarCondiciones();
+    }
+
+    private void inicializarCondiciones(){
         condiciones = new ArrayList<>(List.of(
                 new MayoriaDeMafiosos(jugadores),
                 new NoHayMafiosos(jugadores),
