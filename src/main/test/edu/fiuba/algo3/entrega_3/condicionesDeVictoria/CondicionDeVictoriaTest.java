@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.unitarios.condicionesDeVictoria;
+package edu.fiuba.algo3.entrega_3.condicionesDeVictoria;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.excepciones.SinJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.TodosEstanMuertosException;

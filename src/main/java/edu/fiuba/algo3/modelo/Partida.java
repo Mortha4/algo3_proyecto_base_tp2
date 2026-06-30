@@ -96,7 +96,7 @@ public class Partida implements Observable {
         return jugadores;
     }
     public Fase getFaseActual(){
-        return faseActual; // NO USAR DESDE EL MODELO
+        return faseActual;
     }
 
     @Override
