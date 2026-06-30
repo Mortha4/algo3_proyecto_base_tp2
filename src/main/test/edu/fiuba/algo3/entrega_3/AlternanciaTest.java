@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.entrega_3.condicionesDeVictoria;
+package edu.fiuba.algo3.entrega_3;
 
 import edu.fiuba.algo3.modelo.Partida;
 import edu.fiuba.algo3.modelo.fase.Fase;
