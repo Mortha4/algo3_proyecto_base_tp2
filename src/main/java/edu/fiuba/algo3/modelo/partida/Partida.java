@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.partida;
 
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.*;
-import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseData;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseDiurnaData;
@@ -88,7 +87,7 @@ public class Partida implements Observable {
 
     private void chequearCondicionesDeVictoria(){
         for(CondicionDeVictoria c: condiciones){
-            notificar(c.chequear());
+            c.chequear(notificables);
         }
     }
 
@@ -104,14 +103,9 @@ public class Partida implements Observable {
         notificables.add(notificable);
     }
 
-    public void notificar(FaseData data){
+    private void notificar(FaseData data){
         for(Notificable notificable: notificables){
             notificable.actualizar(data);
-        }
-    }
-    public void notificar(Ganador ganador){
-        for(Notificable notificable: notificables){
-            notificable.actualizar(ganador);
         }
     }
 }

@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.GanaLaMafia;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.NoHayGanador;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.vistas.Notificable;
 
 import java.util.List;
 
@@ -13,10 +14,13 @@ public class UnSoloMafioso extends CondicionDeVictoria {
     }
 
     @Override
-    protected Ganador chequearCondicion() {
+    protected void chequearCondicion(List<Notificable> notificables) {
+        Ganador ganador;
         if(cantidadDeMafiososVivos == 1 && cantidadDeCiudadanosVivos == 0){
-            return new GanaLaMafia();
+            ganador = new GanaLaMafia(notificables);
+        } else {
+            ganador = new NoHayGanador(notificables);
         }
-        return new NoHayGanador();
+        ganador.anunciar();
     }
 }

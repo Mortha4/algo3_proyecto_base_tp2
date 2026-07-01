@@ -8,6 +8,8 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Medico;
+import edu.fiuba.algo3.unitarios.partida.NotificableMock;
+import edu.fiuba.algo3.vistas.Notificable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +21,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UnSoloCiudadanoTest {
     private List<Jugador> jugadores;
+    private List<Notificable> notificables;
+    private NotificableMock unNotificable;
     private Jugador ciudadano;
     private UnSoloCiudadano condicion;
 
     @BeforeEach
     public void arrange(){
+        unNotificable  = new NotificableMock();
+        notificables = new ArrayList<>(List.of(unNotificable));
         jugadores = new ArrayList<>();
         ciudadano = new Jugador(new Ciudadano(), "ciudadano");
     }
@@ -33,9 +39,11 @@ public class UnSoloCiudadanoTest {
         // Arrange
         jugadores.add(ciudadano);
         condicion = new UnSoloCiudadano(jugadores);
-
-        // Act y Assert
-        assertEquals(GananLosCiudadanos.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoCiudadanos(),
                 "Si el unico jugador es un ciudadano deberia devolver GananLosCiudadanos");
     }
 
@@ -46,9 +54,11 @@ public class UnSoloCiudadanoTest {
         jugadores.add(ciudadano);
         jugadores.add(segundoCiudadano);
         condicion = new UnSoloCiudadano(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con mas de un ciudadano deberia devolver un NoHayGanador");
     }
 
@@ -59,9 +69,11 @@ public class UnSoloCiudadanoTest {
         jugadores.add(segundoCiudadano);
         jugadores.add(ciudadano);
         condicion = new UnSoloCiudadano(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con mas de un ciudadano deberia devolver un NoHayGanador");
     }
 
@@ -84,9 +96,11 @@ public class UnSoloCiudadanoTest {
         jugadores.add(ciudadano);
         jugadores.add(mafioso);
         condicion = new UnSoloCiudadano(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con ciudadanos vivos deberia devolver un NoHayGanador");
     }
 
@@ -103,9 +117,11 @@ public class UnSoloCiudadanoTest {
         Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         jugadores.add(mafioso);
         condicion = new UnSoloCiudadano(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoNoHayGanador(),
                 "Sin ciudadanos deberia deberia devolver NoHayGanador");
     }
 
@@ -115,9 +131,11 @@ public class UnSoloCiudadanoTest {
         Jugador medico = new Jugador(new Medico(), "ciudadano2");
         jugadores.add(medico);
         condicion = new UnSoloCiudadano(jugadores);
-
-        // Act y Assert
-        assertEquals(GananLosCiudadanos.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoCiudadanos(),
                 "Con un ciudadano de distinto rol deberian ganar los ciudadanos");
     }
 }

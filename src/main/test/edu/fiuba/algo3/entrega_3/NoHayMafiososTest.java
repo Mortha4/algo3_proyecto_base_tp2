@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Padrino;
+import edu.fiuba.algo3.unitarios.partida.NotificableMock;
+import edu.fiuba.algo3.vistas.Notificable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class NoHayMafiososTest {
+    private List<Notificable> notificables;
+    private NotificableMock unNotificable;
     private Jugador mafioso;
     private Jugador ciudadano1;
     private Jugador ciudadano2;
@@ -22,6 +26,8 @@ public class NoHayMafiososTest {
     @BeforeEach
     public void arrange(){
         jugadores = new ArrayList<>();
+        unNotificable  = new NotificableMock();
+        notificables = new ArrayList<>(List.of(unNotificable));
         mafioso = new Jugador(new Mafioso(), "mafioso");
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano");
@@ -32,10 +38,11 @@ public class NoHayMafiososTest {
         // Arrange
         jugadores.add(ciudadano1);
         condicion = new NoHayMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(GananLosCiudadanos.class,
-                condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoCiudadanos(),
                 "Sin Mafiosos deberia devolver un GananLosCiudadanos");
     }
 
@@ -44,10 +51,11 @@ public class NoHayMafiososTest {
         // Arrange
         jugadores.add(mafioso);
         condicion = new NoHayMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class,
-                condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con un mafioso deveria devolver un NoHayGanador");
     }
 
@@ -57,10 +65,11 @@ public class NoHayMafiososTest {
         jugadores.add(mafioso);
         jugadores.add(ciudadano1);
         condicion = new NoHayMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class,
-                condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con mafiosos y ciudadanos deveria devolver un NoHayGanador");
     }
 
@@ -70,10 +79,11 @@ public class NoHayMafiososTest {
         jugadores.add(ciudadano1);
         jugadores.add(ciudadano2);
         condicion = new NoHayMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(GananLosCiudadanos.class,
-                condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoCiudadanos(),
                 "Con mafiosos y ciudadanos deveria devolver un NoHayGanador");
     }
 
@@ -84,10 +94,11 @@ public class NoHayMafiososTest {
         jugadores.add(mafioso);
         jugadores.add(ciudadano1);
         condicion = new NoHayMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(GananLosCiudadanos.class,
-                condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoCiudadanos(),
                 "Con mafiosos y ciudadanos deveria devolver un NoHayGanador");
     }
 
@@ -99,10 +110,11 @@ public class NoHayMafiososTest {
         jugadores.add(padrino);
         jugadores.add(ciudadano1);
         condicion = new NoHayMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(GananLosCiudadanos.class,
-                condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1,
+                unNotificable.getVecesInvocadoCiudadanos(),
                 "Con mafiosos y ciudadanos deveria devolver un NoHayGanador");
     }
 }
