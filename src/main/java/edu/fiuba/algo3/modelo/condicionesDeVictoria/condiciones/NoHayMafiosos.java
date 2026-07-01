@@ -13,13 +13,12 @@ public class NoHayMafiosos extends CondicionDeVictoria {
     }
 
     @Override
-    protected void chequearCondicion(List<Notificable> notificables) {
-        Ganador ganador;
-        if(cantidadDeMafiososVivos == 0){
-            ganador = new GananLosCiudadanos(notificables);
-        } else {
-            ganador = new NoHayGanador(notificables);
-        }
-        ganador.anunciar();
+    protected boolean condicion() {
+        return cantidadDeMafiososVivos == 0;
+    }
+
+    @Override
+    protected Ganador darGanador(List<Notificable> notificables) {
+        return new GananLosCiudadanos(notificables);
     }
 }

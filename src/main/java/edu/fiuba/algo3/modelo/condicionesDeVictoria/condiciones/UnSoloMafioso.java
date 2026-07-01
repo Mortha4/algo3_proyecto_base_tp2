@@ -14,13 +14,12 @@ public class UnSoloMafioso extends CondicionDeVictoria {
     }
 
     @Override
-    protected void chequearCondicion(List<Notificable> notificables) {
-        Ganador ganador;
-        if(cantidadDeMafiososVivos == 1 && cantidadDeCiudadanosVivos == 0){
-            ganador = new GanaLaMafia(notificables);
-        } else {
-            ganador = new NoHayGanador(notificables);
-        }
-        ganador.anunciar();
+    protected boolean condicion() {
+        return cantidadDeMafiososVivos == 1 && cantidadDeCiudadanosVivos == 0;
+    }
+
+    @Override
+    protected Ganador darGanador(List<Notificable> notificables) {
+        return new GanaLaMafia(notificables);
     }
 }

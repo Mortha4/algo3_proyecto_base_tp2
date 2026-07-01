@@ -14,13 +14,12 @@ public class MayoriaDeMafiosos extends CondicionDeVictoria {
     }
 
     @Override
-    protected void chequearCondicion(List<Notificable> notificables) {
-        Ganador ganador;
-        if(cantidadDeMafiososVivos >= cantidadDeCiudadanosVivos){
-            ganador = new GanaLaMafia(notificables);
-        } else {
-            ganador = new NoHayGanador(notificables);
-        }
-        ganador.anunciar();
+    protected boolean condicion() {
+        return cantidadDeMafiososVivos >= cantidadDeCiudadanosVivos;
+    }
+
+    @Override
+    protected Ganador darGanador(List<Notificable> notificables) {
+        return new GanaLaMafia(notificables);
     }
 }
