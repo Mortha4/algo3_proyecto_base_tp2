@@ -20,8 +20,8 @@ public abstract class Fase {
         objetivo.morir();
     }
 
-    public void nominar(Jugador nominante, Jugador nominado) {
-        this.votacion.agregarCandidato(nominante, nominado);
+    public void nominar(Jugador nominador, Jugador nominado) {
+        this.votacion.agregarCandidato(nominador, nominado);
     }
 
     public abstract void cambiar(Partida partida);

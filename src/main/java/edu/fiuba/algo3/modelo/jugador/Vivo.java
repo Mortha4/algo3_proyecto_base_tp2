@@ -38,8 +38,8 @@ public class Vivo implements Estado {
     }
 
     @Override
-    public void nominar(Fase fase, Jugador nominante, Jugador nominado) {
-        fase.ejecutar(new Nominar(fase, nominante, nominado));
+    public void nominar(Fase fase, Jugador nominador, Jugador nominado) {
+        fase.ejecutar(new Nominar(fase, nominador, nominado));
     }
 
     @Override
