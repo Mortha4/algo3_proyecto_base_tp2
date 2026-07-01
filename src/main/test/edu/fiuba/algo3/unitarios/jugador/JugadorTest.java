@@ -2,6 +2,7 @@ package edu.fiuba.algo3.unitarios.jugador;
 
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +43,7 @@ public class JugadorTest {
 
         // Act y Assert
         assertThrows(JugadorMuertoException.class,
-                () -> ciudadano1.accion(new FaseDiurna(), ciudadano2),
+                () -> ciudadano1.accion(new FaseDiurna(new SinMuerte()), ciudadano2),
                 "Un jugador muerto no debería poder realizar acciones");
     }
 

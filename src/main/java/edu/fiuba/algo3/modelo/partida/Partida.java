@@ -17,6 +17,7 @@ public class Partida implements Observable {
     private final List<Notificable> notificables = new ArrayList<>();
     private final List<String> nombres;
     private final List<Jugador> jugadores = new ArrayList<>();
+    private final CriterioDeDesempate criterio;
     private final Mazo mazo;
     private List<CondicionDeVictoria> condiciones;
     private Fase faseActual;
@@ -29,14 +30,19 @@ public class Partida implements Observable {
         mazo = new Mazo(nombres.size());
         repartirCartas();
         inicializarCondiciones();
-
+        this.criterio = new SinMuerte();
     }
 
-    public Partida(List<String> nombres, Set<Supplier<Rol>> config){
+    public Partida(List<String> nombres, Set<Supplier<Rol>> config, Boolean conBallotage){
         this.nombres = nombres;
         mazo = new Mazo(config, nombres.size());
         repartirCartas();
         inicializarCondiciones();
+        if(conBallotage){
+            criterio = new Ballotage();
+        } else {
+            criterio = new SinMuerte();
+        }
     }
 
     private void inicializarCondiciones(){
@@ -75,7 +81,12 @@ public class Partida implements Observable {
     }
     public void hacerDeDia(){
         notificar(informacionNoches.peek());
-        this.faseActual = new FaseDiurna();
+        if(informacionDias.isEmpty()){
+            this.faseActual = new FaseDiurna(criterio);
+        } else {
+            notificar(informacionNoches.peek());
+            this.faseActual = new FaseDiurna(informacionDias.peek());
+        }
     }
 
     public void apilarData(FaseDiurnaData data){

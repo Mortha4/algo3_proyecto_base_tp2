@@ -2,6 +2,7 @@ package edu.fiuba.algo3.unitarios.acciones;
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoNoPuedeNominarException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +20,7 @@ public class NominarTest {
     public void arrange(){
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         ciudadano2 = new Jugador(new Ciudadano(), "lucas");
-        fase = new FaseDiurna();
+        fase = new FaseDiurna(new SinMuerte());
     }
 
     @Test

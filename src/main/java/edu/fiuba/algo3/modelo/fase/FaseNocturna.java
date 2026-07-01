@@ -13,12 +13,14 @@ public class FaseNocturna extends Fase {
 
     public FaseNocturna() {
         super();
+        this.votacion = new Votacion(new SinMuerte());
     }
 
     public FaseNocturna(FaseNocturnaData info) {
         super();
         info.darProtegidoPara(this);
         info.darInvestigadoPara(this);
+        this.votacion = new Votacion(new SinMuerte());
     }
 
     public void setUltimoProtegido(Jugador ultimoProtegido){

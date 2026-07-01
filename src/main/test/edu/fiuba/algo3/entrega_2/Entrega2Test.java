@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ public class Entrega2Test {
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
         ciudadano3 = new Jugador(new Ciudadano(), "ciudadano3");
-        fase = new FaseDiurna();
+        fase = new FaseDiurna(new SinMuerte());
         detective = new Detective();
     }
 

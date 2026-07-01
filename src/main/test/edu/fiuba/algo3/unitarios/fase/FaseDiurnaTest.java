@@ -3,6 +3,7 @@ import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ public class FaseDiurnaTest {
     public void arrange(){
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         sheriff = new Jugador(new Sheriff(), "sheriff");
-        fase = new FaseDiurna();
+        fase = new FaseDiurna(new SinMuerte());
     }
 
     @Test

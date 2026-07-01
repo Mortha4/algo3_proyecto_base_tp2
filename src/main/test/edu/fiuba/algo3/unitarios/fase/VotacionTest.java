@@ -2,6 +2,7 @@ package edu.fiuba.algo3.unitarios.fase;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.fase.Candidato;
 import edu.fiuba.algo3.modelo.fase.CandidatoNulo;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.fase.Votacion;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
@@ -20,7 +21,7 @@ public class VotacionTest {
     public void arrange() {
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         mafioso = new Jugador(new Mafioso(), "mafioso");
-        votacion = new Votacion();
+        votacion = new Votacion(new SinMuerte());
     }
 
     public void agregarCandidatos(Jugador ...jugadores){
@@ -61,7 +62,7 @@ public class VotacionTest {
         votacion.registrarVoto(ciudadano1);
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, votacion::obtenerMasVotado,
+        assertThrows(NoHuboDecisionException.class, () -> votacion.obtenerMasVotado(),
                 "Una votación empatada sin voto prioritario no debería tener decisión");
     }
 

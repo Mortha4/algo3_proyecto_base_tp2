@@ -1,15 +1,16 @@
 package edu.fiuba.algo3.modelo.fase;
 import edu.fiuba.algo3.modelo.excepciones.JugadorNoNominadoException;
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
 public class Votacion {
     private Candidato prioritario;
     private final Set<Candidato> candidatos;
+    private final CriterioDeDesempate criterioDeDesempate;
 
-    public Votacion() {
+    public Votacion(CriterioDeDesempate criterioDeDesempate) {
         this.candidatos = new HashSet<>();
+        this.criterioDeDesempate = criterioDeDesempate;
     }
 
     public void registrarVoto(Jugador objetivo) {
@@ -47,7 +48,7 @@ public class Votacion {
             if (empatados.contains(prioritario)) {
                 return prioritario;
             }
-            throw new NoHuboDecisionException();
+            criterioDeDesempate.desempatar();
         }
         return masVotado;
     }
