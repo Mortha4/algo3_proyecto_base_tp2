@@ -17,8 +17,8 @@ public class Votacion {
         candidato.sumarVoto();
     }
 
-    public void agregarCandidato(Jugador nominante, Jugador nominado){
-        Candidato candidato = nominante.crearCandidato(nominado);
+    public void agregarCandidato(Jugador nominador, Jugador nominado){
+        Candidato candidato = nominador.crearCandidato(nominado);
         candidatos.add(candidato);
     }
 
