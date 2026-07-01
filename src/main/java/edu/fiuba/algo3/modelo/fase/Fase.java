@@ -12,11 +12,11 @@ public abstract class Fase {
 
     public abstract void ejecutar(Accion accion);
     public abstract FaseData exportarInfo();
-    protected void otrasExcepciones(Candidato objetivo){}
+    protected void excepcionesDeSentencia(Candidato objetivo){}
     public abstract void registrarVoto(Jugador votante, Jugador objetivo);
     public void finalizar() {
         Candidato objetivo = this.votacion.obtenerMasVotado();
-        otrasExcepciones(objetivo);
+        excepcionesDeSentencia(objetivo);
         objetivo.morir();
     }
 

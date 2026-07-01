@@ -54,7 +54,7 @@ public class FaseNocturna extends Fase {
     }
 
     @Override
-    protected void otrasExcepciones(Candidato objetivo) {
+    protected void excepcionesDeSentencia(Candidato objetivo) {
         if (objetivo.equals(this.protegido)) {
             throw new ObjetivoProtegidoException();
         }
