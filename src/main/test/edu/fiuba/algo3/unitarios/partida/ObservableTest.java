@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.unitarios.partida;
 
-import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.modelo.partida.Partida;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

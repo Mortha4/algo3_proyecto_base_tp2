@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_3;
 
-import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.modelo.partida.Partida;
 import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;

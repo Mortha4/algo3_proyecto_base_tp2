@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.partida;
 
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.*;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;

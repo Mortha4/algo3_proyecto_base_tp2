@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.fase;
-import edu.fiuba.algo3.modelo.Partida;
+import edu.fiuba.algo3.modelo.partida.Partida;
 import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseNocturnaData;
