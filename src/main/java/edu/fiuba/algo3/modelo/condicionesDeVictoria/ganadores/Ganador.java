@@ -7,8 +7,17 @@ import java.util.List;
 
 public abstract class Ganador implements Observable{
     protected List<Notificable> notificables;
-    public abstract void anunciar();
+
+    public void anunciar(){
+        for(Notificable notificable: notificables){
+            actualizarNotificable(notificable);
+        }
+    }
+
+    protected abstract void actualizarNotificable(Notificable notificable);
+
     @Override
     public void agregarNotificable(Notificable notificable) {
         notificables.add(notificable);
-    }}
+    }
+}
