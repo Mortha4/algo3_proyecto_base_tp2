@@ -30,32 +30,24 @@ public class SeleccionJugadoresView extends StackPane {
         Button botonContinuar = new Button("Continuar");
 
         // Estilos
-        String styleBtn = "-fx-pref-width: 120px; -fx-pref-height: 40px; -fx-font-size: 14px;";
-        botonVolver.setStyle(styleBtn);
-        botonConfigurarRoles.setStyle(styleBtn);
-        botonContinuar.setStyle(styleBtn);
+        String styleBoton = "-fx-pref-width: 120px; -fx-pref-height: 40px; -fx-font-size: 14px;";
+        botonVolver.setStyle(styleBoton);
+        botonConfigurarRoles.setStyle(styleBoton);
+        botonContinuar.setStyle(styleBoton);
 
         // Lógica de navegación
         botonVolver.setOnAction(e -> App.cambiarVentana(new PrincipalView()));
 
         botonContinuar.setOnAction(e -> {
-            int cantidad = spinnerJugadores.getValue();
+            Runnable accionContinue = () -> App.cambiarVentana(new InicioDeRondaView(1,null,() -> {
 
-            Runnable accionContinue = () -> {
-                App.cambiarVentana(new InicioDeRondaView(1,null,() -> {
+                System.out.println("Iniciando ronda...");
+                App.cambiarVentana(new InicioDeRondaView(2,null,() -> {
 
-                    System.out.println("Iniciando ronda...");
-                    App.cambiarVentana(new InicioDeRondaView(2,null,() -> {
-
-                        System.out.println("ultimo");
-                        App.cambiarVentana(new FinDePartida("inserte ganador",() -> {
-
-                            App.cambiarVentana(new PrincipalView());
-                        }));
-                    }));
+                    System.out.println("ultimo");
+                    App.cambiarVentana(new FinDePartida("inserte ganador",() -> App.cambiarVentana(new PrincipalView())));
                 }));
-
-            };
+            }));
 
 
             App.cambiarVentana(new RevelarRol("inserte su rol",accionContinue));
