@@ -21,7 +21,7 @@ public class SeleccionJugadoresView extends StackPane {
         titulo.setStyle("-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;");
 
         Spinner<Integer> spinnerJugadores = new Spinner<>(5, 12, 5);
-        spinnerJugadores.setEditable(true);
+        spinnerJugadores.setEditable(false);
         spinnerJugadores.setStyle("-fx-font-size: 18px;");
 
         // Botones
