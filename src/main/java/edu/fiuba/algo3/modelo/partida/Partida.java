@@ -38,11 +38,7 @@ public class Partida implements Observable {
         mazo = new Mazo(config, nombres.size());
         repartirCartas();
         inicializarCondiciones();
-        if(conBallotage){
-            criterio = new Ballotage();
-        } else {
-            criterio = new SinMuerte();
-        }
+        criterio = new SinMuerte();
     }
 
     private void inicializarCondiciones(){
