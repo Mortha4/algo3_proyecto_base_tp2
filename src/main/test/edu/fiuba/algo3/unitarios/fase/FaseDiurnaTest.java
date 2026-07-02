@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.unitarios.fase;
-import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
@@ -66,7 +65,7 @@ public class FaseDiurnaTest {
         sheriff.morir();
 
         // Assert
-        assertThrows(JugadorMuertoException.class, () -> sheriff.accion(fase, ciudadano1),
+        assertThrows(ObjetivoMuertoException.class, () -> sheriff.accion(fase, ciudadano1),
                 "Un sheriff muerto al intentar revelar, debería lanzar excepción.");
     }
 }

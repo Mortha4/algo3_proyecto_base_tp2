@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.unitarios.jugador;
 
-import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
+import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -42,7 +42,7 @@ public class JugadorTest {
         ciudadano1.morir();
 
         // Act y Assert
-        assertThrows(JugadorMuertoException.class,
+        assertThrows(ObjetivoMuertoException.class,
                 () -> ciudadano1.accion(new FaseDiurna(new SinMuerte()), ciudadano2),
                 "Un jugador muerto no debería poder realizar acciones");
     }
