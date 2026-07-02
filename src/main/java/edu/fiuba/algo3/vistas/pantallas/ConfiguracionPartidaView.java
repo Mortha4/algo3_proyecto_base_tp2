@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 public class ConfiguracionPartidaView extends StackPane {
 
     private int contadorJugadores= 5;
-    private ContadorJugadores btn1;
     private PartidaController partida;
 
 
@@ -29,10 +28,7 @@ public class ConfiguracionPartidaView extends StackPane {
         loyout.setAlignment(Pos.BOTTOM_CENTER);
 
 
-
-
         // Botón
-
         BotonRolMedico btn1 = new BotonRolMedico();
         BotonRolDetective btn2 = new BotonRolDetective();
         BotonRolSheriff btn3 = new BotonRolSheriff();
@@ -46,7 +42,6 @@ public class ConfiguracionPartidaView extends StackPane {
             App.cambiarVentana(new SeleccionJugadoresView());
 
         });
-
 
         btnBack.setOnAction( (P) -> {
             App.cambiarVentana(new SeleccionJugadoresView());
