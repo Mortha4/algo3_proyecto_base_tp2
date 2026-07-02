@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.modelo.fase;
 
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
+import java.util.List;
 
 public class SinMuerte implements CriterioDeDesempate {
     @Override
-    public void desempatar() {
-        throw new NoHuboDecisionException();
+    public Candidato desempatar(List<Candidato> empatados) {
+        return new CandidatoNulo();
     }
 }

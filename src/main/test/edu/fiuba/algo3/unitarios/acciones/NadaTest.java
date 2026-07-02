@@ -46,7 +46,7 @@ public class NadaTest {
         // Act
         fase.ejecutar(nada);
         fase.ejecutar(votar);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(mafioso.estaVivo(),
@@ -65,7 +65,7 @@ public class NadaTest {
         // Act
         fase.ejecutar(nada);
         fase.ejecutar(votar);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano.estaVivo(),

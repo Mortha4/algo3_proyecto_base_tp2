@@ -48,7 +48,7 @@ public class VotarPrioritarioTest {
 
         // Act
         votoPrioritario.execute();
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -67,7 +67,7 @@ public class VotarPrioritarioTest {
         // Act
         votoMafioso.execute();
         votoPadrino.execute();
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano2.estaVivo(),
@@ -84,7 +84,7 @@ public class VotarPrioritarioTest {
 
         // Act
         fase.ejecutar(votoPrioritario);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),

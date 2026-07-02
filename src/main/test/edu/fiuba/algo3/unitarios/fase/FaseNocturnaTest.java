@@ -48,7 +48,7 @@ public class FaseNocturnaTest {
         mafioso2.accion(fase, medico);
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, fase::finalizar,
+        assertThrows(NoHuboDecisionException.class, fase::obtenerMasVotado,
                 "No debería eliminarse ningún jugador cuando hay un empate en la votación");
     }
 
@@ -58,7 +58,7 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano1, medico);
         mafioso1.accion(fase, ciudadano1);
         padrino.accion(fase, medico);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(medico.estaVivo(),
@@ -71,7 +71,7 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
         mafioso2.accion(fase, ciudadano1);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -101,7 +101,7 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano2);
         mafioso2.accion(fase, ciudadano2);
 
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano2.estaVivo(),
@@ -120,7 +120,7 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
 
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -138,7 +138,7 @@ public class FaseNocturnaTest {
 
         nominarJugadores(ciudadano2);
         mafioso1.accion(fase, ciudadano2);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano2.estaVivo(),

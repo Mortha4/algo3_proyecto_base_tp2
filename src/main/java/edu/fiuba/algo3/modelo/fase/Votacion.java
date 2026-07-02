@@ -28,29 +28,30 @@ public class Votacion {
         this.prioritario = new Candidato(objetivo);
     }
 
-    public Candidato obtenerMasVotado() {
+    public List<Candidato> obtenerMasVotado() {
+        List<Candidato> masVotados = new ArrayList<>();
         if(candidatos.isEmpty()) {
-            return new CandidatoNulo();
+            return masVotados;
         }
 
         Candidato masVotado = candidatos.iterator().next();
-        List<Candidato> empatados = new ArrayList<>();
+        masVotados.add(masVotado);
 
         for (Candidato candidato : candidatos) {
             if (candidato.empataCon(masVotado)) {
-                empatados.add(candidato);
+                masVotados.add(candidato);
             } else if (candidato.esMasVotadoQue(masVotado)) {
                 masVotado = candidato;
-                empatados = new ArrayList<>(List.of(masVotado));
+                masVotados.clear();
+                masVotados.add(masVotado);
             }
         }
-        if (empatados.size() > 1) {
-            if (empatados.contains(prioritario)) {
-                return prioritario;
+        if (masVotados.size() > 1) {
+            if (masVotados.contains(prioritario)) {
+                return List.of(prioritario);
             }
-            criterioDeDesempate.desempatar();
         }
-        return masVotado;
+        return masVotados;
     }
 
     public Candidato buscarCandidato(Jugador objetivo){

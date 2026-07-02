@@ -91,7 +91,7 @@ public class MedicoTest {
         mafioso.accion(fase, ciudadano);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,
+        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
                 "Un jugador protegido por el médico no debería recibir daño durante la fase nocturna");
     }
 }

@@ -365,7 +365,7 @@ public class Entrega1Test {
         // Act
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -391,7 +391,7 @@ public class Entrega1Test {
         medico.accion(fase, ciudadano1);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,
+        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
                 "La fase nocturna debería indicar que el objetivo de la mafia fue protegido por el médico");
     }
 
@@ -401,7 +401,7 @@ public class Entrega1Test {
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
         medico.accion(fase, ciudadano2);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),

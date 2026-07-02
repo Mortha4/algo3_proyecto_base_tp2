@@ -50,7 +50,7 @@ public class ProtegerTest {
         votar.execute();
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,
+        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
                 "Un jugador protegido no debería ser eliminado durante la fase nocturna");
         assertTrue(ciudadano1.estaVivo(),
                 "Un jugador protegido debería seguir vivo");
@@ -68,7 +68,7 @@ public class ProtegerTest {
         fase.ejecutar(votar);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::finalizar,
+        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
                 "La fase nocturna debería poder ejecutar la acción proteger");
         assertTrue(ciudadano1.estaVivo(),
                 "Un jugador protegido debería seguir vivo");
@@ -100,7 +100,7 @@ public class ProtegerTest {
         primeraProteccion.execute();
         segundaProteccion.execute();
         votar.execute();
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),

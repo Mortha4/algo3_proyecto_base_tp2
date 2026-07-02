@@ -44,7 +44,7 @@ public class VotarNocturnoTest {
 
         // Act
         votar.execute();
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano.estaVivo(),
@@ -61,7 +61,7 @@ public class VotarNocturnoTest {
 
         // Act
         fase.ejecutar(votar);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano.estaVivo(),

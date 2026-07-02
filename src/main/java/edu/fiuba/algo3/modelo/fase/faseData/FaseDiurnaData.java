@@ -22,7 +22,7 @@ public class FaseDiurnaData extends FaseData {
     public void darReveladorPara(FaseDiurna faseDiurna){
         faseDiurna.setSheriff(revelador);
     }
-    public void darCriterioPara(FaseDiurna fase){
-        fase.setVotacion(criterioDeDesempate);
+    public void darCriterioPara(FaseDiurna faseDiurna){
+        faseDiurna.setVotacion(criterioDeDesempate);
     }
 }

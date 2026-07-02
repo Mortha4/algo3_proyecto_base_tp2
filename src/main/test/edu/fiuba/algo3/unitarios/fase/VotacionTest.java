@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.unitarios.fase;
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.fase.Candidato;
 import edu.fiuba.algo3.modelo.fase.CandidatoNulo;
 import edu.fiuba.algo3.modelo.fase.SinMuerte;

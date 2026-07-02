@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.fase.faseData.FaseDiurnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.JugadorNulo;
 
+import java.util.List;
+
 public class FaseDiurna extends Fase{
     private Jugador revelado = new JugadorNulo();
     private Jugador sheriff = new JugadorNulo();
@@ -19,7 +21,6 @@ public class FaseDiurna extends Fase{
         info.darReveladoPara(this);
         info.darReveladorPara(this);
         info.darCriterioPara(this);
-        this.votacion = new Votacion(criterioDeDesempate);
     }
 
     public void setRevelado(Jugador revelado) {
@@ -37,7 +38,13 @@ public class FaseDiurna extends Fase{
     }
 
     public FaseDiurnaData exportarInfo(){
-        return new FaseDiurnaData(votacion.obtenerMasVotado(), sheriff, revelado, criterioDeDesempate);
+        return new FaseDiurnaData(obtenerMasVotado(), sheriff, revelado, criterioDeDesempate);
+    }
+
+    @Override
+    public Candidato obtenerMasVotado() {
+        List<Candidato> masVotados = this.votacion.obtenerMasVotado();
+        return criterioDeDesempate.desempatar(masVotados);
     }
 
     @Override

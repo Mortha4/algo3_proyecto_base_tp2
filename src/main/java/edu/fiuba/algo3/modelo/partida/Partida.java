@@ -62,7 +62,7 @@ public class Partida implements Observable {
     }
 
     public void cambiarFase(){
-        faseActual.finalizar();
+        faseActual.obtenerMasVotados();
         faseActual.cambiar(this);
         chequearCondicionesDeVictoria();
     }

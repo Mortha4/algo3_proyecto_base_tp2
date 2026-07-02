@@ -170,7 +170,7 @@ public class Entrega2Test {
 
         // Assert
         assertThrows(NoHuboDecisionException.class,
-                fase::finalizar,
+                fase::obtenerMasVotado,
                 "No debería eliminarse ningún jugador cuando hay un empate en la votación");
     }
 
@@ -181,7 +181,7 @@ public class Entrega2Test {
         ciudadano1.votar(fase, ciudadano3);
         ciudadano2.votar(fase, ciudadano3);
         ciudadano3.votar(fase, ciudadano2);
-        fase.finalizar();
+        fase.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano3.estaVivo(),

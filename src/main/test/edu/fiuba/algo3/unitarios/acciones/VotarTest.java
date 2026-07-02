@@ -3,7 +3,6 @@ package edu.fiuba.algo3.unitarios.acciones;
 import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.excepciones.JugadorNoNominadoException;
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
 import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
 import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
@@ -69,7 +68,7 @@ public class VotarTest {
 
         // Act
         votar.execute();
-        faseDiurna.finalizar();
+        faseDiurna.obtenerMasVotado();
 
         // Assert
         assertFalse(mafioso1.estaVivo(),
@@ -84,7 +83,7 @@ public class VotarTest {
 
         // Act
         votar.execute();
-        faseDiurna.finalizar();
+        faseDiurna.obtenerMasVotado();
 
         // Assert
         assertTrue(ciudadano1.estaVivo(),
@@ -105,7 +104,7 @@ public class VotarTest {
         votoCiudadano2.execute();
         votoMafioso.execute();
         votoPadrino.execute();
-        faseDiurna.finalizar();
+        faseDiurna.obtenerMasVotado();
 
         // Assert
         assertFalse(mafioso1.estaVivo(),
@@ -130,7 +129,7 @@ public class VotarTest {
         votoMafioso.execute();
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, faseDiurna::finalizar,
+        assertThrows(NoHuboDecisionException.class, faseDiurna::obtenerMasVotado,
                 "Una votación empatada no debería tener decisión");
         assertTrue(ciudadano1.estaVivo(),
                 "No se debería eliminar a un jugador si la votación queda empatada");
@@ -155,7 +154,7 @@ public class VotarTest {
 
         // Act
         faseDiurna.ejecutar(votar);
-        faseDiurna.finalizar();
+        faseDiurna.obtenerMasVotado();
 
         // Assert
         assertFalse(mafioso1.estaVivo(),
@@ -170,7 +169,7 @@ public class VotarTest {
 
         // Act
         votar.execute();
-        faseNocturna.finalizar();
+        faseNocturna.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -187,7 +186,7 @@ public class VotarTest {
 
         // Act
         faseNocturna.ejecutar(votar);
-        faseNocturna.finalizar();
+        faseNocturna.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -206,7 +205,7 @@ public class VotarTest {
         votoMafioso1.execute();
         votoMafioso2.execute();
         votoPadrino.execute();
-        faseNocturna.finalizar();
+        faseNocturna.obtenerMasVotado();
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -233,7 +232,7 @@ public class VotarTest {
         votoPadrino.execute();
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, faseNocturna::finalizar,
+        assertThrows(NoHuboDecisionException.class, faseNocturna::obtenerMasVotado,
                 "Una votación nocturna empatada no debería tener decisión");
         assertTrue(ciudadano1.estaVivo(),
                 "No se debería eliminar a un jugador si la votación queda empatada");
