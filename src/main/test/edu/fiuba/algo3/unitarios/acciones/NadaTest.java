@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
@@ -38,7 +39,7 @@ public class NadaTest {
     @Test
     public void test02NadaNoInterfiereConUnaVotacionDiurna() {
         // Arrange
-        FaseDiurna fase = new FaseDiurna();
+        FaseDiurna fase = new FaseDiurna(new SinMuerte());
         fase.nominar(ciudadano, mafioso);
         Votar votar = new Votar(fase, ciudadano, mafioso);
 

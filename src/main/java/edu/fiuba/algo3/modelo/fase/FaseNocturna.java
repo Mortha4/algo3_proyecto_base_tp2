@@ -13,12 +13,14 @@ public class FaseNocturna extends Fase {
 
     public FaseNocturna() {
         super();
+        this.votacion = new Votacion(new SinMuerte());
     }
 
     public FaseNocturna(FaseNocturnaData info) {
         super();
         info.darProtegidoPara(this);
         info.darInvestigadoPara(this);
+        this.votacion = new Votacion(new SinMuerte());
     }
 
     public void setUltimoProtegido(Jugador ultimoProtegido){
@@ -54,7 +56,7 @@ public class FaseNocturna extends Fase {
     }
 
     @Override
-    protected void otrasExcepciones(Candidato objetivo) {
+    protected void excepcionesDeSentencia(Candidato objetivo) {
         if (objetivo.equals(this.protegido)) {
             throw new ObjetivoProtegidoException();
         }

@@ -6,24 +6,20 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 
 public abstract class Fase {
     protected Votacion votacion;
-    Fase(){
-        this.votacion = new Votacion();
-    }
+    protected CriterioDeDesempate criterioDeDesempate;
 
     public abstract void ejecutar(Accion accion);
     public abstract FaseData exportarInfo();
-    protected void otrasExcepciones(Candidato objetivo){}
+    protected void excepcionesDeSentencia(Candidato objetivo){}
     public abstract void registrarVoto(Jugador votante, Jugador objetivo);
     public void finalizar() {
         Candidato objetivo = this.votacion.obtenerMasVotado();
-        otrasExcepciones(objetivo);
+        excepcionesDeSentencia(objetivo);
         objetivo.morir();
     }
 
-    public void nominar(Jugador nominante, Jugador nominado) {
-        this.votacion.agregarCandidato(nominante, nominado);
+    public void nominar(Jugador nominador, Jugador nominado) {
+        this.votacion.agregarCandidato(nominador, nominado);
     }
-
     public abstract void cambiar(Partida partida);
-
 }

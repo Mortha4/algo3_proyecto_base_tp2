@@ -1,9 +1,13 @@
 package edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.GananLosCiudadanos;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.NoHayGanador;
 import edu.fiuba.algo3.modelo.excepciones.SinJugadoresException;
 import edu.fiuba.algo3.modelo.excepciones.TodosEstanMuertosException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
+import edu.fiuba.algo3.vistas.Notificable;
+
 import java.util.List;
 
 public abstract class CondicionDeVictoria {
@@ -62,10 +66,17 @@ public abstract class CondicionDeVictoria {
 
     public void contar(RolNulo ignored){}
 
-    protected abstract Ganador chequearCondicion();
+    protected abstract boolean condicion();
+    protected abstract Ganador darGanador(List<Notificable> notificables);
 
-    public Ganador chequear(){
+    public void chequear(List<Notificable> notificables){
         contarRoles();
-        return chequearCondicion();
+        Ganador ganador;
+        if(condicion()){
+            ganador = darGanador(notificables);
+        } else {
+            ganador = new NoHayGanador(notificables);
+        }
+        ganador.anunciar();
     }
 }

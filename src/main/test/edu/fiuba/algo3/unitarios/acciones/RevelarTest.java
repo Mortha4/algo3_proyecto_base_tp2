@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.unitarios.acciones;
 import edu.fiuba.algo3.modelo.acciones.Revelar;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Sheriff;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,7 @@ public class RevelarTest {
 
     @BeforeEach
     public void arrange(){
-        fase = new FaseDiurna();
+        fase = new FaseDiurna(new SinMuerte());
         revelador = new Jugador(new Sheriff(), "sheriff");
     }
 

@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.partida;
 
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.*;
-import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseData;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseDiurnaData;
@@ -18,6 +17,7 @@ public class Partida implements Observable {
     private final List<Notificable> notificables = new ArrayList<>();
     private final List<String> nombres;
     private final List<Jugador> jugadores = new ArrayList<>();
+    private final CriterioDeDesempate criterio;
     private final Mazo mazo;
     private List<CondicionDeVictoria> condiciones;
     private Fase faseActual;
@@ -30,14 +30,15 @@ public class Partida implements Observable {
         mazo = new Mazo(nombres.size());
         repartirCartas();
         inicializarCondiciones();
-
+        this.criterio = new SinMuerte();
     }
 
-    public Partida(List<String> nombres, Set<Supplier<Rol>> config){
+    public Partida(List<String> nombres, Set<Supplier<Rol>> config, Boolean conBallotage){
         this.nombres = nombres;
         mazo = new Mazo(config, nombres.size());
         repartirCartas();
         inicializarCondiciones();
+        criterio = new SinMuerte();
     }
 
     private void inicializarCondiciones(){
@@ -76,7 +77,12 @@ public class Partida implements Observable {
     }
     public void hacerDeDia(){
         notificar(informacionNoches.peek());
-        this.faseActual = new FaseDiurna();
+        if(informacionDias.isEmpty()){
+            this.faseActual = new FaseDiurna(criterio);
+        } else {
+            notificar(informacionNoches.peek());
+            this.faseActual = new FaseDiurna(informacionDias.peek());
+        }
     }
 
     public void apilarData(FaseDiurnaData data){
@@ -88,7 +94,7 @@ public class Partida implements Observable {
 
     private void chequearCondicionesDeVictoria(){
         for(CondicionDeVictoria c: condiciones){
-            notificar(c.chequear());
+            c.chequear(notificables);
         }
     }
 
@@ -104,14 +110,9 @@ public class Partida implements Observable {
         notificables.add(notificable);
     }
 
-    public void notificar(FaseData data){
+    private void notificar(FaseData data){
         for(Notificable notificable: notificables){
             notificable.actualizar(data);
-        }
-    }
-    public void notificar(Ganador ganador){
-        for(Notificable notificable: notificables){
-            notificable.actualizar(ganador);
         }
     }
 }

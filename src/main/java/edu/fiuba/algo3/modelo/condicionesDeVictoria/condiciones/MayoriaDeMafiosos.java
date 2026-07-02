@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.GanaLaMafia;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.NoHayGanador;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.vistas.Notificable;
 
 import java.util.List;
 
@@ -13,10 +14,12 @@ public class MayoriaDeMafiosos extends CondicionDeVictoria {
     }
 
     @Override
-    protected Ganador chequearCondicion() {
-        if(cantidadDeMafiososVivos >= cantidadDeCiudadanosVivos){
-            return new GanaLaMafia();
-        }
-        return new NoHayGanador();
+    protected boolean condicion() {
+        return cantidadDeMafiososVivos >= cantidadDeCiudadanosVivos;
+    }
+
+    @Override
+    protected Ganador darGanador(List<Notificable> notificables) {
+        return new GanaLaMafia(notificables);
     }
 }

@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Padrino;
+import edu.fiuba.algo3.unitarios.partida.NotificableMock;
+import edu.fiuba.algo3.vistas.Notificable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MayoriaDeMafiososTest {
     private List<Jugador> jugadores;
+    private List<Notificable> notificables;
+    private NotificableMock unNotificable;
     private Jugador mafioso;
     private Jugador padrino;
     private Jugador ciudadano;
@@ -24,6 +28,8 @@ public class MayoriaDeMafiososTest {
     @BeforeEach
     public void arrange(){
         jugadores = new ArrayList<>();
+        unNotificable  = new NotificableMock();
+        notificables = new ArrayList<>(List.of(unNotificable));
         mafioso = new Jugador(new Mafioso(), "mafioso");
         padrino = new Jugador(new Padrino(), "mafioso");
         ciudadano = new Jugador(new Ciudadano(), "ciudadano");
@@ -35,9 +41,10 @@ public class MayoriaDeMafiososTest {
         // Arrange
         jugadores.addAll(List.of(mafioso, padrino, ciudadano, ciudadano2));
         condicion = new MayoriaDeMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(GanaLaMafia.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1, unNotificable.getVecesInvocadoMafia(),
                 "Con 2 ciudadanos y 2 mafiosos deberia devolver un GanaLaMafia");
     }
 
@@ -46,9 +53,11 @@ public class MayoriaDeMafiososTest {
         // Arrange
         jugadores.addAll(List.of(mafioso, padrino, ciudadano));
         condicion = new MayoriaDeMafiosos(jugadores);
+        // Act
+        condicion.chequear(notificables);
 
-        // Act y Assert
-        assertEquals(GanaLaMafia.class, condicion.chequear().getClass(),
+        // Assert
+        assertEquals(1, unNotificable.getVecesInvocadoMafia(),
                 "Con 1 ciudadano y 2 mafiosos deberia devolver un GanaLaMafia");
     }
 
@@ -57,9 +66,11 @@ public class MayoriaDeMafiososTest {
         // Arrange
         jugadores.addAll(List.of(mafioso, ciudadano2, ciudadano));
         condicion = new MayoriaDeMafiosos(jugadores);
+        // Act
+        condicion.chequear(notificables);
 
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
+        // Assert
+        assertEquals(1, unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con 2 ciudadanos y 1 mafioso deberia devolver un NoHayGanador");
     }
 
@@ -69,9 +80,10 @@ public class MayoriaDeMafiososTest {
         mafioso.morir();
         jugadores.addAll(List.of(mafioso, padrino, ciudadano, ciudadano2));
         condicion = new MayoriaDeMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1, unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con 2 ciudadanos, 1 mafioso vivo y 1 mafioso muerto deberia devolver un NoHayGanador");
     }
 
@@ -82,9 +94,10 @@ public class MayoriaDeMafiososTest {
         padrino.morir();
         jugadores.addAll(List.of(mafioso, padrino, ciudadano));
         condicion = new MayoriaDeMafiosos(jugadores);
-
-        // Act y Assert
-        assertEquals(NoHayGanador.class, condicion.chequear().getClass(),
+        // Act
+        condicion.chequear(notificables);
+        // Assert
+        assertEquals(1, unNotificable.getVecesInvocadoNoHayGanador(),
                 "Con 1 ciudadano y 2 mafiosos muertos deberia devolver un NoHayGanador");
     }
 }

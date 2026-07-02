@@ -9,14 +9,17 @@ public class FaseDiurna extends Fase{
     private Jugador revelado = new JugadorNulo();
     private Jugador sheriff = new JugadorNulo();
 
-    public FaseDiurna(){
+    public FaseDiurna(CriterioDeDesempate criterioDeDesempate){
         super();
+        this.votacion = new Votacion(criterioDeDesempate);
     }
 
     public FaseDiurna(FaseDiurnaData info) {
         super();
         info.darReveladoPara(this);
         info.darReveladorPara(this);
+        info.darCriterioPara(this);
+        this.votacion = new Votacion(criterioDeDesempate);
     }
 
     public void setRevelado(Jugador revelado) {
@@ -25,13 +28,16 @@ public class FaseDiurna extends Fase{
     public void setSheriff(Jugador sheriff){
         this.sheriff = sheriff;
     }
+    public void setVotacion(CriterioDeDesempate criterioDeDesempate) {
+        this.votacion = new Votacion(criterioDeDesempate);
+    }
 
     public void ejecutar(Accion comando) {
         comando.execute();
     }
 
     public FaseDiurnaData exportarInfo(){
-        return new FaseDiurnaData(votacion.obtenerMasVotado(), sheriff, revelado);
+        return new FaseDiurnaData(votacion.obtenerMasVotado(), sheriff, revelado, criterioDeDesempate);
     }
 
     @Override
