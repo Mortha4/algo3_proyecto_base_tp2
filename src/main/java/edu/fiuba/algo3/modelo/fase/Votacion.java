@@ -1,22 +1,26 @@
 package edu.fiuba.algo3.modelo.fase;
+import edu.fiuba.algo3.modelo.excepciones.JugadorNoNominadoException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
 public class Votacion {
-    private Candidato prioritario = null;
-    private Set<Candidato> candidatos;
+    private Candidato prioritario;
+    private final Set<Candidato> candidatos;
+    private final CriterioDeDesempate criterioDeDesempate;
 
-    public Votacion() {
+    public Votacion(CriterioDeDesempate criterioDeDesempate) {
         this.candidatos = new HashSet<>();
+        this.criterioDeDesempate = criterioDeDesempate;
     }
 
     public void registrarVoto(Jugador objetivo) {
         Candidato candidato = buscarCandidato(objetivo);
-        if(candidato == null){
-            candidato = new Candidato(objetivo);
-            candidatos.add(candidato);
-        }
         candidato.sumarVoto();
+    }
+
+    public void agregarCandidato(Jugador nominador, Jugador nominado){
+        Candidato candidato = nominador.crearCandidato(nominado);
+        candidatos.add(candidato);
     }
 
     public void registrarVotoPrioritario(Jugador objetivo) {
@@ -25,6 +29,10 @@ public class Votacion {
     }
 
     public Candidato obtenerMasVotado() {
+        if(candidatos.isEmpty()) {
+            return new CandidatoNulo();
+        }
+
         Candidato masVotado = candidatos.iterator().next();
         List<Candidato> empatados = new ArrayList<>();
 
@@ -40,16 +48,17 @@ public class Votacion {
             if (empatados.contains(prioritario)) {
                 return prioritario;
             }
-            return null;
+            criterioDeDesempate.desempatar();
         }
         return masVotado;
     }
+
     public Candidato buscarCandidato(Jugador objetivo){
         for(Candidato candidato: candidatos){
             if(candidato.esIgualQue(objetivo)){
                 return candidato;
             }
         }
-        return null;
+        throw new JugadorNoNominadoException();
     }
 }

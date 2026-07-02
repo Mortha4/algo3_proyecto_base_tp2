@@ -1,14 +1,30 @@
 package edu.fiuba.algo3.modelo.mazo;
+import edu.fiuba.algo3.modelo.excepciones.CantidadDeJugadoresException;
+import edu.fiuba.algo3.modelo.roles.*;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Grande implements ConfiguracionDeMazo{
-    @Override
-    public void obtenerConfig(Map<String, Integer> config) {
-        config.put("Sheriff", 1);
-        config.put("Detective", 1);
-        config.put("Padrino", 1);
-        config.put("Medico", 1);
-        config.put("Mafioso", 3);
+public class Grande extends CreadorDeMazo {
+
+    public Grande(int cantidadDeRoles){
+        if (cantidadDeRoles < 10 || cantidadDeRoles > 12) {
+            throw new CantidadDeJugadoresException();
+        }
+
+        this.cantidadDeRoles = cantidadDeRoles;
+    }
+
+    public List<Rol> obtenerRoles() {
+        List<Rol> roles = new ArrayList<>();
+        roles.add(new Sheriff());
+        roles.add(new Detective());
+        roles.add(new Padrino());
+        roles.add(new Medico());
+        for(int i = 0; i < 3; i++){
+            roles.add(new Mafioso());
+        }
+        rellenarConCiudadanos(roles);
+        return roles;
     }
 }

@@ -1,21 +1,38 @@
 package edu.fiuba.algo3.modelo.fase;
+import edu.fiuba.algo3.modelo.partida.Partida;
+import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.fase.faseData.FaseNocturnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
+import edu.fiuba.algo3.modelo.roles.Rol;
 
 public class FaseNocturna extends Fase {
-
     private Jugador ultimoProtegido;
     private Candidato protegido;
     private Jugador ultimoInvestigado;
 
     public FaseNocturna() {
         super();
+        this.votacion = new Votacion(new SinMuerte());
     }
 
-    public FaseNocturna(Jugador ultimoInvestigado, Jugador ultimoProtegido) {
+    public FaseNocturna(FaseNocturnaData info) {
         super();
+        info.darProtegidoPara(this);
+        info.darInvestigadoPara(this);
+        this.votacion = new Votacion(new SinMuerte());
+    }
+
+    public void setUltimoProtegido(Jugador ultimoProtegido){
         this.ultimoProtegido = ultimoProtegido;
+    }
+
+    public void setUltimoInvestigado(Jugador ultimoInvestigado){
         this.ultimoInvestigado = ultimoInvestigado;
+    }
+
+    public void ejecutar(Accion comando) {
+        comando.execute();
     }
 
     public void registrarVotoPrioritario(Jugador objetivo) {
@@ -24,24 +41,39 @@ public class FaseNocturna extends Fase {
 
     public void proteger(Jugador objetivo) {
         if (objetivo.equals(ultimoProtegido)) {
-            throw new NoSePuedeProtegerDosVecesSeguidas();
+            throw new NoSePuedeProtegerDosVecesSeguidasException();
         }
         this.protegido = new Candidato(objetivo);
         ultimoProtegido = objetivo;
     }
 
-    public void investigar(Jugador base, Jugador objetivo) {
+    public Rol investigar(Jugador base, Jugador objetivo) {
         if (objetivo.equals(ultimoInvestigado)) {
-            throw new NoSePuedeInvestigarDosVecesSeguidas();
+            throw new NoSePuedeInvestigarDosVecesSeguidasException();
         }
-        base.verBando(objetivo);
         ultimoInvestigado = objetivo;
+        return base.verBando(objetivo);
     }
 
     @Override
-    public void otrasExcepciones(Candidato objetivo) {
+    protected void excepcionesDeSentencia(Candidato objetivo) {
         if (objetivo.equals(this.protegido)) {
             throw new ObjetivoProtegidoException();
         }
+    }
+
+    @Override
+    public void registrarVoto(Jugador votante, Jugador objetivo) {
+        this.votacion.registrarVoto(objetivo);
+    }
+
+    @Override
+    public void cambiar(Partida partida) {
+        partida.apilarData(exportarInfo());
+        partida.hacerDeDia();
+    }
+
+    public FaseNocturnaData exportarInfo(){
+        return new FaseNocturnaData(ultimoProtegido, ultimoInvestigado, votacion.obtenerMasVotado());
     }
 }
