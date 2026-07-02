@@ -3,7 +3,6 @@ import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.UnSoloCiudadano;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.GananLosCiudadanos;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.NoHayGanador;
 import edu.fiuba.algo3.modelo.excepciones.SinJugadoresException;
-import edu.fiuba.algo3.modelo.excepciones.TodosEstanMuertosException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
@@ -78,19 +77,7 @@ public class UnSoloCiudadanoTest {
     }
 
     @Test
-    public void test04ConJugadoresMuertosLanzaExcepcion(){
-        // Arrange
-        ciudadano.morir();
-        jugadores.add(ciudadano);
-
-        // Act y Assert
-        assertThrows(TodosEstanMuertosException.class,
-                () -> new UnSoloCiudadano(jugadores),
-                "Recibiendo una lista de jugadores muertos deberia lanzar execepcion");
-    }
-
-    @Test
-    public void test05ConMafiososVivosNoHayGanador(){
+    public void test04ConMafiososVivosNoHayGanador(){
         // Arrange
         Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         jugadores.add(ciudadano);
@@ -105,14 +92,14 @@ public class UnSoloCiudadanoTest {
     }
 
     @Test
-    public void test06SinJugadoresLanzaExcepcion(){
+    public void test05SinJugadoresLanzaExcepcion(){
         assertThrows(SinJugadoresException.class,
                 () -> new UnSoloCiudadano(jugadores),
                 "Chequear la coleccion sin jugadores deberia lanzar una excepcion.");
     }
 
     @Test
-    public void test07SinCiudadanosNoHayGanador(){
+    public void test06SinCiudadanosNoHayGanador(){
         // Arrange
         Jugador mafioso = new Jugador(new Mafioso(), "mafioso");
         jugadores.add(mafioso);
@@ -126,7 +113,7 @@ public class UnSoloCiudadanoTest {
     }
 
     @Test
-    public void test08ConUnCiudadanoDeOtroRolGananLosCiudadanos(){
+    public void test07ConUnCiudadanoDeOtroRolGananLosCiudadanos(){
         // Arrange
         Jugador medico = new Jugador(new Medico(), "ciudadano2");
         jugadores.add(medico);

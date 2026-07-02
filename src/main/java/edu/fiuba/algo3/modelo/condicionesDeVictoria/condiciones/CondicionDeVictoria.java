@@ -3,7 +3,6 @@ import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.Ganador;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.GananLosCiudadanos;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.ganadores.NoHayGanador;
 import edu.fiuba.algo3.modelo.excepciones.SinJugadoresException;
-import edu.fiuba.algo3.modelo.excepciones.TodosEstanMuertosException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
 import edu.fiuba.algo3.vistas.Notificable;
@@ -22,10 +21,6 @@ public abstract class CondicionDeVictoria {
 
         this.jugadores = jugadores;
         contarRoles();
-
-        if(cantidadDeCiudadanosVivos == 0 && cantidadDeMafiososVivos == 0){
-            throw new TodosEstanMuertosException();
-        }
     }
 
     protected void contarRoles(){
