@@ -6,13 +6,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+import java.util.Objects;
+
 public class BotonRolSheriff extends StackPane {
-
-    private int cantidad;
-
     public BotonRolSheriff(){
 
-        Image imgPergamino = new Image(getClass().getResourceAsStream("/rolSheriff.png"));
+        Image imgPergamino = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/rolSheriff.png")));
         ImageView vistaPergamino = new ImageView(imgPergamino);
 
         //tamaños

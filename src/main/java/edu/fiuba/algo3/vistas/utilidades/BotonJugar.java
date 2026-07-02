@@ -9,13 +9,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 public class BotonJugar extends Button {
 
-    private Image imagenNormal;
-    private ImageView vistaImagen;
+    private final ImageView vistaImagen;
 
     public BotonJugar(double ancho){
-        imagenNormal = new Image(getClass().getResourceAsStream("/botonJugar.png"));
+        Image imagenNormal = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/botonJugar.png")));
 
         vistaImagen = new ImageView(imagenNormal);
 

@@ -6,13 +6,14 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Objects;
+
 public class BotonGuardar extends Button {
 
-    private Image imagenNormal;
-    private ImageView vistaImagen;
+    private final ImageView vistaImagen;
 
     public BotonGuardar(double ancho){
-        imagenNormal = new Image(getClass().getResourceAsStream("/botonGuardar.png"));
+        Image imagenNormal = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/botonGuardar.png")));
 
         vistaImagen = new ImageView(imagenNormal);
 

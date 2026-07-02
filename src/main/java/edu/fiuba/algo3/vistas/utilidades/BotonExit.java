@@ -9,16 +9,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 public class BotonExit extends Button {
 
-    private Image imagenNormal;
-    private ImageView vistaImagen;
+    private final ImageView vistaImagen;
 
     public BotonExit(double ancho){
-        imagenNormal = new Image(getClass().getResourceAsStream("/botonExit.png"));
+        Image imagenNormal = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/botonExit.png")));
 
         vistaImagen = new ImageView(imagenNormal);
-
         vistaImagen.setFitWidth(ancho);
         vistaImagen.setPreserveRatio(true);
         vistaImagen.setSmooth(false);

@@ -6,13 +6,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+import java.util.Objects;
+
 public class BotonRolDetective extends StackPane {
-
-    private int cantidad;
-
     public BotonRolDetective(){
 
-        Image imgPergamino = new Image(getClass().getResourceAsStream("/rolDetective.png"));
+        Image imgPergamino = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/rolDetective.png")));
         ImageView vistaPergamino = new ImageView(imgPergamino);
 
         //tamaños

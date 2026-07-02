@@ -5,14 +5,14 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Objects;
+
 public class BotonVolver extends Button {
 
-    private Image imagenNormal;
-    private Image imagenOscura;
-    private ImageView vistaImagen;
+    private final ImageView vistaImagen;
 
     public BotonVolver(double ancho){
-        imagenNormal = new Image(getClass().getResourceAsStream("/botonVolver.png"));
+        Image imagenNormal = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/botonVolver.png")));
 
         vistaImagen = new ImageView(imagenNormal);
 

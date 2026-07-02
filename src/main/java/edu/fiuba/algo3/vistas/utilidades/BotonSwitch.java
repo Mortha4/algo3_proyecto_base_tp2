@@ -6,17 +6,16 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class BotonSwitch extends ImageView {
+import java.util.Objects;
 
-    private Image imagenNormal;
-    private Image imagenAccion;
+public class BotonSwitch extends ImageView {
+    private final Image imagenNormal;
+    private final Image imagenAccion;
     private boolean estaEncendido;
 
-    private ImageView vistaImagen;
-
     public BotonSwitch(){
-        imagenNormal = new Image(getClass().getResourceAsStream("/botonOFF.png"));
-        imagenAccion = new Image(getClass().getResourceAsStream("/botonON.png"));
+        imagenNormal = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/botonOFF.png")));
+        imagenAccion = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/botonON.png")));
         estaEncendido = false;
 
         this.setImage(imagenNormal);
@@ -39,9 +38,4 @@ public class BotonSwitch extends ImageView {
             this.setImage(imagenNormal);
         }
     }
-
-    public boolean estaActivado() {
-        return estaEncendido;
-    }
-
 }
