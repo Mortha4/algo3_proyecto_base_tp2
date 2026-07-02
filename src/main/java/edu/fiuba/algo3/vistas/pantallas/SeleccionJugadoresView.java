@@ -25,20 +25,20 @@ public class SeleccionJugadoresView extends StackPane {
         spinnerJugadores.setStyle("-fx-font-size: 18px;");
 
         // Botones
-        Button btnVolver = new Button("Volver");
-        Button btnConfigurarRoles = new Button("Configurar");
-        Button btnContinuar = new Button("Continuar");
+        Button botonVolver = new Button("Volver");
+        Button botonConfigurarRoles = new Button("Configurar");
+        Button botonContinuar = new Button("Continuar");
 
         // Estilos
         String styleBtn = "-fx-pref-width: 120px; -fx-pref-height: 40px; -fx-font-size: 14px;";
-        btnVolver.setStyle(styleBtn);
-        btnConfigurarRoles.setStyle(styleBtn);
-        btnContinuar.setStyle(styleBtn);
+        botonVolver.setStyle(styleBtn);
+        botonConfigurarRoles.setStyle(styleBtn);
+        botonContinuar.setStyle(styleBtn);
 
         // Lógica de navegación
-        btnVolver.setOnAction(e -> App.cambiarVentana(new PrincipalView()));
+        botonVolver.setOnAction(e -> App.cambiarVentana(new PrincipalView()));
 
-        btnContinuar.setOnAction(e -> {
+        botonContinuar.setOnAction(e -> {
             int cantidad = spinnerJugadores.getValue();
 
             Runnable accionContinue = () -> {
@@ -61,11 +61,11 @@ public class SeleccionJugadoresView extends StackPane {
             App.cambiarVentana(new RevelarRol("inserte su rol",accionContinue));
         });
 
-        btnConfigurarRoles.setOnAction(e -> App.cambiarVentana(new ConfiguracionPartidaView()));
+        botonConfigurarRoles.setOnAction(e -> App.cambiarVentana(new ConfiguracionPartidaView()));
 
         // Layout
 
-        HBox botonesBox = new HBox(15, btnVolver, btnConfigurarRoles,btnContinuar);
+        HBox botonesBox = new HBox(15, botonVolver, botonConfigurarRoles,botonContinuar);
         botonesBox.setAlignment(Pos.CENTER);
 
         VBox contenedor = new VBox(30, titulo, spinnerJugadores, botonesBox);

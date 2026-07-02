@@ -28,7 +28,6 @@ public class BotonRolDetective extends StackPane {
         StackPane.setAlignment(boton, Pos.CENTER_RIGHT);
         StackPane.setMargin(boton, new Insets(-12, 1, 0, 0));
 
-        
         this.getChildren().addAll(vistaPergamino,boton);
     }
 

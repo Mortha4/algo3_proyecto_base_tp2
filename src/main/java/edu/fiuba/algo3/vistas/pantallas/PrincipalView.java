@@ -26,19 +26,19 @@ public class PrincipalView extends StackPane {
 
 
 
-        BotonJugar btnJugar = new BotonJugar(350);
+        BotonJugar botonJugar = new BotonJugar(350);
 
-        btnJugar.setOnActionConSonido(()-> {
+        botonJugar.setOnActionConSonido(()-> {
             App.cambiarVentana(new SeleccionJugadoresView());
         });
 
-        BotonExit btnSalir = new BotonExit(350);
+        BotonExit botonSalir = new BotonExit(350);
 
 
-        btnSalir.setOnAction(e -> Platform.exit());
+        botonSalir.setOnAction(e -> Platform.exit());
 
 
-        menuBox.getChildren().addAll(btnJugar, btnSalir);
+        menuBox.getChildren().addAll(botonJugar, botonSalir);
 
         this.getChildren().addAll(background, menuBox);
     }
