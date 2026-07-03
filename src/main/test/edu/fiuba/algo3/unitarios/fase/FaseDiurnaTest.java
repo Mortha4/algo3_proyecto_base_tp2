@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.unitarios.fase;
-import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
-import edu.fiuba.algo3.modelo.excepciones.VotarAlMismoJugadorException;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeVotarASiMismoException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -25,7 +24,7 @@ public class FaseDiurnaTest {
     @Test
     public void test01UnJugadorNoPuedeVotarseASiMismo(){
         // Act y Assert
-        assertThrows(VotarAlMismoJugadorException.class,
+        assertThrows(NoSePuedeVotarASiMismoException.class,
                 () -> ciudadano1.votar(fase, ciudadano1),
                 "Un jugador no debería poder votarse a sí mismo");
     }
@@ -66,7 +65,7 @@ public class FaseDiurnaTest {
         sheriff.morir();
 
         // Assert
-        assertThrows(JugadorMuertoException.class, () -> sheriff.accion(fase, ciudadano1),
+        assertThrows(ObjetivoMuertoException.class, () -> sheriff.accion(fase, ciudadano1),
                 "Un sheriff muerto al intentar revelar, debería lanzar excepción.");
     }
 }

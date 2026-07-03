@@ -19,7 +19,7 @@ public class Sheriff extends Rol {
 
     @Override
     public Accion accion(FaseNocturna faseNocturna, Jugador base, Jugador objetivo) {
-        return new Nada();
+        return new NoActuar();
     }
 
     public void contarRol(CondicionDeVictoria condicion) {

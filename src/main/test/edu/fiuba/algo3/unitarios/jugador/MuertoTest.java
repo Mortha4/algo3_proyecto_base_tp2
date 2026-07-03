@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.unitarios.jugador;
 
-import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.excepciones.JugadorMuertoNoPuedeVotarException;
+import edu.fiuba.algo3.modelo.excepciones.ObjetivoMuertoException;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.fase.SinMuerte;
@@ -30,7 +30,7 @@ public class MuertoTest {
         Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
 
         // Act y Assert
-        assertThrows(JugadorMuertoException.class, () -> muerto.crearCandidato(jugador),
+        assertThrows(ObjetivoMuertoException.class, () -> muerto.crearCandidato(jugador),
                 "Un estado muerto no debería poder crear candidatos");
     }
 
@@ -41,7 +41,7 @@ public class MuertoTest {
         Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
 
         // Act y Assert
-        assertThrows(JugadorMuertoException.class,
+        assertThrows(ObjetivoMuertoException.class,
                 () -> muerto.accion(new FaseNocturna(), jugador, jugador, new Ciudadano()),
                 "Un estado muerto no debería poder realizar acciones nocturnas");
     }
@@ -53,7 +53,7 @@ public class MuertoTest {
         Jugador jugador = new Jugador(new Ciudadano(), "ciudadano");
 
         // Act y Assert
-        assertThrows(JugadorMuertoException.class,
+        assertThrows(ObjetivoMuertoException.class,
                 () -> muerto.accion(new FaseDiurna(new SinMuerte()), jugador, jugador, new Ciudadano()),
                 "Un estado muerto no debería poder realizar acciones diurnas");
     }

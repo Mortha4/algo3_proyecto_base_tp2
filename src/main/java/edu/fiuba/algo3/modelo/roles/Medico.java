@@ -27,6 +27,6 @@ public class Medico extends Rol {
 
     @Override
     public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
-        return new Nada();
+        return new NoActuar();
     }
 }

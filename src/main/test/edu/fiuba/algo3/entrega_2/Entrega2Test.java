@@ -200,7 +200,7 @@ public class Entrega2Test {
         ciudadano1.morir();
 
         // Assert
-        assertThrows(JugadorMuertoException.class,
+        assertThrows(ObjetivoMuertoException.class,
                 () -> ciudadano1.accion(fase, ciudadano2),
                 "Un jugador muerto no debería poder votar");
     }

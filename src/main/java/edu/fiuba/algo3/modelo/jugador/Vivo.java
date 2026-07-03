@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.jugador;
-import edu.fiuba.algo3.modelo.acciones.Nada;
+import edu.fiuba.algo3.modelo.acciones.NoActuar;
 import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.*;
@@ -34,7 +34,7 @@ public class Vivo implements Estado {
 
     @Override
     public void noActuar(Fase fase, Jugador jugador) {
-        fase.ejecutar(new Nada());
+        fase.ejecutar(new NoActuar());
     }
 
     @Override

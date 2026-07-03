@@ -24,11 +24,11 @@ public class Ciudadano extends Rol {
 
     @Override
     public Accion accion(FaseNocturna fase, Jugador base, Jugador objetivo) {
-        return new Nada();
+        return new NoActuar();
     }
 
     @Override
     public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
-        return new Nada();
+        return new NoActuar();
     }
 }
