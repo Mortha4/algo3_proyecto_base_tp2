@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.unitarios.acciones;
 
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.acciones.VotarPrioritario;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeVotarASiMismoException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
@@ -31,9 +32,18 @@ public class VotarPrioritarioTest {
         padrino = new Jugador(new Padrino(), "padrino");
     }
 
+
+    public void nominarJugadores(Jugador ...jugadores){
+        Jugador nominador = new Jugador(new Ciudadano(), "nominador");
+        for(Jugador jugador: jugadores){
+            fase.ejecutar(new Nominar(fase, nominador, jugador));
+        }
+    }
+
     @Test
     public void test01ElVotoPrioritarioSeRegistraAlEjecutarse() {
         // Arrange
+        nominarJugadores(ciudadano1);
         VotarPrioritario votoPrioritario = new VotarPrioritario(fase, padrino, ciudadano1);
 
         // Act
@@ -50,6 +60,7 @@ public class VotarPrioritarioTest {
     @Test
     public void test02ElVotoPrioritarioDesempataLaVotacion() {
         // Arrange
+        nominarJugadores(ciudadano1, ciudadano2);
         Votar votoMafioso = new Votar(fase, mafioso, ciudadano1);
         VotarPrioritario votoPadrino = new VotarPrioritario(fase, padrino, ciudadano2);
 
@@ -68,6 +79,7 @@ public class VotarPrioritarioTest {
     @Test
     public void test03LaFaseNocturnaPuedeEjecutarUnVotoPrioritario() {
         // Arrange
+        nominarJugadores(ciudadano1);
         VotarPrioritario votoPrioritario = new VotarPrioritario(fase, padrino, ciudadano1);
 
         // Act
@@ -82,7 +94,8 @@ public class VotarPrioritarioTest {
     @Test
     public void test04UnJugadorNoPuedeVotarseASiMismoConVotoPrioritario() {
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        nominarJugadores(padrino);
+        assertThrows(NoSePuedeVotarASiMismoException.class,
                 () -> new VotarPrioritario(fase, padrino, padrino),
                 "Un jugador no debería poder votarse a sí mismo con voto prioritario");
     }

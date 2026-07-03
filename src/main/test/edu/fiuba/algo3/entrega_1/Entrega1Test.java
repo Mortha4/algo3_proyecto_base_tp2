@@ -1,10 +1,12 @@
 package edu.fiuba.algo3.entrega_1;
 
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.mazo.Mazo;
 import edu.fiuba.algo3.modelo.roles.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,6 +16,30 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Entrega1Test {
+    private Jugador ciudadano1;
+    private Jugador ciudadano2;
+    private Jugador medico;
+    private Jugador mafioso1;
+    private Jugador mafioso2;
+    private FaseNocturna fase;
+
+    @BeforeEach
+    public void arrange(){
+        ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
+        ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
+        mafioso1 = new Jugador(new Mafioso(), "mafioso1");
+        mafioso2 = new Jugador(new Mafioso(), "mafioso");
+        medico = new Jugador(new Medico(), "medico");
+        fase = new FaseNocturna();
+    }
+
+    public void nominarJugadores(Jugador ...jugadores){
+        Jugador nominador = new Jugador(new Ciudadano(), "nominador");
+        for(Jugador jugador: jugadores){
+            fase.ejecutar(new Nominar(fase, nominador, jugador));
+        }
+    }
+
     @Test
     public void test01MazoPara5JugadoresTieneLaDistribucionCorrectaDeRoles(){
         //arrange
@@ -246,10 +272,6 @@ public class Entrega1Test {
 
     @Test
     public void test15UnJugadorNoPuedeVerElRolDeOtroJugador(){
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
-        Jugador ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
-
         // Act y Assert
         assertThrows(NoVisibleException.class, () -> ciudadano1.verRol(ciudadano2),
                 "Un jugador no debería poder ver el rol de otro jugador");
@@ -340,13 +362,9 @@ public class Entrega1Test {
 
     @Test
     public void test23LaMafiaPuedeEliminarAUnaVictimaValida() {
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
-        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
-        FaseNocturna fase = new FaseNocturna();
-
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
+        nominarJugadores(ciudadano1);
+        mafioso1.accion(fase, ciudadano1);
         fase.finalizar();
 
         // Assert
@@ -355,31 +373,22 @@ public class Entrega1Test {
     }
 
     @Test
-    public void test24LaMafiaNoPuedeSeleccionarAUnaVictimaMuerta() {
+    public void test24LaMafiaNoPuedeNominarAUnaVictimaMuerta() {
         // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
-        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
-        FaseNocturna fase = new FaseNocturna();
-
         ciudadano1.morir();
 
         // Act y Assert
 
-        assertThrows(ObjetivoMuertoException.class, () -> mafioso1.accionNocturna(fase, ciudadano1),
+        assertThrows(ObjetivoMuertoException.class, () -> mafioso1.nominar(fase, ciudadano1),
                 "La mafia seleccionó una víctima invalida");
     }
 
     @Test
     public void test25ElMedicoPuedeProtegerAlJugadorElegidoPorLaMafia(){
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
-        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
-        Jugador medico = new Jugador(new Medico(), "medico");
-        FaseNocturna fase = new FaseNocturna();
-
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        medico.accionNocturna(fase, ciudadano1);
+        nominarJugadores(ciudadano1);
+        mafioso1.accion(fase, ciudadano1);
+        medico.accion(fase, ciudadano1);
 
         // Assert
         assertThrows(ObjetivoProtegidoException.class, fase::finalizar,
@@ -388,16 +397,10 @@ public class Entrega1Test {
 
     @Test
     public void test26LaMafiaEliminaAUnJugadorNoProtegido(){
-        // Arrange
-        Jugador ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
-        Jugador ciudadano2= new Jugador(new Ciudadano(), "ciudadano2");
-        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
-        Jugador medico = new Jugador(new Medico(), "medico");
-        FaseNocturna fase = new FaseNocturna();
-
         // Act
-        mafioso1.accionNocturna(fase, ciudadano1);
-        medico.accionNocturna(fase, ciudadano2);
+        nominarJugadores(ciudadano1);
+        mafioso1.accion(fase, ciudadano1);
+        medico.accion(fase, ciudadano2);
         fase.finalizar();
 
         // Assert
@@ -407,14 +410,11 @@ public class Entrega1Test {
 
     @Test
     public void test27LaMafiaNoPuedeEliminarAOtroMafioso(){
-        // Arrange
-        Jugador mafioso1 = new Jugador(new Mafioso(), "mafioso1");
-        Jugador mafioso2 = new Jugador(new Mafioso(), "mafioso2");
-        FaseNocturna fase = new FaseNocturna();
+        nominarJugadores(mafioso2);
 
         // Act y Assert
-        assertThrows(VotarMismoRolException.class,
-                () -> mafioso1.accionNocturna(fase, mafioso2),
+        assertThrows(VotacionEntreMafiososException.class,
+                () -> mafioso1.accion(fase, mafioso2),
                 "La mafia no debería poder eliminar a otro mafioso");
     }
 }

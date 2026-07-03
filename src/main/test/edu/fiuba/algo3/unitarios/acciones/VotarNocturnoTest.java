@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.unitarios.acciones;
 
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.VotarNocturno;
-import edu.fiuba.algo3.modelo.excepciones.NoVotableException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.VotacionEntreMafiososException;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeVotarASiMismoException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
@@ -28,9 +29,17 @@ public class VotarNocturnoTest {
         mafioso2 = new Jugador(new Mafioso(), "mafioso2");
     }
 
+    public void nominarJugadores(Jugador ...jugadores){
+        Jugador nominador = new Jugador(new Ciudadano(), "nominador");
+        for(Jugador jugador: jugadores){
+            fase.ejecutar(new Nominar(fase, nominador, jugador));
+        }
+    }
+
     @Test
     public void test01UnVotoNocturnoPuedeEliminarAUnCiudadano() {
         // Arrange
+        nominarJugadores(ciudadano);
         VotarNocturno votar = new VotarNocturno(fase, mafioso1, ciudadano);
 
         // Act
@@ -47,6 +56,7 @@ public class VotarNocturnoTest {
     @Test
     public void test02LaFaseNocturnaPuedeEjecutarUnVotoNocturno() {
         // Arrange
+        nominarJugadores(ciudadano);
         VotarNocturno votar = new VotarNocturno(fase, mafioso1, ciudadano);
 
         // Act
@@ -61,7 +71,7 @@ public class VotarNocturnoTest {
     @Test
     public void test03UnMafiosoNoPuedeVotarAOtroMafiosoDuranteLaNoche() {
         // Act y Assert
-        assertThrows(NoVotableException.class,
+        assertThrows(VotacionEntreMafiososException.class,
                 () -> new VotarNocturno(fase, mafioso1, mafioso2),
                 "Un mafioso no debería poder votar a otro mafioso durante la noche");
     }
@@ -69,7 +79,8 @@ public class VotarNocturnoTest {
     @Test
     public void test04UnMafiosoNoPuedeVotarseASiMismoDuranteLaNoche() {
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        nominarJugadores(mafioso1);
+        assertThrows(NoSePuedeVotarASiMismoException.class,
                 () -> new VotarNocturno(fase, mafioso1, mafioso1),
                 "Un mafioso no debería poder votarse a sí mismo durante la noche");
     }

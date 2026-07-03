@@ -1,24 +1,30 @@
 package edu.fiuba.algo3.modelo.fase;
-import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
+import edu.fiuba.algo3.modelo.excepciones.JugadorNoNominadoException;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import java.util.*;
 
 public class Votacion {
     private Candidato prioritario;
     private final Set<Candidato> candidatos;
+    private final CriterioDeDesempate criterioDeDesempate;
 
-    public Votacion() {
+    public Votacion(CriterioDeDesempate criterioDeDesempate) {
         this.candidatos = new HashSet<>();
+        this.criterioDeDesempate = criterioDeDesempate;
     }
 
-    public void registrarVoto(Jugador votante, Jugador objetivo) {
-        Candidato candidato = buscarCandidato(votante, objetivo);
-        candidatos.add(candidato);
+    public void registrarVoto(Jugador objetivo) {
+        Candidato candidato = buscarCandidato(objetivo);
         candidato.sumarVoto();
     }
 
-    public void registrarVotoPrioritario(Jugador votante, Jugador objetivo) {
-        registrarVoto(votante, objetivo);
+    public void agregarCandidato(Jugador nominador, Jugador nominado){
+        Candidato candidato = nominador.crearCandidato(nominado);
+        candidatos.add(candidato);
+    }
+
+    public void registrarVotoPrioritario(Jugador objetivo) {
+        registrarVoto(objetivo);
         this.prioritario = new Candidato(objetivo);
     }
 
@@ -42,17 +48,17 @@ public class Votacion {
             if (empatados.contains(prioritario)) {
                 return prioritario;
             }
-            throw new NoHuboDecisionException();
+            criterioDeDesempate.desempatar();
         }
         return masVotado;
     }
 
-    public Candidato buscarCandidato(Jugador votante, Jugador objetivo){
+    public Candidato buscarCandidato(Jugador objetivo){
         for(Candidato candidato: candidatos){
             if(candidato.esIgualQue(objetivo)){
                 return candidato;
             }
         }
-        return votante.crearCandidato(objetivo);
+        throw new JugadorNoNominadoException();
     }
 }

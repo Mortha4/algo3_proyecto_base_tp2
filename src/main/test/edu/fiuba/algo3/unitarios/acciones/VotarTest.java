@@ -1,10 +1,14 @@
 package edu.fiuba.algo3.unitarios.acciones;
 
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.Votar;
+import edu.fiuba.algo3.modelo.excepciones.JugadorNoNominadoException;
 import edu.fiuba.algo3.modelo.excepciones.NoHuboDecisionException;
-import edu.fiuba.algo3.modelo.excepciones.SeleccionInvalidaException;
+import edu.fiuba.algo3.modelo.excepciones.NoSePuedeVotarASiMismoException;
+import edu.fiuba.algo3.modelo.fase.Fase;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
+import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
@@ -27,7 +31,7 @@ public class VotarTest {
 
     @BeforeEach
     public void arrange() {
-        faseDiurna = new FaseDiurna();
+        faseDiurna = new FaseDiurna(new SinMuerte());
         faseNocturna = new FaseNocturna();
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
@@ -36,9 +40,17 @@ public class VotarTest {
         padrino = new Jugador(new Padrino(), "padrino");
     }
 
+    public void nominarJugadores(Fase fase, Jugador ...jugadores){
+        Jugador nominador = new Jugador(new Ciudadano(), "nominador");
+        for(Jugador jugador: jugadores){
+            fase.ejecutar(new Nominar(fase, nominador, jugador));
+        }
+    }
+
     @Test
     public void test01AlEjecutarVotarEnFaseDiurnaNoSeEliminaAlVotadoHastaFinalizarLaFase() {
         // Arrange
+        nominarJugadores(faseDiurna, mafioso1);
         Votar votar = new Votar(faseDiurna, ciudadano1, mafioso1);
 
         // Act
@@ -52,6 +64,7 @@ public class VotarTest {
     @Test
     public void test02AlFinalizarLaFaseDiurnaSeEliminaAlVotado() {
         // Arrange
+        nominarJugadores(faseDiurna, mafioso1);
         Votar votar = new Votar(faseDiurna, ciudadano1, mafioso1);
 
         // Act
@@ -66,6 +79,7 @@ public class VotarTest {
     @Test
     public void test03AlVotarEnFaseDiurnaNoSeEliminaAlVotante() {
         // Arrange
+        nominarJugadores(faseDiurna, mafioso1);
         Votar votar = new Votar(faseDiurna, ciudadano1, mafioso1);
 
         // Act
@@ -80,6 +94,7 @@ public class VotarTest {
     @Test
     public void test04EnFaseDiurnaDosVotosAlMismoMafiosoLoEliminanComoMasVotado() {
         // Arrange
+        nominarJugadores(faseDiurna, mafioso1, ciudadano1, ciudadano2);
         Votar votoCiudadano1 = new Votar(faseDiurna, ciudadano1, mafioso1);
         Votar votoCiudadano2 = new Votar(faseDiurna, ciudadano2, mafioso1);
         Votar votoMafioso = new Votar(faseDiurna, mafioso1, ciudadano1);
@@ -106,6 +121,7 @@ public class VotarTest {
     @Test
     public void test05UnEmpateDeVotosEnFaseDiurnaNoEliminaANingunJugador() {
         // Arrange
+        nominarJugadores(faseDiurna, mafioso1, ciudadano1);
         Votar votoCiudadano = new Votar(faseDiurna, ciudadano1, mafioso1);
         Votar votoMafioso = new Votar(faseDiurna, mafioso1, ciudadano1);
 
@@ -125,7 +141,8 @@ public class VotarTest {
     @Test
     public void test06UnJugadorNoPuedeVotarseASiMismo() {
         // Act y Assert
-        assertThrows(SeleccionInvalidaException.class,
+        nominarJugadores(faseDiurna, ciudadano1);
+        assertThrows(NoSePuedeVotarASiMismoException.class,
                 () -> new Votar(faseDiurna, ciudadano1, ciudadano1),
                 "Un jugador no debería poder votarse a sí mismo");
     }
@@ -133,6 +150,7 @@ public class VotarTest {
     @Test
     public void test07LaFaseDiurnaPuedeEjecutarUnVoto() {
         // Arrange
+        nominarJugadores(faseDiurna, mafioso1);
         Votar votar = new Votar(faseDiurna, ciudadano1, mafioso1);
 
         // Act
@@ -147,6 +165,7 @@ public class VotarTest {
     @Test
     public void test08AlFinalizarLaFaseNocturnaSeEliminaAlCiudadanoVotado() {
         // Arrange
+        nominarJugadores(faseNocturna, ciudadano1);
         Votar votar = new Votar(faseNocturna, mafioso1, ciudadano1);
 
         // Act
@@ -163,6 +182,7 @@ public class VotarTest {
     @Test
     public void test09LaFaseNocturnaPuedeEjecutarUnVoto() {
         // Arrange
+        nominarJugadores(faseNocturna, ciudadano1);
         Votar votar = new Votar(faseNocturna, mafioso1, ciudadano1);
 
         // Act
@@ -177,6 +197,7 @@ public class VotarTest {
     @Test
     public void test10EnFaseNocturnaDosMafiososYPadrinoPuedenVotarAlMismoCiudadano() {
         // Arrange
+        nominarJugadores(faseNocturna, ciudadano1);
         Votar votoMafioso1 = new Votar(faseNocturna, mafioso1, ciudadano1);
         Votar votoMafioso2 = new Votar(faseNocturna, mafioso2, ciudadano1);
         Votar votoPadrino = new Votar(faseNocturna, padrino, ciudadano1);
@@ -203,6 +224,7 @@ public class VotarTest {
     @Test
     public void test11UnEmpateDeVotosEnFaseNocturnaNoEliminaANingunJugador() {
         // Arrange
+        nominarJugadores(faseNocturna, ciudadano1, ciudadano2);
         Votar votoMafioso = new Votar(faseNocturna, mafioso1, ciudadano1);
         Votar votoPadrino = new Votar(faseNocturna, padrino, ciudadano2);
 
@@ -217,5 +239,15 @@ public class VotarTest {
                 "No se debería eliminar a un jugador si la votación queda empatada");
         assertTrue(ciudadano2.estaVivo(),
                 "No se debería eliminar a un jugador si la votación queda empatada");
+    }
+
+    @Test
+    public void test12UnJugadorNoNominadoNoPuedeSerVotado(){
+        // Arrange
+        Votar voto = new Votar(faseDiurna, mafioso1, ciudadano1);
+
+        // Act y Assert
+        assertThrows(JugadorNoNominadoException.class,
+                voto::execute);
     }
 }

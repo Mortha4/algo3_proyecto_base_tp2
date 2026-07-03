@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.roles;
 import edu.fiuba.algo3.modelo.acciones.*;
+import edu.fiuba.algo3.modelo.condicionesDeVictoria.condiciones.CondicionDeVictoria;
 import edu.fiuba.algo3.modelo.fase.*;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.visitors.Visitante;
@@ -16,12 +17,16 @@ public class Medico extends Rol {
     }
 
     @Override
-    public AccionNocturna accionNocturna(FaseNocturna faseNocturna, Jugador base, Jugador objetivo) {
+    public Accion accion(FaseNocturna faseNocturna, Jugador base, Jugador objetivo) {
         return new Proteger(faseNocturna, objetivo);
     }
 
+    public void contarRol(CondicionDeVictoria condicion) {
+        condicion.contar(this);
+    }
+
     @Override
-    public AccionDiurna accionDiurna(FaseDiurna fase, Jugador base, Jugador objetivo) {
-        return new Nada();
+    public Accion accion(FaseDiurna fase, Jugador base, Jugador objetivo) {
+        return new NoActuar();
     }
 }

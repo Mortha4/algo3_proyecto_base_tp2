@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.unitarios.acciones;
 
+import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.Proteger;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
@@ -29,9 +30,18 @@ public class ProtegerTest {
         mafioso = new Jugador(new Mafioso(), "mafioso");
     }
 
+
+    public void nominarJugadores(Jugador ...jugadores){
+        Jugador nominador = new Jugador(new Ciudadano(), "nominador");
+        for(Jugador jugador: jugadores){
+            fase.ejecutar(new Nominar(fase, nominador, jugador));
+        }
+    }
+
     @Test
     public void test01ProtegerImpideQueElJugadorVotadoSeaEliminado() {
         // Arrange
+        nominarJugadores(ciudadano1);
         Proteger proteger = new Proteger(fase, ciudadano1);
         Votar votar = new Votar(fase, mafioso, ciudadano1);
 
@@ -49,6 +59,7 @@ public class ProtegerTest {
     @Test
     public void test02LaFaseNocturnaPuedeEjecutarProteger() {
         // Arrange
+        nominarJugadores(ciudadano1);
         Proteger proteger = new Proteger(fase, ciudadano1);
         Votar votar = new Votar(fase, mafioso, ciudadano1);
 
@@ -80,6 +91,7 @@ public class ProtegerTest {
     @Test
     public void test04SePuedeProtegerAOtroJugadorLuegoDeUnaProteccion() {
         // Arrange
+        nominarJugadores(ciudadano1);
         Proteger primeraProteccion = new Proteger(fase, ciudadano1);
         Proteger segundaProteccion = new Proteger(fase, ciudadano2);
         Votar votar = new Votar(fase, mafioso, ciudadano1);
