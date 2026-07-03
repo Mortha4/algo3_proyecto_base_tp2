@@ -9,9 +9,10 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Padrino;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,9 +23,11 @@ public class VotarPrioritarioTest {
     private Jugador ciudadano2;
     private Jugador mafioso;
     private Jugador padrino;
+    private PartidaMock partidaMock;
 
     @BeforeEach
     public void arrange() {
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         fase = new FaseNocturna();
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
@@ -48,7 +51,7 @@ public class VotarPrioritarioTest {
 
         // Act
         votoPrioritario.execute();
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -67,7 +70,7 @@ public class VotarPrioritarioTest {
         // Act
         votoMafioso.execute();
         votoPadrino.execute();
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano2.estaVivo(),
@@ -84,7 +87,7 @@ public class VotarPrioritarioTest {
 
         // Act
         fase.ejecutar(votoPrioritario);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),

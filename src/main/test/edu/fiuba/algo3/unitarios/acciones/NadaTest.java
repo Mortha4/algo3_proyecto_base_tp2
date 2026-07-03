@@ -10,9 +10,10 @@ import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,9 +22,11 @@ public class NadaTest {
     private Jugador ciudadano;
     private Jugador mafioso;
     private Accion nada;
+    private PartidaMock partidaMock;
 
     @BeforeEach
     public void arrange(){
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         ciudadano = new Jugador(new Ciudadano(), "ciudadano");
         mafioso =  new Jugador(new Mafioso(), "mafioso");
         nada = new Nada();
@@ -46,7 +49,7 @@ public class NadaTest {
         // Act
         fase.ejecutar(nada);
         fase.ejecutar(votar);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(mafioso.estaVivo(),
@@ -65,7 +68,7 @@ public class NadaTest {
         // Act
         fase.ejecutar(nada);
         fase.ejecutar(votar);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano.estaVivo(),

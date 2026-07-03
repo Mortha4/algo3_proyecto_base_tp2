@@ -12,8 +12,11 @@ import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import edu.fiuba.algo3.modelo.roles.Padrino;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class VotarTest {
     private FaseDiurna faseDiurna;
     private FaseNocturna faseNocturna;
+    private PartidaMock partidaMock;
     private Jugador ciudadano1;
     private Jugador ciudadano2;
     private Jugador mafioso1;
@@ -30,6 +34,7 @@ public class VotarTest {
 
     @BeforeEach
     public void arrange() {
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         faseDiurna = new FaseDiurna(new SinMuerte());
         faseNocturna = new FaseNocturna();
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
@@ -68,7 +73,7 @@ public class VotarTest {
 
         // Act
         votar.execute();
-        faseDiurna.obtenerMasVotado();
+        faseDiurna.finalizar(partidaMock);
 
         // Assert
         assertFalse(mafioso1.estaVivo(),
@@ -83,7 +88,7 @@ public class VotarTest {
 
         // Act
         votar.execute();
-        faseDiurna.obtenerMasVotado();
+        faseDiurna.finalizar(partidaMock);
 
         // Assert
         assertTrue(ciudadano1.estaVivo(),
@@ -104,7 +109,7 @@ public class VotarTest {
         votoCiudadano2.execute();
         votoMafioso.execute();
         votoPadrino.execute();
-        faseDiurna.obtenerMasVotado();
+        faseDiurna.finalizar(partidaMock);
 
         // Assert
         assertFalse(mafioso1.estaVivo(),
@@ -129,8 +134,6 @@ public class VotarTest {
         votoMafioso.execute();
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, faseDiurna::obtenerMasVotado,
-                "Una votación empatada no debería tener decisión");
         assertTrue(ciudadano1.estaVivo(),
                 "No se debería eliminar a un jugador si la votación queda empatada");
         assertTrue(mafioso1.estaVivo(),
@@ -154,7 +157,7 @@ public class VotarTest {
 
         // Act
         faseDiurna.ejecutar(votar);
-        faseDiurna.obtenerMasVotado();
+        faseDiurna.finalizar(partidaMock);
 
         // Assert
         assertFalse(mafioso1.estaVivo(),
@@ -169,7 +172,7 @@ public class VotarTest {
 
         // Act
         votar.execute();
-        faseNocturna.obtenerMasVotado();
+        faseNocturna.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -186,7 +189,7 @@ public class VotarTest {
 
         // Act
         faseNocturna.ejecutar(votar);
-        faseNocturna.obtenerMasVotado();
+        faseNocturna.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -205,7 +208,7 @@ public class VotarTest {
         votoMafioso1.execute();
         votoMafioso2.execute();
         votoPadrino.execute();
-        faseNocturna.obtenerMasVotado();
+        faseNocturna.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -230,10 +233,9 @@ public class VotarTest {
         // Act
         votoMafioso.execute();
         votoPadrino.execute();
+        faseNocturna.finalizar(partidaMock);
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, faseNocturna::obtenerMasVotado,
-                "Una votación nocturna empatada no debería tener decisión");
         assertTrue(ciudadano1.estaVivo(),
                 "No se debería eliminar a un jugador si la votación queda empatada");
         assertTrue(ciudadano2.estaVivo(),

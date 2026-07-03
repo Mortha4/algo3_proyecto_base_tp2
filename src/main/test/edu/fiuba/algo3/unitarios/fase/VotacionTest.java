@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.unitarios.fase;
 import edu.fiuba.algo3.modelo.fase.Candidato;
-import edu.fiuba.algo3.modelo.fase.CandidatoNulo;
-import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.fase.Votacion;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +20,7 @@ public class VotacionTest {
     public void arrange() {
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         mafioso = new Jugador(new Mafioso(), "mafioso");
-        votacion = new Votacion(new SinMuerte());
+        votacion = new Votacion();
     }
 
     public void agregarCandidatos(Jugador ...jugadores){
@@ -31,12 +31,12 @@ public class VotacionTest {
     }
 
     @Test
-    public void test01UnaVotacionSinVotosDevuelveCandidatoNulo() {
+    public void test01UnaVotacionSinVotosDevuelveSetVacio() {
         // Act
-        Candidato result = votacion.obtenerMasVotado();
+        Set<Candidato> result = votacion.obtenerMasVotado();
 
         // Assert
-        assertEquals(new CandidatoNulo(), result,
+        assertTrue(result.isEmpty(),
                 "Una votación sin votos debería devolver un candidato nulo");
     }
 
@@ -49,7 +49,7 @@ public class VotacionTest {
         votacion.registrarVoto(ciudadano1);
 
         // Assert
-        assertEquals(new Candidato(mafioso), votacion.obtenerMasVotado(),
+        assertEquals(new Candidato(mafioso), votacion.obtenerMasVotado().iterator().next(),
                 "Se debería obtener el candidato con más votos");
     }
 
@@ -59,9 +59,10 @@ public class VotacionTest {
         agregarCandidatos(mafioso, ciudadano1);
         votacion.registrarVoto(mafioso);
         votacion.registrarVoto(ciudadano1);
+        Set<Candidato> masVotados = votacion.obtenerMasVotado();
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, () -> votacion.obtenerMasVotado(),
+        assertTrue(masVotados.containsAll(Set.of(new Candidato(mafioso), new Candidato(ciudadano1))),
                 "Una votación empatada sin voto prioritario no debería tener decisión");
     }
 
@@ -73,7 +74,7 @@ public class VotacionTest {
         votacion.registrarVotoPrioritario(ciudadano1);
 
         // Assert
-        assertEquals(new Candidato(ciudadano1), votacion.obtenerMasVotado(),
+        assertEquals(new Candidato(ciudadano1), votacion.obtenerMasVotado().iterator().next(),
                 "El voto prioritario debería desempatar la votación");
     }
 

@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.mazo.Mazo;
 import edu.fiuba.algo3.modelo.roles.*;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +23,11 @@ public class Entrega1Test {
     private Jugador mafioso1;
     private Jugador mafioso2;
     private FaseNocturna fase;
+    private PartidaMock partidaMock;
 
     @BeforeEach
     public void arrange(){
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
         mafioso1 = new Jugador(new Mafioso(), "mafioso1");
@@ -365,7 +368,7 @@ public class Entrega1Test {
         // Act
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -389,9 +392,10 @@ public class Entrega1Test {
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
         medico.accion(fase, ciudadano1);
+        fase.finalizar(partidaMock);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
+        assertTrue(ciudadano1.estaVivo(),
                 "La fase nocturna debería indicar que el objetivo de la mafia fue protegido por el médico");
     }
 
@@ -401,7 +405,7 @@ public class Entrega1Test {
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
         medico.accion(fase, ciudadano2);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),

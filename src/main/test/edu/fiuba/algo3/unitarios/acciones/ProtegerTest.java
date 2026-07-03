@@ -4,13 +4,15 @@ import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.acciones.Proteger;
 import edu.fiuba.algo3.modelo.acciones.Votar;
 import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
-import edu.fiuba.algo3.modelo.excepciones.ObjetivoProtegidoException;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,9 +23,11 @@ public class ProtegerTest {
     private Jugador ciudadano1;
     private Jugador ciudadano2;
     private Jugador mafioso;
+    private PartidaMock partidaMock;
 
     @BeforeEach
     public void arrange() {
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         fase = new FaseNocturna();
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
@@ -48,10 +52,9 @@ public class ProtegerTest {
         // Act
         proteger.execute();
         votar.execute();
+        fase.finalizar(partidaMock);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
-                "Un jugador protegido no debería ser eliminado durante la fase nocturna");
         assertTrue(ciudadano1.estaVivo(),
                 "Un jugador protegido debería seguir vivo");
     }
@@ -66,10 +69,9 @@ public class ProtegerTest {
         // Act
         fase.ejecutar(proteger);
         fase.ejecutar(votar);
+        fase.finalizar(partidaMock);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
-                "La fase nocturna debería poder ejecutar la acción proteger");
         assertTrue(ciudadano1.estaVivo(),
                 "Un jugador protegido debería seguir vivo");
     }
@@ -100,7 +102,7 @@ public class ProtegerTest {
         primeraProteccion.execute();
         segundaProteccion.execute();
         votar.execute();
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),

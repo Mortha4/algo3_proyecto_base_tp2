@@ -6,11 +6,13 @@ import java.util.*;
 public class Votacion {
     private Candidato prioritario;
     private final Set<Candidato> candidatos;
-    private final CriterioDeDesempate criterioDeDesempate;
 
-    public Votacion(CriterioDeDesempate criterioDeDesempate) {
+    public Votacion() {
         this.candidatos = new HashSet<>();
-        this.criterioDeDesempate = criterioDeDesempate;
+    }
+
+    public Votacion(Set<Candidato> empatados) {
+        this.candidatos = empatados;
     }
 
     public void registrarVoto(Jugador objetivo) {
@@ -25,11 +27,11 @@ public class Votacion {
 
     public void registrarVotoPrioritario(Jugador objetivo) {
         registrarVoto(objetivo);
-        this.prioritario = new Candidato(objetivo);
+        this.prioritario = buscarCandidato(objetivo);
     }
 
-    public List<Candidato> obtenerMasVotado() {
-        List<Candidato> masVotados = new ArrayList<>();
+    public Set<Candidato> obtenerMasVotado() {
+        Set<Candidato> masVotados = new HashSet<>();
         if(candidatos.isEmpty()) {
             return masVotados;
         }
@@ -48,7 +50,7 @@ public class Votacion {
         }
         if (masVotados.size() > 1) {
             if (masVotados.contains(prioritario)) {
-                return List.of(prioritario);
+                return Set.of(prioritario);
             }
         }
         return masVotados;

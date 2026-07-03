@@ -8,8 +8,11 @@ import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.Ciudadano;
 import edu.fiuba.algo3.modelo.roles.Mafioso;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,9 +23,11 @@ public class VotarNocturnoTest {
     private Jugador ciudadano;
     private Jugador mafioso1;
     private Jugador mafioso2;
+    private PartidaMock partidaMock;
 
     @BeforeEach
     public void arrange() {
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         fase = new FaseNocturna();
         ciudadano = new Jugador(new Ciudadano(), "ciudadano");
         mafioso1 = new Jugador(new Mafioso(), "mafioso1");
@@ -44,7 +49,7 @@ public class VotarNocturnoTest {
 
         // Act
         votar.execute();
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano.estaVivo(),
@@ -61,7 +66,7 @@ public class VotarNocturnoTest {
 
         // Act
         fase.ejecutar(votar);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano.estaVivo(),

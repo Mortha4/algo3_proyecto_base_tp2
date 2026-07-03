@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.unitarios.fase;
 import edu.fiuba.algo3.modelo.excepciones.NoSePuedeInvestigarDosVecesSeguidasException;
 import edu.fiuba.algo3.modelo.excepciones.NoSePuedeProtegerDosVecesSeguidasException;
+import edu.fiuba.algo3.modelo.fase.CandidatoNulo;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseNocturnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
@@ -31,7 +32,7 @@ public class FaseNocturnaDataTest {
     @Test
     public void test01guardaCorrectamenteElProtegido(){
         medico.accion(fase, ciudadano1);
-        FaseNocturnaData data = fase.exportarInfo();
+        FaseNocturnaData data = fase.exportarInfo(new CandidatoNulo());
         fase2 = new FaseNocturna(data);
 
         assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
@@ -42,7 +43,7 @@ public class FaseNocturnaDataTest {
     @Test
     public void test02guardaCorrectamenteElInvestigado(){
         detective.accion(fase, ciudadano2);
-        FaseNocturnaData data = fase.exportarInfo();
+        FaseNocturnaData data = fase.exportarInfo(new CandidatoNulo());
         fase2 = new FaseNocturna(data);
 
 

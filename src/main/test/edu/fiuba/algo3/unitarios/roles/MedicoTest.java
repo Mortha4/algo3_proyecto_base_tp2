@@ -4,16 +4,22 @@ import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MedicoTest {
     private Medico medico;
+    private PartidaMock partidaMock;
 
     @BeforeEach
     public void arrange() {
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         medico = new Medico();
     }
 
@@ -89,9 +95,10 @@ public class MedicoTest {
         medico.accion(fase, ciudadano);
         fase.ejecutar(new Nominar(fase, mafioso, ciudadano));
         mafioso.accion(fase, ciudadano);
+        fase.finalizar(partidaMock);
 
         // Assert
-        assertThrows(ObjetivoProtegidoException.class, fase::obtenerMasVotado,
+        assertTrue(ciudadano.estaVivo(),
                 "Un jugador protegido por el médico no debería recibir daño durante la fase nocturna");
     }
 }

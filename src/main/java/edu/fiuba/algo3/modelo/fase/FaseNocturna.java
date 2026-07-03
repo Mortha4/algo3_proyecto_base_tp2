@@ -13,14 +13,16 @@ public class FaseNocturna extends Fase {
 
     public FaseNocturna() {
         super();
-        this.votacion = new Votacion(new SinMuerte());
+        this.votacion = new Votacion();
+        this.criterioDeDesempate = new SinMuerte();
     }
 
     public FaseNocturna(FaseNocturnaData info) {
         super();
         info.darProtegidoPara(this);
         info.darInvestigadoPara(this);
-        this.votacion = new Votacion(new SinMuerte());
+        this.criterioDeDesempate = new SinMuerte();
+        this.votacion = new Votacion();
     }
 
     public void setUltimoProtegido(Jugador ultimoProtegido){
@@ -56,24 +58,21 @@ public class FaseNocturna extends Fase {
     }
 
     @Override
-    protected void excepcionesDeSentencia(Candidato objetivo) {
-        if (objetivo.equals(this.protegido)) {
-            throw new ObjetivoProtegidoException();
-        }
-    }
-
-    @Override
     public void registrarVoto(Jugador votante, Jugador objetivo) {
         this.votacion.registrarVoto(objetivo);
     }
 
     @Override
-    public void cambiar(Partida partida) {
-        partida.apilarData(exportarInfo());
+    public void finalizar(Partida partida) {
+        Candidato masVotado = this.criterioDeDesempate.desempatar(votacion.obtenerMasVotado());
+        partida.apilarData(exportarInfo(masVotado));
         partida.hacerDeDia();
+        if(!masVotado.equals(this.protegido)){
+            masVotado.morir();
+        }
     }
 
-    public FaseNocturnaData exportarInfo(){
-        return new FaseNocturnaData(ultimoProtegido, ultimoInvestigado, votacion.obtenerMasVotado());
+    public FaseNocturnaData exportarInfo(Candidato objetivo){
+        return new FaseNocturnaData(ultimoProtegido, ultimoInvestigado, objetivo);
     }
 }

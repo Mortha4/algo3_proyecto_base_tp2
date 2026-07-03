@@ -40,6 +40,11 @@ public class Candidato {
         return jugador.equals(candidato.jugador);
     }
 
+    @Override
+    public int hashCode() {
+        return jugador.hashCode();
+    }
+
     public boolean esIgualQue(Jugador objetivo) {
         return this.jugador.equals(objetivo);
     }

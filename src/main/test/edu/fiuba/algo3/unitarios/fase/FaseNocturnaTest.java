@@ -9,6 +9,8 @@ import edu.fiuba.algo3.modelo.roles.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FaseNocturnaTest {
@@ -20,9 +22,10 @@ public class FaseNocturnaTest {
     private Jugador padrino;
     private Jugador detective;
     private FaseNocturna fase;
-
+    private PartidaMock partidaMock;
     @BeforeEach
     public void arrange(){
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano1");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
         mafioso1 = new Jugador(new Mafioso(), "mafioso1");
@@ -46,9 +49,10 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano1, medico);
         mafioso1.accion(fase, ciudadano1);
         mafioso2.accion(fase, medico);
+        fase.finalizar(partidaMock);
 
         // Assert
-        assertThrows(NoHuboDecisionException.class, fase::obtenerMasVotado,
+        assertTrue(ciudadano1.estaVivo() && medico.estaVivo(),
                 "No debería eliminarse ningún jugador cuando hay un empate en la votación");
     }
 
@@ -58,7 +62,7 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano1, medico);
         mafioso1.accion(fase, ciudadano1);
         padrino.accion(fase, medico);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(medico.estaVivo(),
@@ -71,7 +75,7 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
         mafioso2.accion(fase, ciudadano1);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -97,11 +101,9 @@ public class FaseNocturnaTest {
         try {
             mafioso1.accion(fase, ciudadano1);
         } catch(JugadorMuertoException ignored){}
-
         nominarJugadores(ciudadano2);
         mafioso2.accion(fase, ciudadano2);
-
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano2.estaVivo(),
@@ -120,7 +122,7 @@ public class FaseNocturnaTest {
         nominarJugadores(ciudadano1);
         mafioso1.accion(fase, ciudadano1);
 
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano1.estaVivo(),
@@ -138,7 +140,7 @@ public class FaseNocturnaTest {
 
         nominarJugadores(ciudadano2);
         mafioso1.accion(fase, ciudadano2);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano2.estaVivo(),

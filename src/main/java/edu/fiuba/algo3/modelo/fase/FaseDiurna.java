@@ -4,8 +4,7 @@ import edu.fiuba.algo3.modelo.acciones.Accion;
 import edu.fiuba.algo3.modelo.fase.faseData.FaseDiurnaData;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.jugador.JugadorNulo;
-
-import java.util.List;
+import java.util.Set;
 
 public class FaseDiurna extends Fase{
     private Jugador revelado = new JugadorNulo();
@@ -13,7 +12,8 @@ public class FaseDiurna extends Fase{
 
     public FaseDiurna(CriterioDeDesempate criterioDeDesempate){
         super();
-        this.votacion = new Votacion(criterioDeDesempate);
+        this.votacion = new Votacion();
+        this.criterioDeDesempate = criterioDeDesempate;
     }
 
     public FaseDiurna(FaseDiurnaData info) {
@@ -21,6 +21,7 @@ public class FaseDiurna extends Fase{
         info.darReveladoPara(this);
         info.darReveladorPara(this);
         info.darCriterioPara(this);
+        this.votacion = new Votacion();
     }
 
     public void setRevelado(Jugador revelado) {
@@ -29,22 +30,16 @@ public class FaseDiurna extends Fase{
     public void setSheriff(Jugador sheriff){
         this.sheriff = sheriff;
     }
-    public void setVotacion(CriterioDeDesempate criterioDeDesempate) {
-        this.votacion = new Votacion(criterioDeDesempate);
+    public void setCriterio(CriterioDeDesempate criterioDeDesempate) {
+        this.criterioDeDesempate = criterioDeDesempate;
     }
 
     public void ejecutar(Accion comando) {
         comando.execute();
     }
 
-    public FaseDiurnaData exportarInfo(){
-        return new FaseDiurnaData(obtenerMasVotado(), sheriff, revelado, criterioDeDesempate);
-    }
-
-    @Override
-    public Candidato obtenerMasVotado() {
-        List<Candidato> masVotados = this.votacion.obtenerMasVotado();
-        return criterioDeDesempate.desempatar(masVotados);
+    public FaseDiurnaData exportarInfo(Candidato objetivo){
+        return new FaseDiurnaData(objetivo, sheriff, revelado, criterioDeDesempate);
     }
 
     @Override
@@ -53,8 +48,17 @@ public class FaseDiurna extends Fase{
     }
 
     @Override
-    public void cambiar(Partida partida) {
-        partida.apilarData(exportarInfo());
+    public void finalizar(Partida partida) {
+        Set<Candidato> masVotados = votacion.obtenerMasVotado();
+
+        if (masVotados.size() > 1) {
+            partida.hacerBallotage(masVotados, criterioDeDesempate, sheriff, revelado);
+            return;
+        }
+
+        Candidato objetivo = criterioDeDesempate.desempatar(masVotados);
+        objetivo.morir();
+        partida.apilarData(exportarInfo(objetivo));
         partida.hacerDeNoche();
     }
 

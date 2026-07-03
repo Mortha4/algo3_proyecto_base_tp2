@@ -61,9 +61,8 @@ public class Partida implements Observable {
         hacerDeNoche();
     }
 
-    public void cambiarFase(){
-        faseActual.obtenerMasVotados();
-        faseActual.cambiar(this);
+    public void cambiarFase() {
+        faseActual.finalizar(this);
         chequearCondicionesDeVictoria();
     }
 
@@ -83,6 +82,11 @@ public class Partida implements Observable {
             notificar(informacionNoches.peek());
             this.faseActual = new FaseDiurna(informacionDias.peek());
         }
+    }
+
+    public void hacerBallotage(Set<Candidato> empatados, CriterioDeDesempate criterio,
+                               Jugador sheriff, Jugador revelado) {
+        this.faseActual = new FaseBallotage(empatados, criterio, sheriff, revelado);
     }
 
     public void apilarData(FaseDiurnaData data){

@@ -2,13 +2,17 @@ package edu.fiuba.algo3.entrega_2;
 
 import edu.fiuba.algo3.modelo.acciones.Nominar;
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.fase.CandidatoNulo;
 import edu.fiuba.algo3.modelo.fase.FaseDiurna;
 import edu.fiuba.algo3.modelo.fase.FaseNocturna;
 import edu.fiuba.algo3.modelo.fase.SinMuerte;
 import edu.fiuba.algo3.modelo.jugador.Jugador;
 import edu.fiuba.algo3.modelo.roles.*;
+import edu.fiuba.algo3.unitarios.fase.PartidaMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,9 +22,11 @@ public class Entrega2Test {
     private Jugador ciudadano3;
     private FaseDiurna fase;
     private Detective detective;
+    private PartidaMock partidaMock;
 
     @BeforeEach
     public void arrange(){
+        partidaMock = new PartidaMock(List.of("1", "2", "3", "4", "5"));
         ciudadano1 = new Jugador(new Ciudadano(), "ciudadano");
         ciudadano2 = new Jugador(new Ciudadano(), "ciudadano2");
         ciudadano3 = new Jugador(new Ciudadano(), "ciudadano3");
@@ -126,7 +132,7 @@ public class Entrega2Test {
         // Act
         detective.accion(primeraNoche, ciudadano);
 
-        FaseNocturna segundaNoche = new FaseNocturna(primeraNoche.exportarInfo());
+        FaseNocturna segundaNoche = new FaseNocturna(primeraNoche.exportarInfo(new CandidatoNulo()));
 
         // Assert
         assertThrows(NoSePuedeInvestigarDosVecesSeguidasException.class,
@@ -143,7 +149,7 @@ public class Entrega2Test {
 
         // Act
         medico.accion(noche1, ciudadano);
-        FaseNocturna noche2 = new FaseNocturna(noche1.exportarInfo());
+        FaseNocturna noche2 = new FaseNocturna(noche1.exportarInfo(new CandidatoNulo()));
 
         // Assert
         assertThrows(NoSePuedeProtegerDosVecesSeguidasException.class,
@@ -167,10 +173,10 @@ public class Entrega2Test {
         nominarJugadores(ciudadano1, ciudadano2);
         ciudadano1.votar(fase, ciudadano2);
         ciudadano2.votar(fase, ciudadano1);
+        fase.finalizar(partidaMock);
 
         // Assert
-        assertThrows(NoHuboDecisionException.class,
-                fase::obtenerMasVotado,
+        assertTrue(ciudadano1.estaVivo() && ciudadano2.estaVivo(),
                 "No debería eliminarse ningún jugador cuando hay un empate en la votación");
     }
 
@@ -181,7 +187,7 @@ public class Entrega2Test {
         ciudadano1.votar(fase, ciudadano3);
         ciudadano2.votar(fase, ciudadano3);
         ciudadano3.votar(fase, ciudadano2);
-        fase.obtenerMasVotado();
+        fase.finalizar(partidaMock);
 
         // Assert
         assertFalse(ciudadano3.estaVivo(),
